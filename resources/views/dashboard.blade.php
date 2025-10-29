@@ -129,7 +129,7 @@
                                                     <form method="POST" action="{{ route('orders.save', ['provider' => $datum['id']]) }}">
                                                         @csrf
                                                         <div class="grid mb-4" style="margin-top:8px">
-                                                            <input id="tplSubject" name="subjet" placeholder="Objet" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" value="Commande la misaine - {{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                                                            <input id="tplSubject" name="subject" placeholder="Objet" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" value="Commande la misaine - {{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                                                         </div>
 
                                                         <div class="muted">Contenu de l'email</div>

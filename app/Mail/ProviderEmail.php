@@ -13,12 +13,14 @@ class ProviderEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public array $data;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -27,7 +29,7 @@ class ProviderEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Provider Email',
+            subject: $this->data['subject'],
         );
     }
 
@@ -37,7 +39,8 @@ class ProviderEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.provider',
+            with: $this->data
         );
     }
 

@@ -8,6 +8,7 @@ use App\Models\OrderLine;
 use App\Models\Provider;
 use App\Mail\ProviderEmail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
@@ -41,11 +42,12 @@ class OrderController extends Controller
         }
 
         $data = [
-            'name' => 'Steven',
             'subject' => $request->subject,
             'content' => $request->email_content
         ];
 
         Mail::to('sletulzo@gmail.com')->send(new ProviderEmail($data));
+
+        return Redirect::route('dashboard')->with('status', 'email-sent');
     }
 }
