@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderWaitingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
     // Order waiting
     Route::post('/order-waiting/save', [OrderWaitingController::class, 'save'])->name('order-waiting.save');
     Route::get('/order-waiting/{orderWaiting}/delete', [OrderWaitingController::class, 'delete'])->name('order-waiting.delete');
+
+    // Orders
+    Route::post('/orders/{provider}/save', [OrderController::class, 'save'])->name('orders.save');
 });
 
 require __DIR__.'/auth.php';

@@ -80,14 +80,28 @@ document.addEventListener('DOMContentLoaded', () => {
 // ------------------------------------ QUILL --------------------------------------
 // ---------------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-    const quills = document.querySelectorAll(".quill-editor");
+    const quillEditors = document.querySelectorAll(".quill-editor");
 
-    quills.forEach(item => {
-        const quill = new Quill(item, {
+    quillEditors.forEach((editorEl) => {
+        // Initialise Quill
+        const quill = new Quill(editorEl, {
             theme: 'snow'
         });
+
+        // Trouve le champ hidden
+        const hiddenInput = editorEl.parentElement.querySelector('input[name="email_content"]');
+        if (!hiddenInput) return;
+
+        // 🔹 Précharge le hidden avec le contenu HTML déjà présent dans Quill
+        hiddenInput.value = quill.root.innerHTML;
+
+        // 🔹 Synchronise le hidden dès qu’on modifie le texte
+        quill.on('text-change', function () {
+            hiddenInput.value = quill.root.innerHTML;
+        });
     });
-})
+});
+
 // const quill = new Quill('.quill-editor', {
 //     theme: 'snow'
 // });
