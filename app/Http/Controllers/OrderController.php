@@ -46,7 +46,8 @@ class OrderController extends Controller
             'content' => $request->email_content
         ];
 
-        Mail::to('sletulzo@gmail.com')->send(new ProviderEmail($data));
+        if ($provider->email)
+            Mail::to($provider->email)->send(new ProviderEmail($data));
 
         return Redirect::route('dashboard')->with('status', 'email-sent');
     }
