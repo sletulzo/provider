@@ -78,10 +78,10 @@
                                             </thead>
                                             <tbody class="divide-y divide-gray-100">
                                                 @foreach($data as $datum)
-                                                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                                                    <tr class="hover:bg-gray-50 transition-all duration-200" data-id="{{ $datum->id }}">
                                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $datum->product?->name }}</td>
                                                         <td class="px-6 py-4 nopaddingtb">
-                                                            <input type="number" value="{{ $datum->quantity }}">
+                                                            <input type="number" name="update-order-quantity" data-url="{{ route('order-waiting.update.quantity', ['orderWaiting' => $datum->id]) }}" value="{{ $datum->quantity }}">
                                                         </td>
                                                         <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
                                                         <td class="px-6 py-4">{{ $datum->provider?->name }}</td>

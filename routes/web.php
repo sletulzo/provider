@@ -51,9 +51,11 @@ Route::middleware('auth')->group(function () {
 
     // Order waiting
     Route::post('/order-waiting/save', [OrderWaitingController::class, 'save'])->name('order-waiting.save');
+    Route::post('/order-waiting/quantity/{orderWaiting}/update', [OrderWaitingController::class, 'updateQuantity'])->name('order-waiting.update.quantity');
     Route::get('/order-waiting/{orderWaiting}/delete', [OrderWaitingController::class, 'delete'])->name('order-waiting.delete');
 
     // Orders
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::post('/orders/{provider}/save', [OrderController::class, 'save'])->name('orders.save');
 });
 

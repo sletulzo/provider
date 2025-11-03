@@ -29,6 +29,15 @@ class OrderWaitingController extends Controller
     }
 
     /**
+     * Update order waiting quantity
+     */
+    public function updateQuantity(OrderWaiting $orderWaiting, Request $request)
+    {
+        $orderWaiting->quantity = $request->value;
+        $orderWaiting->update();
+    }
+
+    /**
      * Delete order waiting
      */
     public function delete(OrderWaiting $orderWaiting)

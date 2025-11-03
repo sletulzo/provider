@@ -102,10 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// const quill = new Quill('.quill-editor', {
-//     theme: 'snow'
-// });
-
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------- NAV TABS -------------------------------------
@@ -162,3 +158,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (defaultTab) activateTab(defaultTab);
 });
 
+
+// ---------------------------------------------------------------------------------
+// --------------------------- Update order quantity -------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('change', 'input[name="update-order-quantity"]', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var value = $(this).val();
+    var url = $(this).attr('data-url');
+    var tr = $(this).closest('tr');
+    var id = tr.attr('data-id');
+
+    $.ajax({
+		method: "POST",
+		url: url,
+		data: {
+			value: value
+		}
+    }).done(function() {
+		toastr.success('Mise à jour réussie.');
+	})
+});

@@ -18,6 +18,15 @@ class OrderController extends Controller
     /**
      * Display provider view
      */
+    public function index()
+    {
+        $orders = Order::orderBy('created_at', 'desc')->get();
+        return view('order.index', compact('orders'));
+    }
+
+    /**
+     * Display provider view
+     */
     public function save(Provider $provider, Request $request)
     {
         // Transform to order
