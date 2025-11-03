@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     
                     <div class="row">
-                        <section class="col card" style="flex:1 1 360px">
+                        <section style="width: 100%">
                             <h2>Produits à commander</h2>
 
                             <form method="POST" action="{{ route('order-waiting.save') }}">
@@ -60,44 +60,17 @@
                             </form>
                         </section>
                         
-                        <section class="col card" style="width: 100%">
-                            <h2>Commande en attente</h2>
+                        <section style="width: 100%">
+                            <h2><span class="big-bubble">{{ $providerOrders->count() }}</span> Commande en attente</h2>
                             @foreach($providerOrders as $providerId => $data)
                                 @php ($provider = \App\Models\Provider::find($providerId))
-                                <!-- <div class="table-wrapper" style="margin-bottom: 20px;"> -->
                                     <h2>{{ $provider->name }}</h2>
-                                    <!-- <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Produit</th>
-                                                <th>Quantité</th>
-                                                <th>Unité</th>
-                                                <th>Fournisseur</th>
-                                                <th class="align-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-gray-100">
-                                            @foreach($data as $datum)
-                                                <tr class="hover:bg-gray-50 transition-all duration-200">
-                                                    <td class="font-semibold">{{ $datum->product?->name }}</td>
-                                                    <td class="nopaddingtb">
-                                                        <input type="number" value="{{ $datum->quantity }}">
-                                                    </td>
-                                                    <td>{{ $datum->unity?->name }}</td>
-                                                    <td>{{ $datum->provider?->name }}</td>
-                                                    <td class="align-right">
-                                                        <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}" class="">Supprimer</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table> -->
                                     <div class="overflow-x-auto rounded-xl border border-gray-100 m-b-20">
-                                        <table class="min-w-full text-sm text-left text-gray-600">
+                                        <table class="min-w-full text-sm text-left text-gray-600 layout-fixed">
                                             <thead class="bg-gray-50 text-gray-700 uppercase text-xs font-semibold">
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3">Produit</th>
-                                                    <th scope="col" class="px-6 py-3">Quantité</th>
+                                                    <th scope="col" class="px-6 py-3" style="width:20%">Produit</th>
+                                                    <th scope="col" class="px-6 py-3" width="120px">Quantité</th>
                                                     <th scope="col" class="px-6 py-3">Unité</th>
                                                     <th scope="col" class="px-6 py-3">Fournisseur</th>
                                                     <th scope="col" class="px-6 py-3 text-right"></th>
