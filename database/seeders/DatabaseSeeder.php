@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Unity;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,10 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('unities')->truncate();
+
         $unities = [
             [
                 'slug' => 'kilo',
-                'name' => 'Kilogramme'
+                'name' => 'Kg'
             ],
             [
                 'slug' => 'unity',

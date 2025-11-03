@@ -17,7 +17,7 @@ class ProviderController extends Controller
      */
     public function index(): View
     {
-        $providers = Provider::all();
+        $providers = Provider::orderBy('name')->get();
         return view('provider.index', compact('providers'));
     }
 

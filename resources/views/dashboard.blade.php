@@ -60,48 +60,69 @@
                             </form>
                         </section>
                         
-                        <section class="col card" style="flex:1 1 360px">
-                            <h2>Produits en attente de commande</h2>
-
-                            <table class="min-w-full text-sm text-left text-gray-600">
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Quantité</th>
-                                    <th>Unité</th>
-                                    <th>Fournisseur</th>
-                                    <th></th>
-                                </tr>
-                                @foreach($orderWaitings as $orderWaiting)
-                                    <tr>
-                                        <td>{{ $orderWaiting->product?->name }}</td>
-                                        <td>{{ $orderWaiting->quantity }}</td>
-                                        <td>{{ $orderWaiting->unity?->name }}</td>
-                                        <td>{{ $orderWaiting->provider?->name }}</td>
-                                        <td>
-                                            <a href="{{ route('order-waiting.delete', ['orderWaiting' => $orderWaiting->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                        <section class="col card" style="width: 100%">
+                            <h2>Commande en attente</h2>
+                            @foreach($providerOrders as $providerId => $data)
+                                @php ($provider = \App\Models\Provider::find($providerId))
+                                <!-- <div class="table-wrapper" style="margin-bottom: 20px;"> -->
+                                    <h2>{{ $provider->name }}</h2>
+                                    <!-- <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Produit</th>
+                                                <th>Quantité</th>
+                                                <th>Unité</th>
+                                                <th>Fournisseur</th>
+                                                <th class="align-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100">
+                                            @foreach($data as $datum)
+                                                <tr class="hover:bg-gray-50 transition-all duration-200">
+                                                    <td class="font-semibold">{{ $datum->product?->name }}</td>
+                                                    <td class="nopaddingtb">
+                                                        <input type="number" value="{{ $datum->quantity }}">
+                                                    </td>
+                                                    <td>{{ $datum->unity?->name }}</td>
+                                                    <td>{{ $datum->provider?->name }}</td>
+                                                    <td class="align-right">
+                                                        <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}" class="">Supprimer</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table> -->
+                                    <div class="overflow-x-auto rounded-xl border border-gray-100 m-b-20">
+                                        <table class="min-w-full text-sm text-left text-gray-600">
+                                            <thead class="bg-gray-50 text-gray-700 uppercase text-xs font-semibold">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3">Produit</th>
+                                                    <th scope="col" class="px-6 py-3">Quantité</th>
+                                                    <th scope="col" class="px-6 py-3">Unité</th>
+                                                    <th scope="col" class="px-6 py-3">Fournisseur</th>
+                                                    <th scope="col" class="px-6 py-3 text-right"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-100">
+                                                @foreach($data as $datum)
+                                                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                                                        <td class="px-6 py-4 font-medium text-gray-900">{{ $datum->product?->name }}</td>
+                                                        <td class="px-6 py-4 nopaddingtb">
+                                                            <input type="number" value="{{ $datum->quantity }}">
+                                                        </td>
+                                                        <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
+                                                        <td class="px-6 py-4">{{ $datum->provider?->name }}</td>
+                                                        <td class="px-6 py-4 text-right">
+                                                            <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <!-- </div> -->
+                            @endforeach
                         </section>
-
-                        <!-- <section class="card" style="margin-top:16px">
-                            <h2>Modèle d'email</h2>
-                            <div class="muted">Ces champs seront fusionnés.</div>
-                            
-                            <div class="grid mb-4" style="margin-top:8px">
-                                <input id="tplSubject" placeholder="Objet" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" value="Commande la misaine - {{ \Carbon\Carbon::now()->format('d/m/Y') }}">
-                            </div>
-
-                            <div class="muted">Contenu de l'email</div>
-                            <div class="mb-4 mt-2">
-                                <div class="quill-editor" style="height: 180px;">
-                                    Bonjour [[fournisseur]], 
-                                    Merci de préparer la commande suivante pour livraison selon vos tournées.
-                                </div>
-                                <input type="hidden" name="commentaire">
-                            </div>
-                        </section> -->
 
                         <section style="width:100%">
                             <h2>Personnaliser votre envoi de mail</h2>

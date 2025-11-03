@@ -18,9 +18,9 @@ class DashboardController extends Controller
         $providers = Provider::orderBy('name')->get();
         $products = Product::orderBy('name')->get();
         $unities = Unity::orderBy('name')->get();
-        $orderWaitings = OrderWaiting::orderBy('created_at', 'desc')->get();
+        $providerOrders = OrderWaiting::orderBy('created_at', 'desc')->get()->groupBy('provider_id');
         $orderFormatted = OrderWaiting::getFormattedEmail();
         
-        return view('dashboard', compact('products', 'unities', 'providers', 'orderWaitings', 'orderFormatted'));
+        return view('dashboard', compact('products', 'unities', 'providers', 'providerOrders', 'orderFormatted'));
     }
 }
