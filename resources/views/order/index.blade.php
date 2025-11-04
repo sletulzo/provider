@@ -15,7 +15,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3">ID</th>
                                     <th scope="col" class="px-6 py-3">Nom</th>
-                                    <th scope="col" class="px-6 py-3">Unité</th>
+                                    <th scope="col" class="px-6 py-3">Date</th>
                                     <th scope="col" class="px-6 py-3">Fournisseur</th>
                                     <th scope="col" class="px-6 py-3 text-right">Actions</th>
                                 </tr>
@@ -23,12 +23,11 @@
                             <tbody class="divide-y divide-gray-100">
                                 @foreach($orders as $order)
                                     <tr class="hover:bg-gray-50 transition-all duration-200">
-                                        <td class="px-6 py-4 font-medium text-gray-900">1</td>
-                                        <td class="px-6 py-4">{{ $order->id }}</td>
-                                        <td class="px-6 py-4">{{ $order->id }}</td>
-                                        <td class="px-6 py-4">{{ $order->id }}</td>
+                                        <td class="px-6 py-4 font-medium text-gray-900">{{ $order->id }}</td>
+                                        <td class="px-6 py-4">Commande</td>
+                                        <td class="px-6 py-4">{{ carbon($order->created_at)->format('d/m/Y') }}</td>
+                                        <td class="px-6 py-4">{{ $order->provider?->name }}</td>
                                         <td class="px-6 py-4 text-right">
-                                            <a href="{{ route('products.edit', ['product' => $order->id]) }}" class="ajax-modal px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Editer</a>
                                             <a href="{{ route('products.delete', ['product' => $order->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
                                         </td>
                                     </tr> 

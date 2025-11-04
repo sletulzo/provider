@@ -21,5 +21,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        $this->loadHelpers();
+    }
+
+    /**
+     * Register helpers
+     *
+     * @return void
+     */
+    protected function loadHelpers()
+    {
+        foreach (glob(app_path('Helpers') . '/*.php') as $filename) 
+        {
+            require_once $filename;
+        }
     }
 }
