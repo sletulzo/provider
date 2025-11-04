@@ -7,7 +7,7 @@ use App\Http\Controllers\OrderWaitingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
-use App\Models\OrderWaiting;
+use App\Http\Controllers\UnityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +57,16 @@ Route::middleware('auth')->group(function () {
     // Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::post('/orders/{provider}/save', [OrderController::class, 'save'])->name('orders.save');
+    Route::get('/orders/{order}/delete', [OrderController::class, 'delete'])->name('orders.delete');
+    Route::get('/orders/{order}/products', [OrderController::class, 'products'])->name('orders.products');
+
+    // Unities
+    Route::get('/unities', [UnityController::class, 'index'])->name('unities');
+    Route::get('/unities/create', [UnityController::class, 'create'])->name('unities.create');
+    Route::get('/unities/{unity}/edit', [UnityController::class, 'edit'])->name('unities.edit');
+    Route::post('/unities/save', [UnityController::class, 'store'])->name('unities.store');
+    Route::post('/unities/{unity}/update', [UnityController::class, 'update'])->name('unities.update');
+    Route::get('/unities/{unity}/delete', [UnityController::class, 'destroy'])->name('unities.delete');
 });
 
 require __DIR__.'/auth.php';

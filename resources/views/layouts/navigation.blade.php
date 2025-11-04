@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
                         {{ __('Commandes effectués') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('unities')" :active="request()->routeIs('unities')">
+                        {{ __('Unités') }}
+                    </x-nav-link>
                 </div>
             </div>
 

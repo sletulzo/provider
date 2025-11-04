@@ -42,5 +42,6 @@
         @include('layouts.modal')
 
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+        <script src="https://kit.fontawesome.com/6a5b66e10a.js" crossorigin="anonymous"></script>
     </body>
 </html>

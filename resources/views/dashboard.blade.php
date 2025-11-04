@@ -86,7 +86,7 @@
                                                         <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
                                                         <td class="px-6 py-4">{{ $datum->provider?->name }}</td>
                                                         <td class="px-6 py-4 text-right">
-                                                            <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
+                                                            <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}"><i class="fa-solid fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

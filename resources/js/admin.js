@@ -172,12 +172,12 @@ $(document).on('change', 'input[name="update-order-quantity"]', function(e) {
     var id = tr.attr('data-id');
 
     $.ajax({
-		method: "POST",
-		url: url,
-		data: {
-			value: value
-		}
+      method: "POST",
+      url: url,
+      data: {
+        value: value
+      }
     }).done(function() {
-		toastr.success('Mise à jour réussie.');
-	})
+      toastr.success('Mise à jour réussie.');
+	  })
 });

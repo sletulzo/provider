@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="bg-white p-6 rounded-2xl shadow-sm">
-                            <a href="{{ route('products.create') }}"
+                            <a href="{{ route('unities.create') }}"
                                 class="ajax-modal inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow transition">
-                                + Créer un produit
+                                + Créer une unité
                             </a>
                         </div>
 
@@ -22,21 +22,17 @@
                                     <tr>
                                         <th scope="col" class="px-6 py-3">ID</th>
                                         <th scope="col" class="px-6 py-3">Nom</th>
-                                        <th scope="col" class="px-6 py-3">Unité</th>
-                                        <th scope="col" class="px-6 py-3">Fournisseur</th>
                                         <th scope="col" class="px-6 py-3 text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
-                                    @foreach($products as $product)
+                                    @foreach($unities as $unity)
                                         <tr class="hover:bg-gray-50 transition-all duration-200">
-                                            <td class="px-6 py-4 font-medium text-gray-900">1</td>
-                                            <td class="px-6 py-4">{{ $product->name }}</td>
-                                            <td class="px-6 py-4">{{ $product->unity?->name }}</td>
-                                            <td class="px-6 py-4">{{ $product->provider?->name }}</td>
+                                            <td class="px-6 py-4 font-medium text-gray-900">{{ $unity->id }}</td>
+                                            <td class="px-6 py-4">{{ $unity->name }}</td>
                                             <td class="px-6 py-4 text-right">
-                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-solid fa-pencil"></i></a>
-                                                <a href="{{ route('products.delete', ['product' => $product->id]) }}"><i class="fa-solid fa-trash"></i></a>
+                                                <a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="ajax-modal"><i class="fa-solid fa-pencil"></i></a>
+                                                <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}"><i class="fa-solid fa-trash"></i></a>
                                             </td>
                                         </tr> 
                                     @endforeach

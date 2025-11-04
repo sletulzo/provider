@@ -35,6 +35,7 @@ class OrderController extends Controller
         $order = new Order();
         $order->uuid = Str::uuid()->toString();
         $order->provider_id = $provider->id;
+        $order->user_id = $request->user()->id;
         $order->save();
 
         foreach($orderWaiting as $item)
@@ -59,5 +60,13 @@ class OrderController extends Controller
             Mail::to($provider->email)->send(new ProviderEmail($data));
 
         return Redirect::route('dashboard')->with('status', 'email-sent');
+    }
+
+    /**
+     * Display products
+     */
+    public function products(Order $order)
+    {
+        return view('order.products', compact('order'));
     }
 }

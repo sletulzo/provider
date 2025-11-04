@@ -1,7 +1,7 @@
 <form method="POST" action="{{ route('providers.update', ['provider' => $provider->id]) }}" id="createFournisseurForm" class="space-y-5">
     @csrf
 
-    <h2 class="text-lg font-semibold text-gray-800">Créer un fournisseur</h2>
+    <h2 class="text-lg font-semibold text-gray-800">Mettre à jour un fournisseur</h2>
 
     <!-- Nom -->
     <div>

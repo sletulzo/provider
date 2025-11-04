@@ -35,8 +35,8 @@
                                             <td class="px-6 py-4">{{ $provider->email }}</td>
                                             <td class="px-6 py-4">{{ $provider->phone }}</td>
                                             <td class="px-6 py-4 text-right">
-                                                <a href="{{ route('providers.edit', ['provider' => $provider->id]) }}" class="ajax-modal px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Editer</a>
-                                                <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
+                                                <a href="{{ route('providers.edit', ['provider' => $provider->id]) }}" class="ajax-modal"><i class="fa-solid fa-pencil"></i></a>
+                                                <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}"><i class="fa-solid fa-trash"></i></a>
                                             </td>
                                         </tr> 
                                     @endforeach

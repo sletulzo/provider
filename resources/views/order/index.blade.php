@@ -15,8 +15,10 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3">ID</th>
                                     <th scope="col" class="px-6 py-3">Nom</th>
+                                    <th scope="col" class="px-6 py-3">Articles</th>
                                     <th scope="col" class="px-6 py-3">Date</th>
                                     <th scope="col" class="px-6 py-3">Fournisseur</th>
+                                    <th scope="col" class="px-6 py-3">Créateur</th>
                                     <th scope="col" class="px-6 py-3 text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -25,10 +27,13 @@
                                     <tr class="hover:bg-gray-50 transition-all duration-200">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $order->id }}</td>
                                         <td class="px-6 py-4">Commande</td>
+                                        <td class="px-6 py-4">{{ $order->lines()->count() }}</td>
                                         <td class="px-6 py-4">{{ carbon($order->created_at)->format('d/m/Y') }}</td>
                                         <td class="px-6 py-4">{{ $order->provider?->name }}</td>
+                                        <td class="px-6 py-4">{{ $order->user?->name }}</td>
                                         <td class="px-6 py-4 text-right">
-                                            <a href="{{ route('products.delete', ['product' => $order->id]) }}" class="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">Supprimer</a>
+                                            <a href="{{ route('orders.products', ['order' => $order->id]) }}" class="ajax-modal"><i class="fa-solid fa-table-cells-large"></i></a>
+                                            <a href="{{ route('orders.delete', ['order' => $order->id]) }}"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr> 
                                 @endforeach
