@@ -23,4 +23,13 @@ class DashboardController extends Controller
         
         return view('dashboard', compact('products', 'unities', 'providers', 'providerOrders', 'orderFormatted'));
     }
+
+    /**
+     * Section order waiting
+     */
+    public function sectionOrderWaiting()
+    {
+        $providerOrders = OrderWaiting::orderBy('created_at', 'desc')->get()->groupBy('provider_id');
+        return view('section.order-waiting', compact('providerOrders'));
+    }
 }

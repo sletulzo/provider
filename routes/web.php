@@ -28,6 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
     // Dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/section/order-waiting', [DashboardController::class, 'sectionOrderWaiting'])->name('section.order-waiting');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/providers/save', [ProviderController::class, 'store'])->name('providers.store');
     Route::post('/providers/{provider}/update', [ProviderController::class, 'update'])->name('providers.update');
     Route::get('/providers/{provider}/delete', [ProviderController::class, 'destroy'])->name('providers.delete');
+    Route::post('/providers/products', [ProviderController::class, 'products'])->name('providers.products');
+    Route::post('/providers/products/{product}/quantity', [ProviderController::class, 'updateProductQuantity'])->name('providers.products.quantity');
 
     // Products
     Route::get('/products', [ProductController::class, 'index'])->name('products');

@@ -111,3 +111,59 @@ table input {
 .table tr td a {
     color: #2563eb;
 }
+
+
+/* -------------------------------------------------------- */
+/* -------------- DAShBOARD Provider products ------------- */
+/* -------------------------------------------------------- */
+.container-provider-products {
+    background-color: #f9fafc;
+    min-height: 150px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
+
+.container-provider-products .container-provider-products-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 6px 8px;
+}
+
+.container-provider-products .container-provider-products-item .name {
+    width: 40%;
+}
+
+.container-provider-products .container-provider-products-item .unity {
+    width: 20%;
+}
+
+.container-provider-products .container-provider-products-item .input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    width: 40%;
+}
+
+.container-provider-products .container-provider-products-item .input a {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafc;
+}
+
+.container-provider-products .container-provider-products-item .input input {
+    height: 28px;
+    width: 60px;
+    padding-right: 0px;
+    text-align: center;
+}

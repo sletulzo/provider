@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\OrderWaiting;
 use App\Models\Provider;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,5 +78,43 @@ class ProviderController extends Controller
     {
         $provider->delete();
         return Redirect::route('providers')->with('status', 'profile-deleted');
+    }
+
+    /**
+     * Return products view.
+     */
+    public function products(Request $request)
+    {
+        $products = Product::where('products.provider_id', $request->provider_id)
+            ->leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+            ->leftJoin('unities', 'unities.id', '=', 'products.unity_id')
+            ->orderBy('products.name')
+            ->select([
+                'products.id',
+                'products.name',
+                'unities.name as unity_name',
+                'orders_waiting.quantity as quantity',
+            ])->get();
+
+        return view('provider.products', compact('products'));
+    }
+
+    /**
+     * Update product quantity.
+     */
+    public function updateProductQuantity(Product $product, Request $request)
+    {
+        $orderWaiting = OrderWaiting::firstOrCreate([
+            'product_id' => $product->id,
+            'provider_id' => $product->provider_id,
+            'unity_id' => $product->unity_id
+        ]);
+
+        $orderWaiting->quantity = $request->quantity;
+        $orderWaiting->save();
+
+        if ($orderWaiting->quantity == 0) {
+            $orderWaiting->delete();
+        }
     }
 }

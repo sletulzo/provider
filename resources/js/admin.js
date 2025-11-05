@@ -181,3 +181,90 @@ $(document).on('change', 'input[name="update-order-quantity"]', function(e) {
       toastr.success('Mise à jour réussie.');
 	  })
 });
+
+
+// ---------------------------------------------------------------------------------
+// ----------------------- Update provider product select --------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('change', '#selectProviderProduct', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var provider_id = $(this).val();
+	var form = $(this).closest('form');
+	var url = form.attr('action');
+	var container = form.find('.container-provider-products');
+
+	$.ajax({
+		method: "POST",
+		url: url,
+		data: {
+			provider_id: provider_id
+		}
+	}).done(function(view) {
+		container.html(view);
+	})
+})
+
+// ---------------------------------------------------------------------------------
+// ------------------- Update input product provider quantity ----------------------
+// ---------------------------------------------------------------------------------
+$(document).on('change', '.input-provider-product-update', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var url = $(this).attr('data-url');
+    var quantity = $(this).val();
+
+    $.ajax({
+        method: 'POST',
+		url: url,
+		data: {
+			quantity: quantity
+		}
+    }).done(function() {
+		updateSection('sectionOrderWaiting');
+	})
+});
+
+// ---------------------------------------------------------------------------------
+// -------------------------- Section order waiting --------------------------------
+// ---------------------------------------------------------------------------------
+function updateSection(id) {
+	var section = $('section#' + id);
+
+	if (section.length) {
+		var url = section.attr('data-url');
+
+		$.ajax({
+			method: 'POST',
+			url: url
+		}).done(function(view) {
+			section.replaceWith(view);
+		});
+	}
+}
+
+// ---------------------------------------------------------------------------------
+// -------------------------- Increment & decrement --------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.increment', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var type = $(this).attr('data-type');
+	var target = $(this).attr('data-target');
+	var parent = $(this).parent();
+	var input = parent.find('.' + target);
+
+	if (input.length) {
+		var value = input.val() == '' ? 0 : parseInt(input.val());
+		var newValue = type == 'minus' ? value-1 : value+1;
+
+		if (newValue < 0)
+			newValue = 0;
+		
+		input.val(newValue);
+		input.trigger('change');
+	}
+});
