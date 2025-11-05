@@ -124,6 +124,7 @@ table input {
     flex-direction: column;
     padding: 10px;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .container-provider-products .container-provider-products-item {
