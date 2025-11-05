@@ -167,3 +167,9 @@ table input {
     padding-right: 0px;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .flex.gap-4 {
+        flex-wrap: wrap;
+    }
+}
