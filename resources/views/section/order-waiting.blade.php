@@ -1,5 +1,4 @@
 <section style="width: 100%" id="sectionOrderWaiting" data-url="{{ route('section.order-waiting') }}">
-    <h2><span class="big-bubble">{{ $providerOrders->count() }}</span> Commande en attente</h2>
     @foreach($providerOrders as $providerId => $data)
         @php ($provider = \App\Models\Provider::find($providerId))
             <h2>{{ $provider->name }}</h2>
@@ -24,7 +23,7 @@
                                 <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
                                 <td class="px-6 py-4">{{ $datum->provider?->name }}</td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>
                             </tr>
                         @endforeach

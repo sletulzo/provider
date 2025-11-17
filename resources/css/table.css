@@ -1,0 +1,73 @@
+.table-wrapper {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    min-width: 0px;
+    overflow-wrap: break-word;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 3.5px 5.5px;
+    border-radius: 15px;
+}
+
+.table-wrapper a.table-wrapper-action {
+    display: inline-flex;
+    appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    width: auto;
+    line-height: 1.2;
+    border-radius: 15px;
+    font-weight: 600;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 0.2s;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    font-size: 0.75rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    background: linear-gradient(81.62deg, rgb(49, 56, 96) 2.25%, rgb(21, 25, 40) 79.87%);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.table-wrapper .table-wrapper-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.table-wrapper .table-wrapper-title h6 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.table-wrapper table thead tr th {
+    color: #CBD5E0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #EDF2F7;
+    font-size: 13px;
+    padding: 12px 0px;
+}
+
+.table-wrapper table tbody tr td {
+    padding: 20px 0px;
+    border-bottom: 1px solid #EDF2F7;
+    color: #1f2733;
+}
+
+.table-wrapper table tbody tr td.actions a {
+    text-align: right;
+    color: #A0AEC0; 
+}

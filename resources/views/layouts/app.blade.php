@@ -15,23 +15,24 @@
         <!-- Scripts -->
         @vite([
             'resources/css/app.css',
-            'resources/css/admin.css', 
+            'resources/css/admin.css',
+            'resources/css/nav.css',
+            'resources/css/table.css',
+            'resources/css/form.css',
+            'resources/css/mobile.css',
             'resources/js/app.js',
             'resources/js/admin.js',
         ])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <div class="main-wrapper">
+            <header>
+                {{ isset($header) ? $header : 'Dashboard' }}
+                @include('layouts.header-right')
+            </header>
+
+            @include('layouts.navigation')
 
             <!-- Page Content -->
             <main>

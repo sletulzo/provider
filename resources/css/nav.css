@@ -1,0 +1,68 @@
+.nav {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    transition: all 0.2s;
+}
+
+.nav .nav-title {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    gap: 15px;
+}
+
+.nav .nav-title-separator {
+    display: flex;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(224, 225, 226) 49.52%, rgba(224, 225, 226, 0) 100%);
+}
+
+.nav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.nav nav > a {
+    width: 220px;
+    height: 54px;
+    border-radius: 15px;
+    color: #A0AEC0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 15px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.nav nav > a .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #51d3c9;
+    transition: all 0.2s;
+}
+
+.nav nav > a.active,
+.nav nav > a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.nav nav > a.active .icon, 
+.nav nav > a:hover .icon {
+    background-color: #51d3c9;
+    color: #fff;
+}

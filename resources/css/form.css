@@ -1,0 +1,26 @@
+select, input {
+    width: 100%;
+    min-width: 0px;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    position: relative;
+    appearance: none;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;;
+    transition-duration: 200ms;
+    font-size: 13px !important;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    height: 3rem;
+    border-radius: 15px;
+    border: 1px solid #CBD5E0 !important;
+    border-style: solid;
+    border-image: initial;
+    background: inherit;
+    margin-bottom: 24px;
+}
+
+select:focus, 
+input:focus {
+    border-color: #4FD1C5 !important;
+    box-shadow: 0 0 0 0px #fff, 0 0 0 calc(1px + 0px) #4FD1C5, 0 0 #000;
+}

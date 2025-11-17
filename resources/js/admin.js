@@ -268,3 +268,16 @@ $(document).on('click', '.increment', function(e) {
 		input.trigger('change');
 	}
 });
+
+
+
+// ---------------------------------------------------------------------------------
+// ------------------------------- Responsive menu ---------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.nav-mobile-icon', function() {
+	var main = $('.main-wrapper');
+	var responsiveMenu = $('.nav-mobile');
+
+	main.toggleClass('open-menu');
+	responsiveMenu.toggleClass('active');
+});
