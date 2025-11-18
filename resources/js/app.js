@@ -21,18 +21,6 @@ import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 window.toastr = toastr;
 
-// -----------------------------------------------------------------------
-// Quill
-// -----------------------------------------------------------------------
-import Quill from 'quill';
-window.Quill = Quill;
-
-// -----------------------------------------------------------------------
-// Livewire SPA (wire:navigate)
-// -----------------------------------------------------------------------
-// Important : Livewire v3 active wire:navigate automatiquement
-// Tu n'as rien à importer ici pour Livewire SPA
-
 
 // -----------------------------------------------------------------------
 // Initialisation Alpine
@@ -49,10 +37,3 @@ $.ajaxSetup({
     }
 });
 
-
-// -----------------------------------------------------------------------
-// Admin JS (TON fichier perso)
-// -----------------------------------------------------------------------
-window.addEventListener('load', () => {
-    import('./admin.js');
-});
