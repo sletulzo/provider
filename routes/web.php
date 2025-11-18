@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     // Dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/section/order-waiting', [DashboardController::class, 'sectionOrderWaiting'])->name('section.order-waiting');
+    Route::post('/section/order-email', [DashboardController::class, 'sectionOrderEmail'])->name('section.order-email');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

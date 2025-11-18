@@ -1,3 +1,8 @@
+$(function() {
+    initQuillEditors();
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('ajaxModal');
   const modalContent = document.getElementById('ajaxModalContent');
@@ -33,131 +38,90 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ✅ Fermeture de la modal
+  // Close modal
   closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
 
-  // ✅ Fermer si clic en dehors
+  // On click outside
   modal.addEventListener('click', (e) => {
     if (e.target === modal) modal.classList.add('hidden');
   });
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Sélecteur du select produit
-    const productSelect = document.querySelector('.orderwaiting-update-product');
+// document.addEventListener('DOMContentLoaded', () => {
+//     // Sélecteur du select produit
+//     const productSelect = document.querySelector('.orderwaiting-update-product');
 
-    // Sélecteurs des autres champs
-    const unitySelect = document.querySelector('select[name="unity_id"]');
-    const providerSelect = document.querySelector('select[name="provider_id"]');
+//     // Sélecteurs des autres champs
+//     const unitySelect = document.querySelector('select[name="unity_id"]');
+//     const providerSelect = document.querySelector('select[name="provider_id"]');
 
-    // Quand le produit change
-    productSelect.addEventListener('change', () => {
-        const selectedOption = productSelect.options[productSelect.selectedIndex];
+//     // Quand le produit change
+//     productSelect.addEventListener('change', () => {
+//         const selectedOption = productSelect.options[productSelect.selectedIndex];
 
-        // Récupération des data-attributes
-        const unityId = selectedOption.getAttribute('data-unity');
-        const providerId = selectedOption.getAttribute('data-provider');
+//         // Récupération des data-attributes
+//         const unityId = selectedOption.getAttribute('data-unity');
+//         const providerId = selectedOption.getAttribute('data-provider');
 
-        // Mise à jour des selects
-        if (unitySelect && unityId) {
-            unitySelect.value = unityId;
-        } else if (unitySelect) {
-            unitySelect.value = ''; // reset si vide
-        }
+//         // Mise à jour des selects
+//         if (unitySelect && unityId) {
+//             unitySelect.value = unityId;
+//         } else if (unitySelect) {
+//             unitySelect.value = ''; // reset si vide
+//         }
 
-        if (providerSelect && providerId) {
-            providerSelect.value = providerId;
-        } else if (providerSelect) {
-            providerSelect.value = '';
-        }
-    });
-});
-
+//         if (providerSelect && providerId) {
+//             providerSelect.value = providerId;
+//         } else if (providerSelect) {
+//             providerSelect.value = '';
+//         }
+//     });
+// });
 
 
 // ---------------------------------------------------------------------------------
 // ------------------------------------ QUILL --------------------------------------
 // ---------------------------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function () {
-    const quillEditors = document.querySelectorAll(".quill-editor");
+function initQuillEditors() {
+    $('.quill-editor').each(function () {
+        var editorEl = this;
 
-    quillEditors.forEach((editorEl) => {
         // Initialise Quill
-        const quill = new Quill(editorEl, {
+        var quill = new Quill(editorEl, {
             theme: 'snow'
         });
 
-        // Trouve le champ hidden
-        const hiddenInput = editorEl.parentElement.querySelector('input[name="email_content"]');
-        if (!hiddenInput) return;
+        // Trouve l'input hidden à côté
+        var hiddenInput = $(editorEl).parent().find('input[name="email_content"]');
+        if (!hiddenInput.length) return;
 
-        // 🔹 Précharge le hidden avec le contenu HTML déjà présent dans Quill
-        hiddenInput.value = quill.root.innerHTML;
+        // Précharge le contenu initial
+        hiddenInput.val(quill.root.innerHTML);
 
-        // 🔹 Synchronise le hidden dès qu’on modifie le texte
+        // Synchronise à chaque changement
         quill.on('text-change', function () {
-            hiddenInput.value = quill.root.innerHTML;
+            hiddenInput.val(quill.root.innerHTML);
         });
     });
-});
-
+}
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------- NAV TABS -------------------------------------
 // ---------------------------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function () {
-    const tabsContainer = document.querySelector(".nav-tabs");
-    if (!tabsContainer) return;
+$(document).on('click', '.tabs-nav button', function() {
+    var tabId = $(this).data('tab');
+    var container = $(this).closest('.tabs');
 
-    const tabLinks = tabsContainer.querySelectorAll("ul li a");
-    const tabPanes = tabsContainer.querySelectorAll(".tab-pane");
+    container.find('.tabs-nav button').removeClass('active');
+    container.find('.tab-pane').removeClass('active');
 
-    // Fonction pour activer un onglet
-    function activateTab(tabId) {
-        // Désactive tous les onglets
-        tabLinks.forEach(link => {
-            link.classList.remove("text-white", "bg-blue-700", "dark:bg-blue-600", "active");
-            link.classList.add("bg-gray-50", "text-gray-500", "dark:bg-gray-800", "dark:text-gray-400");
-        });
+    // Active le bouton cliqué
+    $(this).addClass('active');
 
-        // Cache tous les contenus
-        tabPanes.forEach(pane => {
-            pane.style.display = "none";
-        });
-
-        // Active le bon lien
-        const activeLink = tabsContainer.querySelector(`a[href="${tabId}"]`);
-        if (activeLink) {
-            activeLink.classList.add("text-white", "bg-blue-700", "dark:bg-blue-600", "active");
-            activeLink.classList.remove("bg-gray-50", "text-gray-500", "dark:bg-gray-800", "dark:text-gray-400");
-        }
-
-        // Affiche le bon contenu
-        const activePane = tabsContainer.querySelector(tabId);
-        if (activePane) {
-            activePane.style.display = "block";
-        }
-    }
-
-    // Écoute les clics sur les onglets
-    tabLinks.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const href = this.getAttribute("href");
-            const isDisabled = this.classList.contains("cursor-not-allowed");
-            if (isDisabled) return;
-
-            activateTab(href);
-        });
-    });
-
-    // Active le premier onglet par défaut
-    const defaultTab = tabLinks[0]?.getAttribute("href");
-    if (defaultTab) activateTab(defaultTab);
+    // Affiche le bon contenu
+    container.find('#' + tabId).addClass('active');
 });
-
 
 // ---------------------------------------------------------------------------------
 // --------------------------- Update order quantity -------------------------------
@@ -179,7 +143,7 @@ $(document).on('change', 'input[name="update-order-quantity"]', function(e) {
       }
     }).done(function() {
       toastr.success('Mise à jour réussie.');
-	  })
+	})
 });
 
 
@@ -218,12 +182,17 @@ $(document).on('change', '.input-provider-product-update', function(e) {
 
     $.ajax({
         method: 'POST',
-		url: url,
-		data: {
-			quantity: quantity
-		}
+        url: url,
+        data: {
+          quantity: quantity
+        }
     }).done(function() {
-		updateSection('sectionOrderWaiting');
+      updateSection('sectionOrderWaiting');
+      updateSection('sectionOrderEmail');
+
+      setTimeout(function() {
+        initQuillEditors();
+      }, 200);
 	})
 });
 
@@ -269,15 +238,19 @@ $(document).on('click', '.increment', function(e) {
 	}
 });
 
-
-
 // ---------------------------------------------------------------------------------
 // ------------------------------- Responsive menu ---------------------------------
 // ---------------------------------------------------------------------------------
 $(document).on('click', '.nav-mobile-icon', function() {
-	var main = $('.main-wrapper');
-	var responsiveMenu = $('.nav-mobile');
+    $('.main-wrapper').toggleClass('open-menu');
+    $('.nav-mobile').toggleClass('active');
+});
 
-	main.toggleClass('open-menu');
-	responsiveMenu.toggleClass('active');
+$(document).on('click', function(e) {
+    if ($('.nav-mobile').hasClass('active')) {
+        if (!$(e.target).closest('.nav-mobile, .nav-mobile-icon').length) {
+            $('.main-wrapper').removeClass('open-menu');
+            $('.nav-mobile').removeClass('active');
+        }
+    }
 });

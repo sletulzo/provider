@@ -9,7 +9,6 @@
                             <th scope="col" class="px-6 py-3" style="width:20%">Produit</th>
                             <th scope="col" class="px-6 py-3" width="120px">Quantité</th>
                             <th scope="col" class="px-6 py-3">Unité</th>
-                            <th scope="col" class="px-6 py-3">Fournisseur</th>
                             <th scope="col" class="px-6 py-3 text-right"></th>
                         </tr>
                     </thead>
@@ -21,7 +20,6 @@
                                     <input type="number" name="update-order-quantity" data-url="{{ route('order-waiting.update.quantity', ['orderWaiting' => $datum->id]) }}" value="{{ $datum->quantity }}">
                                 </td>
                                 <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
-                                <td class="px-6 py-4">{{ $datum->provider?->name }}</td>
                                 <td class="px-6 py-4 text-right">
                                     <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>

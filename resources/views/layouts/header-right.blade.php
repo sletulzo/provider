@@ -1,4 +1,4 @@
-<div class="hidden sm:flex sm:items-center sm:ms-6">
+<div class="flex-center">
     <div class="nav-mobile-icon">
         <i class="fa-solid fa-bars"></i>
     </div>

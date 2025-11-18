@@ -32,4 +32,13 @@ class DashboardController extends Controller
         $providerOrders = OrderWaiting::orderBy('created_at', 'desc')->get()->groupBy('provider_id');
         return view('section.order-waiting', compact('providerOrders'));
     }
+
+    /**
+     * Section order email
+     */
+    public function sectionOrderEmail()
+    {
+        $orderFormatted = OrderWaiting::getFormattedEmail();
+        return view('section.order-email', compact('orderFormatted'));
+    }
 }

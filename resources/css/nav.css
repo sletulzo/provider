@@ -66,3 +66,76 @@
     background-color: #51d3c9;
     color: #fff;
 }
+
+/* ----------------------------------------------------------------------------------------------- */
+/* ----------------------------------------- NAV MOBILE ------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------- */
+.nav-mobile-icon {
+    display: none;
+}
+
+.nav-mobile {
+    width: calc(260px - 20px);
+    height: calc(100% - 40px);
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+    margin-left: -280px;
+    margin-top: 20px;
+    border-radius: 20px;
+    transition: all 0.4s;
+    padding: 20px;
+}
+
+.nav-mobile.active {
+    margin-left: 20px;
+}
+
+.nav-mobile .nav-title {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-mobile .nav-title-separator {
+    display: flex;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(224, 225, 226) 49.52%, rgba(224, 225, 226, 0) 100%);
+    margin: 15px 0px;
+}
+
+.nav-mobile > nav > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 45px;
+    color: #A0AEC0;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.nav-mobile > nav > a .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #51d3c9;
+    transition: all 0.2s;
+}
+
+.nav-mobile > nav > a.active,
+.nav-mobile > nav > a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.nav-mobile > nav > a.active .icon,
+.nav-mobile > nav > a:hover .icon {
+    background-color: #51d3c9;
+    color: #fff;
+}
