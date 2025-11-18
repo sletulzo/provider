@@ -29,7 +29,7 @@
 
     <div class="nav-title-separator"></div>
     <nav x-data="{ open: false }">
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('users')">
+        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
             <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
             {{ __('Utilisateurs') }}
         </x-nav-link>
@@ -69,7 +69,7 @@
 
     <div class="nav-title-separator"></div>
     <nav x-data="{ open: false }">
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('users')">
+        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
             <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
             {{ __('Utilisateurs') }}
         </x-nav-link>

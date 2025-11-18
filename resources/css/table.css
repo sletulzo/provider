@@ -52,6 +52,11 @@
     font-weight: 600;
 }
 
+.table-wrapper .table-wrapper-title > input[name="search-table"] {
+    max-width: 500px;
+    height: 40px;
+}
+
 .table-wrapper table thead tr th {
     color: #CBD5E0;
     letter-spacing: 0.05em;

@@ -277,6 +277,16 @@ border-radius: 15px;
     color: #101828;
 }
 
+.table tr.parent-tr td {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px 0px;
+}
+
+.table tr.child td:first-child {
+    padding-left: 20px;
+}
+
 .table tr td {
     border-top: 1px solid #ddd;
     color: #6a7282;

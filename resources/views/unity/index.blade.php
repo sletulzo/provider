@@ -7,8 +7,8 @@
 
    <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <h6>Liste des unités</h6>
-            <a href="{{ route('unities.create') }}" class="ajax-modal table-wrapper-action">Créer un produit</a>
+            <input type="text" name="search-table" placeholder="Rechercher une unité...">
+            <a href="{{ route('unities.create') }}" class="ajax-modal table-wrapper-action">Créer une unité</a>
         </div>
 
         <table class="table">

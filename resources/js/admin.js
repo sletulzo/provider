@@ -47,39 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Sélecteur du select produit
-//     const productSelect = document.querySelector('.orderwaiting-update-product');
-
-//     // Sélecteurs des autres champs
-//     const unitySelect = document.querySelector('select[name="unity_id"]');
-//     const providerSelect = document.querySelector('select[name="provider_id"]');
-
-//     // Quand le produit change
-//     productSelect.addEventListener('change', () => {
-//         const selectedOption = productSelect.options[productSelect.selectedIndex];
-
-//         // Récupération des data-attributes
-//         const unityId = selectedOption.getAttribute('data-unity');
-//         const providerId = selectedOption.getAttribute('data-provider');
-
-//         // Mise à jour des selects
-//         if (unitySelect && unityId) {
-//             unitySelect.value = unityId;
-//         } else if (unitySelect) {
-//             unitySelect.value = ''; // reset si vide
-//         }
-
-//         if (providerSelect && providerId) {
-//             providerSelect.value = providerId;
-//         } else if (providerSelect) {
-//             providerSelect.value = '';
-//         }
-//     });
-// });
-
-
 // ---------------------------------------------------------------------------------
 // ------------------------------------ QUILL --------------------------------------
 // ---------------------------------------------------------------------------------
@@ -143,6 +110,11 @@ $(document).on('change', 'input[name="update-order-quantity"]', function(e) {
       }
     }).done(function() {
       toastr.success('Mise à jour réussie.');
+      updateSection('sectionOrderEmail');
+
+      setTimeout(function() {
+        initQuillEditors();
+      }, 200);
 	})
 });
 
@@ -187,6 +159,7 @@ $(document).on('change', '.input-provider-product-update', function(e) {
           quantity: quantity
         }
     }).done(function() {
+      toastr.success('Mise à jour réussie.');
       updateSection('sectionOrderWaiting');
       updateSection('sectionOrderEmail');
 
@@ -253,4 +226,16 @@ $(document).on('click', function(e) {
             $('.nav-mobile').removeClass('active');
         }
     }
+});
+
+
+// ---------------------------------------------------------------------------------
+// ---------------------------- Search inside table --------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('keyup', 'input[name="search-table"]', function () {
+    let value = $(this).val().toLowerCase();
+
+    $('.table tbody tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
 });

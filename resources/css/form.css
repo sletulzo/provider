@@ -16,7 +16,7 @@ select, input {
     border-style: solid;
     border-image: initial;
     background: inherit;
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
 }
 
 select:focus, 

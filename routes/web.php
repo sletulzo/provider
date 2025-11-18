@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnityController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/unities/save', [UnityController::class, 'store'])->name('unities.store');
     Route::post('/unities/{unity}/update', [UnityController::class, 'update'])->name('unities.update');
     Route::get('/unities/{unity}/delete', [UnityController::class, 'destroy'])->name('unities.delete');
+
+    // User
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::post('/users/save', [UserController::class, 'store'])->name('users.store');
+    Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
 });
 
 require __DIR__.'/auth.php';

@@ -7,7 +7,7 @@
 
    <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <h6>Liste des fournisseurs</h6>
+            <input type="text" name="search-table" placeholder="Rechercher un fournisseur...">
             <a href="{{ route('providers.create') }}" class="ajax-modal table-wrapper-action">Créer un fournisseur</a>
         </div>
 

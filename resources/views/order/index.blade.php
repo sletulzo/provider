@@ -7,7 +7,7 @@
 
    <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <h6>Liste des commandes produits</h6>
+            <input type="text" name="search-table" placeholder="Rechercher une commande...">
         </div>
 
         <table class="table">
