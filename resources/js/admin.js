@@ -1,51 +1,61 @@
-$(function() {
-    initQuillEditors();
-});
+import $ from 'jquery';
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('ajaxModal');
-  const modalContent = document.getElementById('ajaxModalContent');
-  const closeBtn = document.getElementById('closeModalBtn');
+function initAjaxModal() {
+    const modal = document.getElementById('ajaxModal');
+    const modalContent = document.getElementById('ajaxModalContent');
+    const closeBtn = document.getElementById('closeModalBtn');
 
-  // ✅ Ouverture de la modal via un lien
-  document.querySelectorAll('a.ajax-modal').forEach(link => {
-    link.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const url = link.getAttribute('href');
-      modal.classList.remove('hidden');
-      modalContent.innerHTML = `
-        <div class="flex items-center justify-center h-32">
-          <svg class="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-          </svg>
-        </div>`;
+    if (!modal || modal.__ajaxModalInit) return;
 
-      try {
-        const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
-        if (!response.ok) throw new Error('Erreur de chargement');
+    // Marqueur pour éviter double initialisation
+    modal.__ajaxModalInit = true;
 
-        const html = await response.text();
-        modalContent.innerHTML = html;
-      } catch (error) {
+    // Handler d’ouverture (délégué pour fonctionner en SPA)
+    document.addEventListener('click', async (e) => {
+        const link = e.target.closest('a.ajax-modal');
+        if (!link) return;
+
+        e.preventDefault();
+        const url = link.getAttribute('href');
+
+        modal.classList.remove('hidden');
+
         modalContent.innerHTML = `
-          <div class="text-red-600 p-6">
-            <p>❌ Erreur lors du chargement du contenu.</p>
+          <div class="flex items-center justify-center h-32">
+            <svg class="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
           </div>`;
-        console.error(error);
-      }
+
+        try {
+            const response = await fetch(url, { 
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+
+            if (!response.ok) throw new Error('Erreur de chargement');
+
+            const html = await response.text();
+            modalContent.innerHTML = html;
+        } catch (error) {
+            modalContent.innerHTML = `
+              <div class="text-red-600 p-6">
+                <p>❌ Erreur lors du chargement du contenu.</p>
+              </div>`;
+            console.error(error);
+        }
     });
-  });
 
-  // Close modal
-  closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    // Fermeture modal
+    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
 
-  // On click outside
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.add('hidden');
-  });
-});
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+    });
+}
+
+document.addEventListener('livewire:navigated', initAjaxModal);
 
 // ---------------------------------------------------------------------------------
 // ------------------------------------ QUILL --------------------------------------
@@ -72,6 +82,9 @@ function initQuillEditors() {
         });
     });
 }
+
+// Ré-initialisation après navigation SPA Livewire
+document.addEventListener('livewire:navigated', initQuillEditors);
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------- NAV TABS -------------------------------------

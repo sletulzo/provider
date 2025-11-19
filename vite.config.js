@@ -2,6 +2,13 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
+     server: {
+        host: 'vinste.local',
+        hmr: {
+            host: 'vinste.local',
+        },
+        cors: true,
+    },
     plugins: [
         laravel({
             input: [

@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 
         <!-- Scripts -->
         @vite([
@@ -19,9 +20,9 @@
             'resources/css/table.css',
             'resources/css/form.css',
             'resources/css/mobile.css',
-            'resources/js/app.js',
-            'resources/js/admin.js',
         ])
+
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
 
@@ -42,6 +43,12 @@
         @include('layouts.modal')
 
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-        <script src="https://kit.fontawesome.com/6a5b66e10a.js" crossorigin="anonymous"></script>
+
+        @vite([
+            'resources/js/app.js',
+            'resources/js/admin.js'
+        ])
+
+        @livewireScripts
     </body>
 </html>
