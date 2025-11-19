@@ -81,6 +81,7 @@
 @media screen and (max-width: 768px) {
     .login-container {
         gap: 0px;
+        overflow: hidden;
     }
 
     .login-container .login-container-left {
