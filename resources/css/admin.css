@@ -66,6 +66,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     text-align: right;
 }
 
+.align-center {
+    text-align: center !important;
+}
+
 /* -------------------------------------------------------- */
 /* ------------------------- FLEX ------------------------- */
 /* -------------------------------------------------------- */

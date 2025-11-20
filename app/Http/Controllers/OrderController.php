@@ -69,4 +69,19 @@ class OrderController extends Controller
     {
         return view('order.products', compact('order'));
     }
+
+    /**
+     * Delete order
+     */
+    public function delete(Order $order)
+    {
+        foreach($order->lines as $line)
+        {
+            $line->delete();
+        }
+
+        $order->delete();
+
+        return Redirect::route('orders')->with('status', 'done');
+    }
 }

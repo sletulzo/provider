@@ -13,7 +13,7 @@
 
     <!-- Email -->
     <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Unité</label>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Unité <span class="text-red-500">*</span></label>
         <select class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" name="unity_id" required>
             <option value="">Choisir l'unité</option>
             @foreach($unities as $unity)
@@ -24,13 +24,29 @@
 
     <!-- Téléphone -->
     <div>
-        <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Fournisseur</label>
+        <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Fournisseur <span class="text-red-500">*</span></label>
         <select class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" name="provider_id" required>
             <option value="">Choisir un fournisseur</option>
             @foreach($providers as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
         </select>
+    </div>
+
+    <!-- Quantity -->
+    <div class="flex" style="gap: 10px">
+        <div class="col-6">
+            <label for="quantity_min" class="block text-sm font-medium text-gray-700 mb-1">Quantité minimum</label>
+            <input type="number" name="quantity_min" id="quantity_min"
+               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+               placeholder="Quantité minimum">
+        </div>
+        <div class="col-6">
+            <label for="quantity_step" class="block text-sm font-medium text-gray-700 mb-1">Quantité étape</label>
+            <input type="number" name="quantity_step" id="quantity_step"
+               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+               placeholder="L'ajout de quantité se fera par ce nombre">
+        </div>
     </div>
 
     <!-- Boutons -->

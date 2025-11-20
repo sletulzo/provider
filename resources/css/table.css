@@ -74,5 +74,6 @@
 
 .table-wrapper table tbody tr td.actions a {
     text-align: right;
-    color: #A0AEC0; 
+    color: #A0AEC0;
+    margin-left: 5px;
 }

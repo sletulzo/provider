@@ -22,8 +22,17 @@
             Annuler
         </button>
         <button type="submit"
-                class="ml-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                class="btn-primary">
             Enregistrer
         </button>
     </div>
 </form>
+
+<div class="flex justify-end pt-2">
+    <form action="{{ route('users.sendReset', $user) }}" method="POST">
+        @csrf
+        <button class="btn btn-primary">
+            Envoyer lien de création / reset mot de passe
+        </button>
+    </form>
+</div>

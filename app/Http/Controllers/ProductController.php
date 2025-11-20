@@ -42,6 +42,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->unity_id = $request->unity_id;
         $product->provider_id = $request->provider_id;
+        $product->quantity_min = $request->quantity_min;
+        $product->quantity_step = $request->quantity_step;
         $product->save();
 
         return Redirect::route('products')->with('status', 'product-created');
@@ -70,6 +72,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->unity_id = $request->unity_id;
         $product->provider_id = $request->provider_id;
+        $product->quantity_min = $request->quantity_min;
+        $product->quantity_step = $request->quantity_step;
         $product->update();
 
         return Redirect::route('products')->with('status', 'product-updated');

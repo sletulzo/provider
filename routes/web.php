@@ -9,6 +9,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\SendUserPasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,6 +81,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/save', [UserController::class, 'store'])->name('users.store');
     Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
+
+    Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('users.sendReset');
 });
 
 require __DIR__.'/auth.php';

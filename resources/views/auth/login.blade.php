@@ -2,15 +2,14 @@
 
     <div class="login-container">
         <div class="login-container-left">
-
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <h2>Content de te revoir</h2>
                 <h3>Merci de rentrer ton email et ton mot de passe pour te connecter</h3>
+
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
 
                 <div>
                     <x-input-label for="email" :value="__('Email')" />

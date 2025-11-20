@@ -33,6 +33,24 @@
         </select>
     </div>
 
+     <!-- Quantity -->
+    <div class="flex" style="gap: 10px">
+        <div class="col-6">
+            <label for="quantity_min" class="block text-sm font-medium text-gray-700 mb-1">Quantité minimum</label>
+            <input type="number" name="quantity_min" id="quantity_min"
+                value="{{ $product->quantity_min }}"
+                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Quantité minimum">
+        </div>
+        <div class="col-6">
+            <label for="quantity_step" class="block text-sm font-medium text-gray-700 mb-1">Quantité étape</label>
+            <input type="number" name="quantity_step" id="quantity_step"
+                value="{{ $product->quantity_step }}"
+                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                placeholder="L'ajout de quantité se fera par ce nombre">
+        </div>
+    </div>
+
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
         <button type="button"
