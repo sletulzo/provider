@@ -376,11 +376,11 @@ table input {
 /* ------------------------ TOASTR ------------------------ */
 /* -------------------------------------------------------- */
 #toast-container {
-    top: auto !important;
+    /* top: auto !important;
     right: auto !important;
     bottom: 12px !important;
     left: 50% !important;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
 }
 
 #toast-container > .toast {

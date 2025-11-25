@@ -14,7 +14,7 @@
                         @csrf
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Choix du fournisseur</label>
-                            <select id="selectProviderProduct" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" name="provider_id" required>
+                            <select id="selectProviderProduct" name="provider_id" required>
                                 <option value="">Choisir</option>
                                 @foreach($providers as $provider)
                                     <option value="{{ $provider->id }}">{{ $provider->name }}</option>
