@@ -1,6 +1,11 @@
 <svg width="128" height="119" viewBox="0 0 128 119" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Rectangle arrondi -->
     <rect width="128" height="119" rx="10" ry="10" fill="#393e46" />
+
+    <!-- Symbole V -->
     <g transform="translate(20.56524546835103,-13.801678611519236) scale(5.652454599282144)" fill="#4fd1c5">
         <path d="M-0.1 5.98 l4.96 0 l2.9 9.2 l2.88 -9.2 l4.74 0 l-5.36 14.02 l-4.8 0 z"></path>
     </g>
+
 </svg>

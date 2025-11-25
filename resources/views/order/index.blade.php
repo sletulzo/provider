@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 @foreach($orders as $order)
-                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                    <tr class="hover:bg-gray-50 transition-all duration-200 line">
                         <td class="px-6 py-4 font-medium text-gray-900">{{ $order->id }}</td>
                         <td>Commande</td>
                         <td>{{ $order->lines()->count() }}</td>
@@ -33,7 +33,7 @@
                         <td>{{ $order->user?->name }}</td>
                         <td class="align-right actions">
                             <a href="{{ route('orders.products', ['order' => $order->id]) }}" class="ajax-modal"><i class="fa-solid fa-table-cells-large"></i></a>
-                            <a href="{{ route('orders.delete', ['order' => $order->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                            <a href="{{ route('orders.delete', ['order' => $order->id]) }}"  class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr>
                 @endforeach

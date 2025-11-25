@@ -21,12 +21,12 @@
             </thead>
             <tbody>
                 @foreach($unities as $unity)
-                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                    <tr class="hover:bg-gray-50 transition-all duration-200" class="line">
                         <td class="px-6 py-4">{{ $unity->id }}</td>
                         <td class="px-6 py-4">{{ $unity->name }}</td>
                         <td class="align-right actions">
                             <a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                            <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}"  class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr> 
                 @endforeach

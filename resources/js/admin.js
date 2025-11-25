@@ -252,3 +252,37 @@ $(document).on('keyup', 'input[name="search-table"]', function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
 });
+
+
+// ---------------------------------------------------------------------------------
+// ----------------------------------- DELETE --------------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', 'a.confirm-delete', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+	var url = $(this).attr('href');
+	var remove = $(this).attr('data-remove');
+	var line = $(this).closest('.' + remove);
+
+    Swal.fire({
+		title: "Supprimer cet élément ?",
+		text: "Cette action est irréversible.",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Oui, supprimer",
+		cancelButtonText: "Annuler",
+		confirmButtonColor: "#4FD1C5",
+    	cancelButtonColor: "#ddd"
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				method: 'GET',
+				url: url
+			}).done(function() {
+				toastr.success('Vous venez de supprimer un élément', 'Succès');
+				line.remove();
+			});
+		}
+	});
+});

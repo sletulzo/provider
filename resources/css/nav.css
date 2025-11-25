@@ -16,6 +16,11 @@
     gap: 15px;
 }
 
+.nav .nav-title > svg {
+    width: 40px;
+    height: 40px;
+}
+
 .nav .nav-title-separator {
     display: flex;
     height: 1px;

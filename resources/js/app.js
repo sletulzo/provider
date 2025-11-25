@@ -15,6 +15,13 @@ window.toastr = toastr;
 
 
 // -----------------------------------------------------------------------
+// SweetAlert2
+// -----------------------------------------------------------------------
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
+
+// -----------------------------------------------------------------------
 // AJAX (CSRF token)
 // -----------------------------------------------------------------------
 $.ajaxSetup({
@@ -37,5 +44,5 @@ document.addEventListener('livewire:navigated', () => {
 // Livewire
 // -----------------------------------------------------------------------
 document.addEventListener('livewire:navigated', () => {
-    console.log("SPA navigation -> scripts reloaded");
+    // Do nothing
 });

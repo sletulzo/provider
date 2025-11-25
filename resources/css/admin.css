@@ -370,3 +370,116 @@ table input {
         flex-wrap: wrap;
     }
 }
+
+
+/* -------------------------------------------------------- */
+/* ------------------------ TOASTR ------------------------ */
+/* -------------------------------------------------------- */
+#toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+}
+
+#toast-container > .toast {
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#toast-container > div {
+    position: relative;
+    pointer-events: auto;
+    overflow: hidden;
+    opacity: 1;
+    margin: 0 0 6px;
+    padding: 10px 15px 10px 60px !important;
+    width: 300px;
+    -moz-border-radius: 14px;
+    -webkit-border-radius: 14px;
+    border-radius: 14px !important;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-image: none !important;
+    -moz-box-shadow: -2px 2px 13px -2px rgb(106, 114, 128, 0.3) !important;
+    -webkit-box-shadow: -2px 2px 13px -2px rgb(106, 114, 128, 0.3) !important;
+    box-shadow: -2px 2px 13px -2px rgb(106, 114, 128, 0.3) !important;
+    font-size: 12px;
+    background-size: 6% !important;
+    background-color: #fff;
+    border: 1px solid #ebebeb;
+    color: #040f46 !important;
+}
+
+#toast-container .toast-icon {
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #186fe117;
+    color: #186fe1;
+    font-size: 23px;
+    line-height: 23px;
+}
+
+#toast-container > div:before {
+    font-family: "Font Awesome 6 Free";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding: 0px 6px;
+    border-radius: 8px;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+#toast-container > div {
+    padding-left: 55px !important;
+}
+
+.toast-success:before {
+    content: "\f00c";
+}
+
+.toast-error:before {
+    content: "\f057";
+}
+
+.toast-info:before {
+    content: "\f05a";
+}
+
+.toast-warning:before {
+    content: "\f071";
+}
+
+#toast-container > .toast-info:before {
+    background: #186fe117;
+    color: #186fe1;
+}
+#toast-container > .toast-error:before {
+    background: #fc4f4e17;
+    color: #fc4f4e;
+}
+#toast-container > .toast-success:before {
+    background: #0bbd8317;
+    color: #0bbd83;
+}
+#toast-container > .toast-warning:before {
+    background: #186fe117;
+    color: #186fe1;
+}
+
+#toast-container .toast-message {
+    font-size: 13px;
+}

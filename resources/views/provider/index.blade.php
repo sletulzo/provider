@@ -22,13 +22,13 @@
             </thead>
             <tbody>
                 @foreach($providers as $provider)
-                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                    <tr class="hover:bg-gray-50 transition-all duration-200 line">
                         <td>{{ $provider->name }}</td>
                         <td>{{ $provider->email }}</td>
                         <td>{{ $provider->phone }}</td>
                         <td class="align-right actions">
                             <a href="{{ route('providers.edit', ['provider' => $provider->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                            <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr> 
                 @endforeach

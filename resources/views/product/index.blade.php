@@ -28,7 +28,7 @@
                         <td colspan="6">{{ $provider->name }}</td>
                     </tr>
                     @foreach($provider->products->sortBy('name') as $product)
-                        <tr class="child hover:bg-gray-50 transition-all duration-200">
+                        <tr class="child hover:bg-gray-50 transition-all duration-200 line">
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->unity?->name }}</td>
                             <td>{{ $product->provider?->name }}</td>
@@ -36,7 +36,7 @@
                             <td class="align-center">{{ $product->quantity_step }}</td>
                             <td class="align-right actions">
                                 <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="{{ route('products.delete', ['product' => $product->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                                <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                             </td>
                         </tr> 
                     @endforeach

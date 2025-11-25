@@ -14,14 +14,14 @@
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @foreach($data as $datum)
-                            <tr class="hover:bg-gray-50 transition-all duration-200" data-id="{{ $datum->id }}">
+                            <tr class="hover:bg-gray-50 transition-all duration-200 line" data-id="{{ $datum->id }}">
                                 <td class="px-6 py-4 font-medium text-gray-900" style="width: 50%">{{ $datum->product?->name }}</td>
                                 <td class="px-6 py-4 nopaddingtb">
                                     <input type="number" name="update-order-quantity" data-url="{{ route('order-waiting.update.quantity', ['orderWaiting' => $datum->id]) }}" value="{{ $datum->quantity }}">
                                 </td>
                                 <td class="px-6 py-4">{{ $datum->unity?->name }}</td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                                    <a href="{{ route('order-waiting.delete', ['orderWaiting' => $datum->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>
                             </tr>
                         @endforeach
