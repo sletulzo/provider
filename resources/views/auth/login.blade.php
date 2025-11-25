@@ -5,6 +5,11 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
+                <div class="login-container-mobile">
+                    <div class="login-container-logo"></div>
+                    <div class="login-container-title">{{ config('app.name') }}</div>
+                </div>
+
                 <h2>Content de te revoir</h2>
                 <h3>Merci de rentrer ton email et ton mot de passe pour te connecter</h3>
 
