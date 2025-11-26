@@ -9,6 +9,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Auth\SendUserPasswordResetController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,8 +82,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/save', [UserController::class, 'store'])->name('users.store');
     Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
-
     Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('users.sendReset');
+
+    // Tenant
+    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
+    Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
+    Route::get('/tenants/{tenant}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
+    Route::post('/tenants/save', [TenantController::class, 'store'])->name('tenants.store');
+    Route::post('/tenants/{tenant}/update', [TenantController::class, 'update'])->name('tenants.update');
+    Route::get('/tenants/{tenant}/delete', [TenantController::class, 'destroy'])->name('tenants.delete');
 });
 
 require __DIR__.'/auth.php';

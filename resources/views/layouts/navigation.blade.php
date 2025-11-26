@@ -27,13 +27,19 @@
         </x-nav-link>
     </nav>
 
-    <div class="nav-title-separator"></div>
-    <nav x-data="{ open: false }">
-        <x-nav-link wire:navigate :href="route('users')" :active="request()->routeIs('users')">
-            <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
-            {{ __('Utilisateurs') }}
-        </x-nav-link>
-    </nav>
+    @if (Auth::user()->is_admin)
+        <div class="nav-title-separator"></div>
+        <nav x-data="{ open: false }">
+            <x-nav-link wire:navigate :href="route('users')" :active="request()->routeIs('users')">
+                <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
+                {{ __('Utilisateurs') }}
+            </x-nav-link>
+            <x-nav-link wire:navigate :href="route('tenants')" :active="request()->routeIs('tenants')">
+                <div class="icon"><i class="fa-regular fa-building"></i></div>
+                {{ __('Sociétés') }}
+            </x-nav-link>
+        </nav>
+    @endif
 </div>
 
 <!-- Responsive menu -->
@@ -67,12 +73,18 @@
         </x-nav-link>
     </nav>
 
-    <div class="nav-title-separator"></div>
-    <nav x-data="{ open: false }">
-        <x-nav-link wire:navigate :href="route('users')" :active="request()->routeIs('users')">
-            <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
-            {{ __('Utilisateurs') }}
-        </x-nav-link>
-    </nav>
+    @if (Auth::user()->is_admin)
+        <div class="nav-title-separator"></div>
+        <nav x-data="{ open: false }">
+            <x-nav-link wire:navigate :href="route('users')" :active="request()->routeIs('users')">
+                <div class="icon"><i class="fa-regular fa-circle-user"></i></div>
+                {{ __('Utilisateurs') }}
+            </x-nav-link>
+            <x-nav-link wire:navigate :href="route('tenants')" :active="request()->routeIs('tenants')">
+                <div class="icon"><i class="fa-regular fa-building"></i></div>
+                {{ __('Sociétés') }}
+            </x-nav-link>
+        </nav>
+    @endif
 </div>
 

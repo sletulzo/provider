@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class UserController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('user.create');
+        $tenants = Tenant::orderBy('name')->get();
+        return view('user.create', compact('tenants'));
     }
 
     /**
@@ -50,8 +52,11 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
+        $tenants = Tenant::orderBy('name')->get();
+
         return view('user.edit', [
-            'user' => $user
+            'user' => $user,
+            'tenants' => $tenants
         ]);
     }
 

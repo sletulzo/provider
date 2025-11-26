@@ -15,6 +15,17 @@
         <input type="text" name="email" id="email" required placeholder="Email de l'utilisateur">
     </div>
 
+    <!-- Tenant -->
+    <div>
+        <label for="tenant_id">Société <span class="text-red-500">*</span></label>
+        <select class="form-control" id="tenant_id" name="tenant_id" required>
+            <option value="">Choisir dans la liste</option>
+            @foreach($tenants as $tenant)
+                <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
         <button type="button"
@@ -22,7 +33,7 @@
             Annuler
         </button>
         <button type="submit"
-                class="ml-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                class="btn-primary">
             Enregistrer
         </button>
     </div>

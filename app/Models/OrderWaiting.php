@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderWaiting extends Model
 {
+    use BelongsToTenant;
+    
     protected $table = 'orders_waiting';
     protected $fillable = ['user_id', 'product_id', 'unity_id', 'provider_id'];
 

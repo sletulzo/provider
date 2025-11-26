@@ -15,6 +15,17 @@
         <input type="text" name="email" id="email" value="{{ $user->email }}" required placeholder="Email de l'utilisateur">
     </div>
 
+    <!-- Tenant -->
+    <div>
+        <label for="tenant_id">Société <span class="text-red-500">*</span></label>
+        <select class="form-control" id="tenant_id" name="tenant_id" required>
+            <option value="">Choisir dans la liste</option>
+            @foreach($tenants as $tenant)
+                <option value="{{ $tenant->id }}" {{ $user->tenant_id == $tenant->id ? 'selected' : '' }}>{{ $tenant->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
         <button type="button"

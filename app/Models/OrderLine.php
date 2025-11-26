@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderLine extends Model
 {
+    use BelongsToTenant;
+    
     protected $table = 'orders_lines';
     protected $fillable = ['order_id', 'product_id', 'unity_id'];
 
