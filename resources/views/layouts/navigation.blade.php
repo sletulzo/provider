@@ -38,6 +38,11 @@
                 <div class="icon"><i class="fa-regular fa-building"></i></div>
                 {{ __('Sociétés') }}
             </x-nav-link>
+
+            <x-nav-link wire:navigate :href="route('dashboard.test')" :active="request()->routeIs('dashboard.test')">
+                <div class="icon"><i class="fa-regular fa-building"></i></div>
+                {{ __('Commandes - new version') }}
+            </x-nav-link>
         </nav>
     @endif
 </div>

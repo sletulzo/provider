@@ -286,3 +286,57 @@ $(document).on('click', 'a.confirm-delete', function(e) {
 		}
 	});
 });
+
+
+// ---------------------------------------------------------------------------------
+// ----------------------------- UPDATE DASHBOARD ----------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.indent-container-left-item', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var item = $(this);
+	var provider_id = $(this).attr('data-provider');
+	var url = $(this).closest('.indent-container-left-list').attr('data-url');
+	var parent = $(this).closest('.indent-container');
+	var container = parent.find('.indent-container-right');
+	var items = $('.indent-container-left-item');
+	items.removeClass('active');
+
+	$.ajax({
+		method: "POST",
+		url: url,
+		data: {
+			provider_id: provider_id
+		}
+	}).done(function(view) {
+		item.addClass('active');
+		container.html(view);
+	});
+});
+
+
+// ---------------------------------------------------------------------------------
+// ------------------------------- TRIGGER UPDOWN ----------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.trigger-updown', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var updown = $(this).closest('.updown');
+	var type = $(this).attr('data-type');
+	var url = updown.attr('data-url');
+
+	var parent = $(this).closest('.indent-container');
+	var container = parent.find('.indent-container-right');
+
+	$.ajax({
+		method: "POST",
+		url: url,
+		data: {
+			type: type
+		}
+	}).done(function(view) {
+		container.html(view);
+	});
+});

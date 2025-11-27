@@ -75,22 +75,30 @@ Route::middleware('auth')->group(function () {
     Route::post('/unities/{unity}/update', [UnityController::class, 'update'])->name('unities.update');
     Route::get('/unities/{unity}/delete', [UnityController::class, 'destroy'])->name('unities.delete');
 
-    // User
-    Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('/users/save', [UserController::class, 'store'])->name('users.store');
-    Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
-    Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
-    Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('users.sendReset');
 
-    // Tenant
-    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
-    Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
-    Route::get('/tenants/{tenant}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
-    Route::post('/tenants/save', [TenantController::class, 'store'])->name('tenants.store');
-    Route::post('/tenants/{tenant}/update', [TenantController::class, 'update'])->name('tenants.update');
-    Route::get('/tenants/{tenant}/delete', [TenantController::class, 'destroy'])->name('tenants.delete');
+    Route::middleware('admin')->group(function () {
+        // User
+        Route::get('/users', [UserController::class, 'index'])->name('users');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/users/save', [UserController::class, 'store'])->name('users.store');
+        Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
+        Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
+        Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('users.sendReset');
+
+        // Tenant
+        Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
+        Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
+        Route::get('/tenants/{tenant}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
+        Route::post('/tenants/save', [TenantController::class, 'store'])->name('tenants.store');
+        Route::post('/tenants/{tenant}/update', [TenantController::class, 'update'])->name('tenants.update');
+        Route::get('/tenants/{tenant}/delete', [TenantController::class, 'destroy'])->name('tenants.delete');
+
+        // TODO : test
+        Route::get('/dashboard/test', [DashboardController::class, 'newIndex'])->name('dashboard.test');
+        Route::post('/dashboard/items', [DashboardController::class, 'productList'])->name('dashboard.items');
+        Route::post('/dashboard/{product}/quantity', [DashboardController::class, 'productQuantity'])->name('dashboard.quantities');
+    });
 });
 
 require __DIR__.'/auth.php';

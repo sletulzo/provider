@@ -16,4 +16,14 @@ class Provider extends Model
     {
         return $this->hasMany(Product::class, 'provider_id');
     }
+
+    public function orderWaitings()
+    {
+        return $this->hasMany(OrderWaiting::class, 'provider_id');
+    }
+
+    public function sumOrderWaitings()
+    {
+        return $this->orderWaitings()->sum('quantity');
+    }
 }

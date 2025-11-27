@@ -55,6 +55,7 @@
 .table-wrapper .table-wrapper-title > input[name="search-table"] {
     max-width: 500px;
     height: 40px;
+    margin-right: 10px;
 }
 
 .table-wrapper table thead tr th {

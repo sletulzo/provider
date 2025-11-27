@@ -16,6 +16,10 @@
         margin-left: 0px;
         width: 100%;
     }
+
+    .indent-container-right-item {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -24,6 +28,44 @@
     }
 
     .flex > .col-6 {
+        width: 100%;
+    }
+
+    .table-wrapper table tbody tr td, 
+    .table-wrapper table thead tr th {
+        padding: 12px 12px;
+        white-space: nowrap;
+    }
+
+    .table-wrapper .overflow-x-auto {
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .table-wrapper-action {
+        font-size: 0 !important;
+        padding: 10px 12px;
+    }
+
+    .table-wrapper-action::before {
+        content: "\f067";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        display: inline-block;
+        font-size: 20px; 
+    }
+}
+
+@media screen and (max-width: 675px) {
+    .indent-container {
+        flex-direction: column;
+    }
+
+    .indent-container-left {
+        width: 100%;
+    }
+
+    .indent-container-right {
         width: 100%;
     }
 }
