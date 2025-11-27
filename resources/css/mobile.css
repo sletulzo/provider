@@ -41,6 +41,9 @@
         -webkit-overflow-scrolling: touch;
     }
 
+    #ajaxModal > div {
+        height: 100%;
+    }
 
     .table-wrapper-action {
         font-size: 0 !important;
