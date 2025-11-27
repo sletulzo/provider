@@ -45,7 +45,7 @@ class UserController extends Controller
         $user->password = Hash::make(Str::random(24));
         $user->save();
 
-        return Redirect::route('users')->with('status', 'provider-created');
+        return Redirect::route('users')->with('success', 'Modifications enregistrées avec succès !');
     }
 
     /**

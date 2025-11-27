@@ -76,7 +76,7 @@ class ProductController extends Controller
         $product->quantity_step = $request->quantity_step;
         $product->update();
 
-        return Redirect::route('products')->with('status', 'product-updated');
+        return Redirect::route('products')->with('success', 'Modifications enregistrées avec succès !');
     }
 
     /**

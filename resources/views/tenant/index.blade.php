@@ -37,7 +37,7 @@
                             <td class="px-6 py-4">{{ carbon($tenant->created_at)->format('d/m/Y') }}</td>
                             <td class="align-right actions">
                                 <a href="{{ route('tenants.edit', ['tenant' => $tenant->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="{{ route('tenants.delete', ['tenant' => $tenant->id]) }}"><i class="fa-regular fa-trash-can"></i></a>
+                                <a href="{{ route('tenants.delete', ['tenant' => $tenant->id]) }}" class="confirm-delete"><i class="fa-regular fa-trash-can"></i></a>
                             </td>
                         </tr> 
                     @endforeach

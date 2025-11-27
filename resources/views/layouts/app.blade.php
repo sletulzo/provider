@@ -55,5 +55,6 @@
         ])
 
         @livewireScripts
+        @include('layouts.notifications')
     </body>
 </html>
