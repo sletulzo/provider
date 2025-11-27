@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->agency_id = $request->agency_id;
+        $user->tenant_id = $request->tenant_id;
         $user->password = Hash::make(Str::random(24));
         $user->save();
 
@@ -70,7 +70,7 @@ class UserController extends Controller
         {
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->agency_id = $request->agency_id;
+            $user->tenant_id = $request->tenant_id;
             $user->update();
         }
         catch(\Exception $e)
