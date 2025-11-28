@@ -14,9 +14,6 @@
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 
-        <!-- PWA -->
-        @include('components.pwa')
-
         <!-- Scripts -->
         @vite([
             'resources/css/app.css',

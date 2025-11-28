@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 
         <!-- PWA -->
         @include('components.pwa')
@@ -24,5 +25,9 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         {{ $slot }}
+
+        <button id="installPWA" style="display: none" class="install-pwa-button">
+            <i class="fa-solid fa-mobile-screen"></i>
+        </button>
     </body>
 </html>

@@ -99,6 +99,20 @@
     font-weight: bold;
 }
 
+.install-pwa-button {
+    position: fixed;
+    top: 15px;
+    box-shadow: 3px 3px 12px 4px #dddddd6e;
+    border-radius: 50%;
+    padding: 8px 18px;
+    width: 50px;
+    height: 50px;
+    right: 20px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media screen and (max-width: 768px) {
     .login-container {
