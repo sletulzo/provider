@@ -10,4 +10,12 @@ class Unity extends Model
     use BelongsToTenant;
     
     protected $table = 'unities';
+
+    /**
+     * Relation
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
+    }
 }

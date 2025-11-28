@@ -9,10 +9,16 @@
         <input type="text" name="name" id="name" value="{{ $tenant->name }}" placeholder="Nom de la société" required>
     </div>
 
-    <!-- Domaine -->
+    <!-- Email -->
     <div>
-        <label for="email">Domaine</label>
-        <input type="text" name="domain" id="domain" value="{{ $tenant->domain }}" placeholder="Domaine">
+        <label for="email">Email <span class="text-red-500">*</span></label>
+        <input type="text" name="email" id="email" value="{{ $tenant->email }}" placeholder="Email" required>
+    </div>
+
+    <!-- Mot de passe -->
+    <div>
+        <label for="smtp_password">Mot de passe <span class="text-red-500">*</span></label>
+        <input type="text" name="smtp_password" id="smtp_password" value="{{ $tenant->smtp_password }}" placeholder="Mot de passe" required>
     </div>
 
     <label class="toggle-field">

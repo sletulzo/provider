@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\Provider;
 use App\Mail\ProviderEmail;
+use App\Services\TenantMailer;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
@@ -57,7 +58,15 @@ class OrderController extends Controller
         ];
 
         if ($provider->email)
-            Mail::to($provider->email)->send(new ProviderEmail($data));
+        {
+            // Mail::to($provider->email)->send(new ProviderEmail($data));
+
+            TenantMailer::send(
+                $provider->tenant,
+                $provider->email,
+                new ProviderEmail($data)
+            );
+        }
 
         return Redirect::route('dashboard')->with('status', 'email-sent');
     }

@@ -8,6 +8,10 @@ class Tenant extends Model
 {
     protected $table = 'tenants';
 
+    protected $casts = [
+        'smtp_password' => 'encrypted',
+    ];
+
     /**
      * Users relation
      *
