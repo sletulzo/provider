@@ -26,7 +26,7 @@ class TenantMailer
 
             'mail.from' => [
                 'address' => $tenant->smtp_email,
-                'name'    => $tenant->name ?? 'Application',
+                'name'    => $tenant->name ?? 'Vinste',
             ]
         ]);
 
