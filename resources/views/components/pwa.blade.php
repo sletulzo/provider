@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        installBtn.style.display = 'block';
+        installBtn.style.display = 'flex';
     });
 
     window.addEventListener("appinstalled", () => {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const choice = await deferredPrompt.userChoice;
 
         if (choice.outcome !== 'accepted') {
-            installBtn.style.display = 'block';
+            installBtn.style.display = 'flex';
         }
 
         deferredPrompt = null;
