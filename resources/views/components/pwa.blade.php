@@ -1,7 +1,11 @@
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+
     let deferredPrompt;
 
     const installBtn = document.getElementById('installPWA');
+
+    if (!installBtn) return; // sécurité
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -10,7 +14,6 @@
     });
 
     window.addEventListener("appinstalled", () => {
-        console.log("PWA installée");
         installBtn.style.display = 'none';
     });
 
@@ -22,10 +25,7 @@
         deferredPrompt.prompt();
         const choice = await deferredPrompt.userChoice;
 
-        if (choice.outcome === 'accepted') {
-            console.log('Installation acceptée');
-        } else {
-            console.log('Installation refusée');
+        if (choice.outcome !== 'accepted') {
             installBtn.style.display = 'block';
         }
 
@@ -40,4 +40,6 @@
     if (isStandalone()) {
         installBtn.style.display = 'none';
     }
+
+});
 </script>
