@@ -166,8 +166,12 @@
     background-color: #fff;
     height: 68px;
     position: fixed;
-    bottom: 0;
     z-index: 1000;
+
+    bottom: env(safe-area-inset-bottom);
+    left: 0;
+    right: 0;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .nav-mobile-bottom > nav {
