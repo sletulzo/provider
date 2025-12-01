@@ -30,6 +30,7 @@
 
         <div class="main-wrapper">
             <header>
+                <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                 {{ isset($header) ? $header : 'Dashboard' }}
                 @include('layouts.header-right')
             </header>

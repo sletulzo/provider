@@ -137,6 +137,10 @@ header {
     transition: all 0.2s;
 }
 
+header > svg {
+    display: none;
+}
+
 header > h2 {
     margin-bottom: 0px;
     display: flex;

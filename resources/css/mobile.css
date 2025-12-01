@@ -1,5 +1,5 @@
 @media screen and (max-width: 1096px) {
-    .nav-mobile-icon {
+    .nav-mobile-bottom {
         display: block;
     }
 
@@ -8,6 +8,7 @@
     }
 
     .main-wrapper main {
+        height: calc(100vh - 140px);
         margin-left: 0px;
         width: 100%;
     }
@@ -15,6 +16,21 @@
     header {
         margin-left: 0px;
         width: 100%;
+    }
+
+    header > svg {
+        display: block;
+        position: absolute;
+        width: 36px;
+        height: 36px;
+    }
+
+    header > h2 {
+        padding-left: 45px;
+    }
+
+    header > h2 > i {
+        display: none !important;
     }
 
     .indent-container-right-item {

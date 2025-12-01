@@ -17,6 +17,8 @@
                 {{ __('Profil') }}
             </x-dropdown-link>
 
+            <div class="divider"></div>
+
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -27,10 +29,12 @@
                     {{ __('Déconnexion') }}
                 </x-dropdown-link>
             </form>
+
+            @if (Auth::user()->is_admin)
+                <div class="nav-title-separator"></div>
+                <x-dropdown-link :href="route('users')">{{ __('Utilisateurs') }}</x-dropdown-link>
+                <x-dropdown-link :href="route('tenants')">{{ __('Sociétés') }}</x-dropdown-link>
+            @endif
         </x-slot>
     </x-dropdown>
-
-    <div class="nav-mobile-icon">
-        <i class="fa-solid fa-bars"></i>
-    </div>
 </div>
