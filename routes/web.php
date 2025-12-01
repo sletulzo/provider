@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home page
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('redirect.auth')->name('home');
 
 
 Route::middleware('auth')->group(function () {
