@@ -8,8 +8,9 @@
     }
 
     .main-wrapper main {
-        height: calc(100vh - 140px);
+        height: calc(100vh - 70px);
         margin-left: 0px;
+        padding-bottom: 68px;
         width: 100%;
     }
 
