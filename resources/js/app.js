@@ -46,3 +46,10 @@ document.addEventListener('livewire:navigated', () => {
 document.addEventListener('livewire:navigated', () => {
     // Do nothing
 });
+
+// Livewire nav
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.add('active');
+    });
+});

@@ -201,6 +201,7 @@
 .nav-mobile-bottom > nav > a .icon {
     font-size: 21px;
     color: #848A94;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .nav-mobile-bottom > nav > a.active .icon {
