@@ -1,6 +1,6 @@
 @media screen and (max-width: 1096px) {
     .nav-mobile-bottom {
-        display: block;
+        margin-bottom: 0px;
     }
 
     .main-wrapper > .nav {

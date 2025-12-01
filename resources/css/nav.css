@@ -161,12 +161,12 @@
 /* ----------------------------------------- NAV MOBILE ------------------------------------------ */
 /* ----------------------------------------------------------------------------------------------- */
 .nav-mobile-bottom {
-    display: none;
     width: 100%;
     background-color: #fff;
     height: 68px;
     position: fixed;
     z-index: 1000;
+    margin-bottom: -60px;
 
     height: calc(68px + env(safe-area-inset-bottom));
     bottom: env(safe-area-inset-bottom);
