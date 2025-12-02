@@ -15,8 +15,10 @@
     }
 
     header {
+        height: 60px;
         margin-left: 0px;
         width: 100%;
+        border-bottom: 1px solid #eee;
     }
 
     header > svg {
@@ -87,6 +89,7 @@
 
     .indent-container-right {
         width: 100%;
+        padding: 0px;
     }
 }
 

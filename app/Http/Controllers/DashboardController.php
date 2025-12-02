@@ -63,6 +63,20 @@ class DashboardController extends Controller
         return view('test.items', compact('products'));
     }
 
+    public function providerProduct(Provider $provider)
+    {
+        $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+            ->where('products.provider_id', $provider->id)
+            ->select([
+                'products.id',
+                'products.name',
+                'products.unity_id',
+                'orders_waiting.quantity'
+            ])->get();
+
+        return view('test.products', compact('provider', 'products'));
+    }
+
     public function productQuantity(Product $product, Request $request)
     {
         $type = $request->type;

@@ -34,6 +34,7 @@
                 <div class="nav-title-separator"></div>
                 <x-dropdown-link :href="route('users')">{{ __('Utilisateurs') }}</x-dropdown-link>
                 <x-dropdown-link :href="route('tenants')">{{ __('Sociétés') }}</x-dropdown-link>
+                <x-dropdown-link :href="route('dashboard.test')">{{ __('Test steven') }}</x-dropdown-link>
             @endif
         </x-slot>
     </x-dropdown>

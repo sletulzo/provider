@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
         // TODO : test
         Route::get('/dashboard/test', [DashboardController::class, 'newIndex'])->name('dashboard.test');
         Route::post('/dashboard/items', [DashboardController::class, 'productList'])->name('dashboard.items');
+        Route::get('/dashboard/{provider}/products', [DashboardController::class, 'providerProduct'])->name('dashboard.provider');
         Route::post('/dashboard/{product}/quantity', [DashboardController::class, 'productQuantity'])->name('dashboard.quantities');
     });
 });
