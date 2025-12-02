@@ -20,8 +20,7 @@ export default defineConfig({
                 'resources/css/form.css',
                 'resources/css/mobile.css',
                 'resources/js/app.js',
-                'resources/js/admin.js',
-                'resources/js/transitions.js',
+                'resources/js/admin.js'
             ],
             refresh: true,
         }),

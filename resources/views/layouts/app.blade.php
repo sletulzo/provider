@@ -48,8 +48,7 @@
 
         @vite([
             'resources/js/app.js',
-            'resources/js/admin.js',
-            'resources/js/transitions.js'
+            'resources/js/admin.js'
         ])
 
         @livewireScripts
