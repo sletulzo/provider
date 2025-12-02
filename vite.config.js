@@ -21,6 +21,7 @@ export default defineConfig({
                 'resources/css/mobile.css',
                 'resources/js/app.js',
                 'resources/js/admin.js',
+                'resources/js/transitions.js',
             ],
             refresh: true,
         }),
