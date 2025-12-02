@@ -765,7 +765,7 @@ table input {
     gap: 10px;
     width: calc(100% + 30px);
     margin-left: -15px;
-    margin-top: -15px;
+    margin-top: -20px;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
 }
