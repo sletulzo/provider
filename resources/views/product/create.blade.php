@@ -49,6 +49,13 @@
         </div>
     </div>
 
+    <div>
+        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix</label>
+        <input type="number" name="price" id="price" step="0.01"
+               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+               placeholder="Prix du produit">
+    </div>
+
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
         <button type="button"

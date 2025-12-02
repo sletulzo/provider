@@ -701,6 +701,7 @@ table input {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .indent-container-right-item-name {
@@ -724,6 +725,7 @@ table input {
     margin-left: auto;
     margin-top: 4px;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 .indent-container-right-item-footer {

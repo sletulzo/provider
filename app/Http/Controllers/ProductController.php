@@ -44,6 +44,7 @@ class ProductController extends Controller
         $product->provider_id = $request->provider_id;
         $product->quantity_min = $request->quantity_min;
         $product->quantity_step = $request->quantity_step;
+        $product->price = $request->price * 100;
         $product->save();
 
         return Redirect::route('products')->with('status', 'product-created');
@@ -74,6 +75,7 @@ class ProductController extends Controller
         $product->provider_id = $request->provider_id;
         $product->quantity_min = $request->quantity_min;
         $product->quantity_step = $request->quantity_step;
+        $product->price = $request->price * 100;
         $product->update();
 
         return Redirect::route('products')->with('success', 'Modifications enregistrées avec succès !');

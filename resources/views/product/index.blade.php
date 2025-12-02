@@ -20,6 +20,7 @@
                         <th>Fournisseur</th>
                         <th class="align-center">Quantité min</th>
                         <th class="align-center">Quantité étape</th>
+                        <th class="align-center">Prix</th>
                         <th class="align-right"></th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@
                                 <td>{{ $product->provider?->name }}</td>
                                 <td class="align-center">{{ $product->quantity_min }}</td>
                                 <td class="align-center">{{ $product->quantity_step }}</td>
+                                <td class="align-center">{{ $product->price ? $product->price / 100 . '€' : '' }}</td>
                                 <td class="align-right actions">
                                     <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
                                     <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>

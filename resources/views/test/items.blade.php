@@ -6,7 +6,7 @@
                 <div class="name">{{ $product->name }}</div>
                 <div class="description">{{ $product->unity?->name }}</div>
             </div>
-            <div class="indent-container-right-item-price">0 €</div>
+            <div class="indent-container-right-item-price">{{ $product->price ? $product->price / 100 . '€' : '' }}</div>
         </div>
         <div class="indent-container-right-item-footer">
             <div class="indent-container-right-item-actions">
@@ -16,7 +16,7 @@
                     <button data-type="add" class="trigger-updown"><i class="fa-solid fa-plus"></i></button>
                 </div>
             </div>
-            <div class="indent-container-right-item-total">167€</div>
+            <div class="indent-container-right-item-total">{{ $product->total ? $product->total / 100 . '€' : '' }}</div>
         </div>
     </div>
 @endforeach

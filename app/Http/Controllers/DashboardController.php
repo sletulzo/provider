@@ -53,12 +53,8 @@ class DashboardController extends Controller
     {
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $request->provider_id)
-            ->select([
-                'products.id',
-                'products.name',
-                'products.unity_id',
-                'orders_waiting.quantity'
-            ])->get();
+            ->orderBy('products.name')
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
         return view('test.items', compact('products'));
     }
@@ -67,12 +63,8 @@ class DashboardController extends Controller
     {
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $provider->id)
-            ->select([
-                'products.id',
-                'products.name',
-                'products.unity_id',
-                'orders_waiting.quantity'
-            ])->get();
+            ->orderBy('products.name')
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
         return view('test.products', compact('provider', 'products'));
     }
@@ -87,20 +79,16 @@ class DashboardController extends Controller
         ]);
 
         $orderWaiting->quantity = ($type == 'add') ? $orderWaiting->quantity + 1 : $orderWaiting->quantity - 1;
+        $orderWaiting->price = $product->price * $orderWaiting->quantity;
         $orderWaiting->update();
 
         if ($orderWaiting->quantity <= 0)
             $orderWaiting->delete();
-        
 
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $product->provider_id)
-            ->select([
-                'products.id',
-                'products.name',
-                'products.unity_id',
-                'orders_waiting.quantity'
-            ])->get();
+            ->orderBy('products.name')
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
         return view('test.items', compact('products'));
     }

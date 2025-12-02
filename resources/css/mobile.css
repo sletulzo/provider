@@ -82,6 +82,12 @@
 @media screen and (max-width: 675px) {
     .indent-container {
         flex-direction: column;
+        background-color: transparent;
+        padding: 0px;
+    }
+
+    .indent-container-header {
+        margin-bottom: 0px;
     }
 
     .indent-container-left {
@@ -91,6 +97,14 @@
     .indent-container-right {
         width: 100%;
         padding: 0px;
+    }
+
+    .indent-container-left-item {
+        background-color: #fff;
+    }
+
+    .indent-container-left-list {
+        gap: 15px;
     }
 }
 
