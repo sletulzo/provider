@@ -97,6 +97,7 @@
     .indent-container-right {
         width: 100%;
         padding: 0px;
+        margin-bottom: 20px;
     }
 
     .indent-container-left-item {
