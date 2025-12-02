@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <i class="fa-regular fa-paste"></i> {{ __('Commandes fournisseurs - New version') }}
+            <i class="fa-regular fa-paste"></i> {{ __('Test steven') }}
         </h2>
     </x-slot>
 
