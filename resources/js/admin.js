@@ -289,6 +289,44 @@ $(document).on('click', 'a.confirm-delete', function(e) {
 
 
 // ---------------------------------------------------------------------------------
+// --------------------------- Ajax modal up and down ------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.ajax-modal-up', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var url = $(this).attr('href');
+	var modal = $('#ajaxModalSlideUp');
+	var modalContent = modal.find('#ajaxModalSlideUpContent');
+	var body = $('body');
+
+	modalContent.html( `
+		<div class="flex items-center justify-center h-32">
+		<svg class="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+			<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+			<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+		</svg>
+		</div>`);
+	
+	modal.addClass('active');
+	body.addClass('backdrop');
+
+	$.ajax({
+		method: "POST",
+		url: url
+	}).done(function(view) {
+		modalContent.html(view);
+	});
+});
+
+// Close modal
+$(document).on('click', '#ajaxModalSlideUpClose', function(e) {
+	var modal = $('#ajaxModalSlideUp');
+	$('body').removeClass('backdrop');
+	modal.removeClass('active');
+});
+
+// ---------------------------------------------------------------------------------
 // ----------------------------- UPDATE DASHBOARD ----------------------------------
 // ---------------------------------------------------------------------------------
 // $(document).on('click', '.indent-container-left-item', function(e) {

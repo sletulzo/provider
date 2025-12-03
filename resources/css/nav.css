@@ -165,7 +165,7 @@
     background-color: #fff;
     height: 68px;
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     margin-bottom: -60px;
 
     height: calc(68px + env(safe-area-inset-bottom));

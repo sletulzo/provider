@@ -43,6 +43,17 @@ class OrderWaiting extends Model
     {
         return $this->belongsTo(Provider::class, 'provider_id');
     }
+    
+    /**
+     * Get price
+     */
+    public function getPrice()
+    {
+        if ($this->product)
+            return $this->product->price * $this->quantity;
+
+        return 0;
+    }
 
     public static function getFormattedEmail()
     {

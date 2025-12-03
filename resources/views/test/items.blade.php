@@ -20,3 +20,12 @@
         </div>
     </div>
 @endforeach
+
+@if ($orderCount)
+    <a class="indent-order-popup ajax-modal-up slide-right" href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}">
+        <i class="fa-solid fa-basket-shopping">
+            <span>{{ $orderCount }}</span>
+        </i>
+        Voir la commande
+    </a>
+@endif

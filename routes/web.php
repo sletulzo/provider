@@ -11,6 +11,7 @@ use App\Http\Controllers\UnityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Auth\SendUserPasswordResetController;
+use App\Http\Controllers\IndentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -99,6 +100,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/items', [DashboardController::class, 'productList'])->name('dashboard.items');
         Route::get('/dashboard/{provider}/products', [DashboardController::class, 'providerProduct'])->name('dashboard.provider');
         Route::post('/dashboard/{product}/quantity', [DashboardController::class, 'productQuantity'])->name('dashboard.quantities');
+
+        Route::post('/indent/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
     });
 });
 

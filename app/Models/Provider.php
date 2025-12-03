@@ -42,5 +42,23 @@ class Provider extends Model
     public function sumOrderWaitings()
     {
         return $this->orderWaitings()->sum('quantity');
+    } 
+    
+    /**
+     * Get price
+     */
+    public function getPrice()
+    {
+        $price = 0;
+
+        foreach($this->orderWaitings as $orderWaiting)
+        {
+            if ($orderWaiting->product)
+            {
+                $price += $orderWaiting->quantity * $orderWaiting->product->price;            
+            }
+        }
+
+        return $price;
     }
 }
