@@ -82,6 +82,7 @@ class DashboardController extends Controller
 
         $orderWaiting->quantity = ($type == 'add') ? $orderWaiting->quantity + 1 : $orderWaiting->quantity - 1;
         $orderWaiting->price = $product->price * $orderWaiting->quantity;
+        $orderWaiting->unity_id = $product->unity_id;
         $orderWaiting->update();
 
         if ($orderWaiting->quantity <= 0)
