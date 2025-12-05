@@ -60,7 +60,7 @@ class OrderWaiting extends Model
         $data = [];
 
         $query = self::join('products', 'products.id', '=', 'orders_waiting.product_id')
-            ->join('unities', 'unities.id', '=', 'orders_waiting.unity_id')
+            ->leftJoin('unities', 'unities.id', '=', 'orders_waiting.unity_id')
             ->join('providers', 'providers.id', '=', 'orders_waiting.provider_id')
             ->select([
                 'orders_waiting.id',

@@ -955,6 +955,8 @@ table input {
 }
 
 .shop-cart-footer {
+    display: flex;
+    align-items: center;
     margin-top: auto;
     margin-bottom: 70px;
     border-top: 1px solid #ddd;
@@ -969,6 +971,10 @@ table input {
 .shop-cart-footer-price {
     font-size: 28px;
     font-weight: bold;
+}
+
+.shop-cart-footer .shop-cart-footer-actions {
+    margin-left: auto;
 }
 
 /* ------------------------------------------------------------ */

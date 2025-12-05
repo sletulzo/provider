@@ -22,7 +22,12 @@
         </div>
     </div>
     <div class="shop-cart-footer">
-        <div class="shop-cart-footer-title">Total général</div>
-        <div class="shop-cart-footer-price">{{ $provider->getPrice() / 100 }}€</div>
+        <div>
+            <div class="shop-cart-footer-title">Total général</div>
+            <div class="shop-cart-footer-price">{{ $provider->getPrice() / 100 }}€</div>
+        </div>
+        <div class="shop-cart-footer-actions">
+            <a href="" class="btn-primary">Passer la commande</a>
+        </div>
     </div>
 </div>
