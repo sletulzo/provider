@@ -697,7 +697,7 @@ table input {
 .indent-container-right-item {
     width: 25%;
     min-width: 250px;
-    padding: 15px;
+    padding: 12px 15px;
     background-color: #fff;
     height: fit-content;
     border-radius: 12px;
@@ -707,7 +707,7 @@ table input {
 
 .indent-container-right-item-body {
     display: flex;
-    margin-bottom: 10px;
+    align-items: center;
 }
 
 .indent-container-right-item-icon {

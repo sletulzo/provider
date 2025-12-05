@@ -61,14 +61,14 @@ class DashboardController extends Controller
 
     public function providerProduct(Provider $provider)
     {
+        $orderCount = OrderWaiting::where('provider_id', $provider->id)->sum('quantity');
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $provider->id)
             ->orderBy('products.name')
             ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
-        return view('test.products', compact('provider', 'products'));
+        return view('test.products', compact('provider', 'products', 'orderCount'));
     }
-
 
     public function productQuantity(Product $product, Request $request)
     {
@@ -88,7 +88,7 @@ class DashboardController extends Controller
             $orderWaiting->delete();
 
 
-        $orderCount = OrderWaiting::where('provider_id', $product->provider_id)->count();
+        $orderCount = OrderWaiting::where('provider_id', $product->provider_id)->sum('quantity');
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $product->provider_id)
             ->orderBy('products.name')
