@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/indent/{product}/quantity', [IndentController::class, 'quantity'])->name('indent.update.quantity');
     Route::post('/indent/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
     Route::post('/indent/{provider}/preview', [IndentController::class, 'preview'])->name('indent.preview');
+    Route::post('/indent/{provider}/send', [IndentController::class, 'send'])->name('indent.send');
 
 
     Route::middleware('admin')->group(function () {

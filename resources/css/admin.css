@@ -240,6 +240,36 @@ body.backdrop::after {
     text-transform: uppercase;
 }
 
+.btn-default {
+    display: inline-flex;
+    appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    width: auto;
+    line-height: 1.2;
+    border-radius: 15px;
+    font-weight: 600;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 0.2s;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    font-size: 0.75rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    background-color: #eee;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+
 /* -------------------------------------------------------- */
 /* ---------------------- NAV TABS ------------------------ */
 /* -------------------------------------------------------- */
@@ -703,6 +733,7 @@ table input {
     border-radius: 12px;
     box-shadow: 2px 2px 10px #e7e7e7;
     border: 1px solid transparent;
+    transition: all 0.2s;
 }
 
 .indent-container-right-item-body {
@@ -896,6 +927,7 @@ table input {
 
 .shop-cart-body {
     padding: 20px;
+    overflow-y: auto;
 }
 
 .shop-cart-body-provider {
@@ -977,8 +1009,96 @@ table input {
     margin-left: auto;
 }
 
+
 /* ------------------------------------------------------------ */
-/* -------------------- MODAL ------------------------ */
+/* ------------------ SHOP CART PREVIEW ----------------------- */
+/* ------------------------------------------------------------ */
+.shop-cart-body-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.shop-cart-body-preview-box {
+    border-radius: 12px;
+    border: 2px solid #eee;
+    transition: all 0.2s;
+    padding: 12px 15px;
+    display: flex;
+    gap: 12px;
+    background-color: #f9fafc;
+}
+
+.shop-cart-body-preview-box .icon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-cart-body-preview-box .provider {
+    line-height: 16px;
+}
+
+.shop-cart-body-preview-box .provider > div {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.shop-cart-body-preview-box .provider > span {
+    font-size: 12px;
+    color: #75787f;
+}
+
+.shop-cart-body-preview-bigbox {
+    border-radius: 12px;
+    border: 2px solid #eee;
+    transition: all 0.2s;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.shop-cart-body-preview-bigbox .header {
+    background-color: #4fd1c5;
+    padding: 10px 15px;
+    color: #fff;
+    line-height: 26px;
+}
+
+.shop-cart-body-preview-bigbox .header > div {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.shop-cart-body-preview-bigbox .header > span i {
+    margin-right: 5px;
+}
+
+.shop-cart-body-preview-bigbox .body {
+    padding: 15px 15px;
+}
+
+.shop-cart-body-preview-bigbox .preview-products {
+    padding: 10px;
+    background: #4fd1c524;
+    border-radius: 12px;
+}
+
+.shop-cart-body-preview-bigbox .preview-products table {
+    width: 100%;
+}
+
+.shop-cart-body-preview-bigbox .preview-products table tr td {
+    border: 1px solid #4fd1c55c;
+    font-size: 12px;
+    padding: 2px 6px;
+}
+
+/* ------------------------------------------------------------ */
+/* ------------------------- MODAL ---------------------------- */
 /* ------------------------------------------------------------ */
 .close-modal-button {
     font-size: 26px;

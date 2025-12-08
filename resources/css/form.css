@@ -1,4 +1,4 @@
-select, input {
+select, input, textarea {
     width: 100%;
     min-width: 0px;
     outline: transparent solid 2px;
@@ -19,8 +19,13 @@ select, input {
     /* margin-bottom: 24px; */
 }
 
+textarea:focus, 
 select:focus, 
 input:focus {
     border-color: #4FD1C5 !important;
     box-shadow: 0 0 0 0px #fff, 0 0 0 calc(1px + 0px) #4FD1C5, 0 0 #000;
+}
+
+textarea {
+    height: auto;
 }

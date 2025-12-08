@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -7,4 +7,20 @@
     <h2>{{ $subject ?? 'Email fournisseur' }}</h2>
     {!! $content ?? '<p>Contenu vide</p>' !!}
 </body>
-</html>
+</html> -->
+
+
+
+
+@component('mail::message')
+# {{ $subject }}
+
+{!! $content !!}
+
+@component('mail::button', ['url' => $data['url'] ?? '#'])
+Voir le fournisseur
+@endcomponent
+
+Merci,<br>
+{{ config('app.name') }}
+@endcomponent

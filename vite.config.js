@@ -3,7 +3,7 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
      server: {
-        host: 'vinste.local',
+        host: '127.0.0.1',
         hmr: {
             host: 'vinste.local',
         },

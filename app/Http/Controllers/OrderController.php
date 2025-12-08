@@ -59,8 +59,6 @@ class OrderController extends Controller
 
         if ($provider->email)
         {
-            // Mail::to($provider->email)->send(new ProviderEmail($data));
-
             TenantMailer::send(
                 $provider->tenant,
                 $provider->email,

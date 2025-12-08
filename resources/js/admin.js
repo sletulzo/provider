@@ -309,6 +309,8 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 		</svg>
 		</div>`);
 	
+  
+	modal.removeClass('large');
 	modal.addClass('active');
 	body.addClass('backdrop');
 	modal.addClass(size);
