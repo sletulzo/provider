@@ -297,6 +297,7 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 
 	var url = $(this).attr('href');
 	var modal = $('#ajaxModalSlideUp');
+	var size = $(this).attr('data-size');
 	var modalContent = modal.find('#ajaxModalSlideUpContent');
 	var body = $('body');
 
@@ -310,6 +311,7 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 	
 	modal.addClass('active');
 	body.addClass('backdrop');
+	modal.addClass(size);
 
 	$.ajax({
 		method: "POST",
@@ -324,6 +326,7 @@ $(document).on('click', '#ajaxModalSlideUpClose', function(e) {
 	var modal = $('#ajaxModalSlideUp');
 	$('body').removeClass('backdrop');
 	modal.removeClass('active');
+	modal.removeClass('large');
 });
 
 // ---------------------------------------------------------------------------------
@@ -366,6 +369,7 @@ $(document).on('click', '.trigger-updown', function(e) {
 	var url = updown.attr('data-url');
 	var item = $(this).closest('.indent-container-right-item');
 	var display = updown.find('.updown-display');
+  var popup = $('.indent-order-popup');
 
   	if (parseInt(display.html()) == 0 && type == 'remove')
 		return;
@@ -380,5 +384,6 @@ $(document).on('click', '.trigger-updown', function(e) {
 		$('#indentOrderCount').html(data.count);
 		display.html(data.value);
 		item.toggleClass('active', data.value <= 0 ? false : true);
+    	popup.toggleClass('active', data.count > 0 ? true : false);
 	});
 });

@@ -16,20 +16,10 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="indent-container-right-item-footer">
-            <div class="indent-container-right-item-actions">
-                <div class="updown" data-url="{{ route('dashboard.quantities', ['product' => $product->id]) }}">
-                    <button data-type="remove" class="trigger-updown"><i class="fa-solid fa-minus"></i></button>
-                    <span class="updown-display">{{ $product->quantity ?? 0 }}</span>
-                    <button data-type="add" class="trigger-updown"><i class="fa-solid fa-plus"></i></button>
-                </div>
-            </div>
-            <div class="indent-container-right-item-total">{{ $product->total ? $product->total / 100 . '€' : '' }}</div>
-        </div> -->
     </div>
 @endforeach
 
-<a class="indent-order-popup ajax-modal-up slide-right" href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}">
+<a class="indent-order-popup ajax-modal-up slide-right {{ $orderCount ? 'active' : '' }}" href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}">
     <i class="fa-solid fa-basket-shopping">
         <span id="indentOrderCount">{{ $orderCount }}</span>
     </i>

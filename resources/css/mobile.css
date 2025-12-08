@@ -78,7 +78,7 @@
         font-size: 20px; 
     }
 
-    .indent-order-popup {
+    .indent-order-popup.active {
         display: flex;
         align-items: center;
     }

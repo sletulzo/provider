@@ -45,6 +45,15 @@ class IndentController extends Controller
     public function shopCart(Provider $provider): View
     {
         $indents = OrderWaiting::where('provider_id', $provider->id)->get();
-        return view('test.shop-cart', compact('provider', 'indents'));
+        return view('indent.shop-cart', compact('provider', 'indents'));
+    }
+
+    /**
+     * Preview email
+     */
+    public function preview(Provider $provider): View
+    {
+        $indents = OrderWaiting::where('provider_id', $provider->id)->get();
+        return view('indent.preview', compact('provider', 'indents'));
     }
 }

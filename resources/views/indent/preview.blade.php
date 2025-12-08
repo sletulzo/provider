@@ -1,6 +1,6 @@
 <div class="shop-cart">
     <div class="shop-cart-title">
-        Ma commande
+        Prévisualiser ma commande
         <span class="shop-cart-title-label">{{ $indents->sum('quantity') }} articles</span>
     </div>
     <div class="shop-cart-body">
@@ -27,7 +27,7 @@
             <div class="shop-cart-footer-price">{{ $provider->getPrice() / 100 }}€</div>
         </div>
         <div class="shop-cart-footer-actions">
-            <a href="" class="btn-primary">Passer la commande</a>
+            <a href="{{ route('indent.preview', ['provider' => $provider->id]) }}" class="btn-primary ajax-modal-up" data-size="large">Passer la commande</a>
         </div>
     </div>
 </div>

@@ -1000,6 +1000,10 @@ table input {
     z-index: 1000;
 }
 
+.modal-slide-up.large {
+    height: 90%;
+}
+
 .modal-slide-up.active {
     bottom: 0px;
 }

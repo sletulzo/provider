@@ -6,7 +6,7 @@
     <div class="nav-title-separator"></div>
     <nav x-data="{ open: false }">
         <x-nav-link wire:navigate :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <div class="icon"><i class="fa-regular fa-paste"></i></div>
+            <div class="icon"><i class="fa-solid fa-basket-shopping"></i></div>
             {{ __('Commandes') }}
         </x-nav-link>
         <x-nav-link wire:navigate :href="route('providers')" :active="request()->routeIs('providers')">
@@ -57,7 +57,7 @@
             <div class="icon"><i class="fa-regular fa-lemon"></i></div>
         </x-nav-link>
         <x-nav-link class="nav-item" wire:navigate :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <div class="icon"><i class="fa-regular fa-paste"></i></div>
+            <div class="icon"><i class="fa-solid fa-basket-shopping"></i></div>
         </x-nav-link>
         <x-nav-link class="nav-item" wire:navigate :href="route('orders')" :active="request()->routeIs('orders')">
             <div class="icon"><i class="fa-solid fa-pencil"></i></div>
