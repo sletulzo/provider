@@ -54,5 +54,12 @@
 
         @livewireScripts
         @include('layouts.notifications')
+
+
+        <div x-data="{ loading: false }" x-on:livewire:navigate.window="loading = true" x-on:livewire:navigated.window="loading = false">
+            <template x-if="loading">
+                <div class="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-[9999] pointer-events-auto"></div>
+            </template>
+        </div>
     </body>
 </html>
