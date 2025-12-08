@@ -2,7 +2,7 @@
      class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
   <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 relative">
     <!-- Bouton de fermeture -->
-    <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition">
+    <button id="closeModalBtn" class="close-modal-button absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition">
       ✕
     </button>
 

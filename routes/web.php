@@ -76,6 +76,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/unities/{unity}/update', [UnityController::class, 'update'])->name('unities.update');
     Route::get('/unities/{unity}/delete', [UnityController::class, 'destroy'])->name('unities.delete');
 
+    // Indent
+    Route::post('/indent/{product}/quantity', [IndentController::class, 'quantity'])->name('indent.update.quantity');
+    Route::post('/indent/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
+
 
     Route::middleware('admin')->group(function () {
         // User
@@ -100,8 +104,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/items', [DashboardController::class, 'productList'])->name('dashboard.items');
         Route::get('/dashboard/{provider}/products', [DashboardController::class, 'providerProduct'])->name('dashboard.provider');
         Route::post('/dashboard/{product}/quantity', [DashboardController::class, 'productQuantity'])->name('dashboard.quantities');
-
-        Route::post('/indent/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
     });
 });
 

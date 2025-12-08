@@ -364,9 +364,11 @@ $(document).on('click', '.trigger-updown', function(e) {
 	var updown = $(this).closest('.updown');
 	var type = $(this).attr('data-type');
 	var url = updown.attr('data-url');
+	var item = $(this).closest('.indent-container-right-item');
+	var display = updown.find('.updown-display');
 
-	var parent = $(this).closest('.indent-container');
-	var container = parent.find('.indent-container-right');
+  	if (parseInt(display.html()) == 0 && type == 'remove')
+		return;
 
 	$.ajax({
 		method: "POST",
@@ -374,7 +376,9 @@ $(document).on('click', '.trigger-updown', function(e) {
 		data: {
 			type: type
 		}
-	}).done(function(view) {
-		container.html(view);
+	}).done(function(data) {
+		$('#indentOrderCount').html(data.count);
+		display.html(data.value);
+		item.toggleClass('active', data.value <= 0 ? false : true);
 	});
 });

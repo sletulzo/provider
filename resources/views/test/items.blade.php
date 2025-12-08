@@ -8,7 +8,7 @@
             </div>
             <div class="indent-container-right-item-price">
                 <div class="indent-container-right-item-actions">
-                    <div class="updown" data-url="{{ route('dashboard.quantities', ['product' => $product->id]) }}">
+                    <div class="updown" data-url="{{ route('indent.update.quantity', ['product' => $product->id]) }}">
                         <button data-type="remove" class="trigger-updown"><i class="fa-solid fa-minus"></i></button>
                         <span class="updown-display">{{ $product->quantity ?? 0 }}</span>
                         <button data-type="add" class="trigger-updown"><i class="fa-solid fa-plus"></i></button>
@@ -29,11 +29,9 @@
     </div>
 @endforeach
 
-@if ($orderCount)
-    <a class="indent-order-popup ajax-modal-up slide-right" href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}">
-        <i class="fa-solid fa-basket-shopping">
-            <span>{{ $orderCount }}</span>
-        </i>
-        Voir la commande
-    </a>
-@endif
+<a class="indent-order-popup ajax-modal-up slide-right" href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}">
+    <i class="fa-solid fa-basket-shopping">
+        <span id="indentOrderCount">{{ $orderCount }}</span>
+    </i>
+    Voir la commande
+</a>
