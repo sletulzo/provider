@@ -43,7 +43,7 @@ class ProviderController extends Controller
         $provider->email_content = $request->email_content;
         $provider->save();
 
-        return Redirect::route('providers')->with('status', 'provider-created');
+        return Redirect::route('providers')->with('success', 'Fournisseur crée');
     }
 
     /**
@@ -68,16 +68,15 @@ class ProviderController extends Controller
         $provider->email_content = $request->email_content;
         $provider->update();
 
-        return Redirect::route('providers')->with('status', 'profile-updated');
+        return Redirect::route('providers')->with('success', 'Fournisseur mis à jour');
     }
 
     /**
      * Delete the user's account.
      */
-    public function destroy(Provider $provider): RedirectResponse
+    public function destroy(Provider $provider)
     {
         $provider->delete();
-        return Redirect::route('providers')->with('status', 'profile-deleted');
     }
 
     /**

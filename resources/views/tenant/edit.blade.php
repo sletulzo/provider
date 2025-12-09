@@ -18,7 +18,7 @@
     <!-- Email -->
     <div>
         <label for="email">Email <span class="text-red-500">*</span></label>
-        <input type="text" name="email" id="email" value="{{ $tenant->email }}" placeholder="Email" required>
+        <input type="text" name="email" id="email" value="{{ $tenant->smtp_email }}" placeholder="Email" required>
     </div>
 
     <!-- Mot de passe -->

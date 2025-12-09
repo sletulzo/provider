@@ -47,7 +47,7 @@ class ProductController extends Controller
         $product->price = $request->price * 100;
         $product->save();
 
-        return Redirect::route('products')->with('status', 'product-created');
+        return Redirect::route('products')->with('success', 'Produit crée avec succès !');
     }
 
     /**
