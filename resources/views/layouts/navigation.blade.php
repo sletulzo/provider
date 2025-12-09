@@ -22,7 +22,7 @@
             {{ __('Commandes effectués') }}
         </x-nav-link>
         <x-nav-link wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
-            <div class="icon"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="icon"><i class="fa-solid fa-scale-unbalanced-flip"></i></div>
             {{ __('Unités') }}
         </x-nav-link>
     </nav>
@@ -65,7 +65,7 @@
             <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
         </x-nav-link>
         <x-nav-link class="nav-item" wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
-            <div class="icon"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="icon"><i class="fa-solid fa-scale-unbalanced-flip"></i></div>
         </x-nav-link>
     </nav>
 </div>
