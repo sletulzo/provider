@@ -19,6 +19,42 @@ use Illuminate\Support\Facades\Redirect;
 class IndentController extends Controller
 {
     /**
+     * Index view
+     */
+    public function index()
+    {
+        $providers = Provider::orderBy('name')->get();
+        return view('indent.index', compact('providers'));
+    }
+
+    /**
+     * Products list
+     */
+    public function products(Provider $provider)
+    {
+        $orderCount = OrderWaiting::where('provider_id', $provider->id)->sum('quantity');
+        $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+            ->where('products.provider_id', $provider->id)
+            ->orderBy('products.name')
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
+
+        return view('indent.products', compact('provider', 'products', 'orderCount'));
+    }
+
+    /**
+     * Items
+     */
+    public function items(Request $request)
+    {
+        $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+            ->where('products.provider_id', $request->provider_id)
+            ->orderBy('products.name')
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
+
+        return view('indent.items', compact('products'));
+    }
+
+    /**
      * Update quantity
      */
     public function quantity(Product $product, Request $request)
@@ -98,20 +134,23 @@ class IndentController extends Controller
                 'content' => $emailContent
             ];
 
-            // try 
-            // {
+            try 
+            {
                 TenantMailer::send(
                     $provider->tenant,
                     $provider->email,
-                    new ProviderEmail($data)
+                    new ProviderEmail($data, $order)
                 );
-            // } catch(\Exception $e)
-            // {
-            //     dd('erreur ici');
-            //     return Redirect::route('dashboard')->with('status', 'email-error');
-            // }
+
+                $order->is_sent = true;
+                $order->update();
+
+            } catch(\Exception $e)
+            {
+                return Redirect::route('indents')->with('error', "Erreur dans l'envoi de l'email");
+            }
         });
 
-        return Redirect::route('dashboard')->with('status', 'email-sent');
+        return Redirect::route('indents')->with('success', 'E-mail envoyé avec succès !');
     }
 }

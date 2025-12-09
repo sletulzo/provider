@@ -39,7 +39,9 @@ class UnityController extends Controller
         $unity->name = $request->name;
         $unity->save();
 
-        return Redirect::route('unities')->with('status', 'unity-created');
+        return redirect()
+            ->route('unities')
+            ->with('success', "Création réussie");
     }
 
     /**

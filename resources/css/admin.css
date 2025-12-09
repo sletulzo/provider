@@ -456,7 +456,7 @@ table input {
     overflow: hidden;
     opacity: 1;
     margin: 0 0 6px;
-    padding: 10px 15px 10px 60px !important;
+    padding: 12px 15px 12px 60px !important;
     width: 300px;
     -moz-border-radius: 14px;
     -webkit-border-radius: 14px;
@@ -893,6 +893,23 @@ table input {
     border-radius: 50%;
 }
 
+/* ------------------------------------------------------------ */
+/* ------------------------- BUBBLE --------------------------- */
+/* ------------------------------------------------------------ */
+.bubble {
+    position: absolute;
+    right: -4px;
+    top: -5px;
+    background-color: red;
+    color: #fff;
+    font-size: 8px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* ------------------------------------------------------------ */
 /* ----------------------- SHOP CART -------------------------- */
@@ -1103,6 +1120,22 @@ table input {
 .close-modal-button {
     font-size: 26px;
     right: 20px;
+}
+
+/* -------------------------------------------------------- */
+/* ---------------------- COLLAPSE ------------------------ */
+/* -------------------------------------------------------- */
+.swiftopen-content {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0 !important;
+    transition: max-height 0.25s ease, padding-top 0.25s ease, padding-bottom 0.25s ease;
+}
+
+.swiftopen-content.is-open {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-height: 500px;
 }
 
 /* ------------------------------------------------------------ */

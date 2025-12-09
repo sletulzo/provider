@@ -1,23 +1,20 @@
-@if(session('success'))
-    <script>
-        toastr.success("{{ session('success') }}");
-    </script>
-@endif
-
-@if(session('error'))
-    <script>
-        toastr.error("{{ session('error') }}");
-    </script>
-@endif
-
-@if(session('info'))
-    <script>
-        toastr.info("{{ session('info') }}");
-    </script>
-@endif
-
-@if(session('warning'))
-    <script>
-        toastr.warning("{{ session('warning') }}");
-    </script>
-@endif
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        @if(session('success'))
+            toastr.clear();
+            toastr.success(@json(session('success')), 'Succès');
+        @endif
+        @if(session('error'))
+            toastr.clear();
+            toastr.error(@json(session('error')), 'Erreur');
+        @endif
+        @if(session('info'))
+            toastr.clear();
+            toastr.info(@json(session('info')), 'Information');
+        @endif
+        @if(session('warning'))
+            toastr.clear();
+            toastr.warning(@json(session('warning')), 'Attention');
+        @endif
+    });
+</script>

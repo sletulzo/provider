@@ -14,7 +14,7 @@ class IndentMail
     public function createIndentMail(Provider $provider, $content, $footer)
     {
         $table = '<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px;">'
-            . '<tr style="background-color: #007BFF; color: #ffffff;">'
+            . '<tr style="background-color: #51d3c9; color: #ffffff;">'
                 . '<th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Produit</th>'
                 . '<th style="padding: 10px; border: 1px solid #dddddd; text-align: center;">Quantité</th>'
                 . '<th style="padding: 10px; border: 1px solid #dddddd; text-align: right;">Unité</th>'

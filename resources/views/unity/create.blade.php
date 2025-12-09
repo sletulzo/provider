@@ -17,9 +17,9 @@
                 class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
             Annuler
         </button>
-        <button type="submit"
-                class="btn-primary">
-            Enregistrer
+        <button type="submit" class="btn-primary">
+            <span class="btn-loader"></span>
+            <span class="btn-text">Enregistrer</span>
         </button>
     </div>
 </form>

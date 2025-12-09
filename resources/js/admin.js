@@ -280,6 +280,7 @@ $(document).on('click', 'a.confirm-delete', function(e) {
 				method: 'GET',
 				url: url
 			}).done(function() {
+				toastr.clear();
 				toastr.success('Vous venez de supprimer un élément', 'Succès');
 				line.remove();
 			});
@@ -331,33 +332,6 @@ $(document).on('click', '#ajaxModalSlideUpClose', function(e) {
 	modal.removeClass('large');
 });
 
-// ---------------------------------------------------------------------------------
-// ----------------------------- UPDATE DASHBOARD ----------------------------------
-// ---------------------------------------------------------------------------------
-// $(document).on('click', '.indent-container-left-item', function(e) {
-// 	e.preventDefault();
-// 	e.stopPropagation();
-
-// 	var item = $(this);
-// 	var provider_id = $(this).attr('data-provider');
-// 	var url = $(this).closest('.indent-container-left-list').attr('data-url');
-// 	var parent = $(this).closest('.indent-container');
-// 	var container = parent.find('.indent-container-right');
-// 	var items = $('.indent-container-left-item');
-// 	items.removeClass('active');
-
-// 	$.ajax({
-// 		method: "POST",
-// 		url: url,
-// 		data: {
-// 			provider_id: provider_id
-// 		}
-// 	}).done(function(view) {
-// 		item.addClass('active');
-// 		container.html(view);
-// 	});
-// });
-
 
 // ---------------------------------------------------------------------------------
 // ------------------------------- TRIGGER UPDOWN ----------------------------------
@@ -388,4 +362,34 @@ $(document).on('click', '.trigger-updown', function(e) {
 		item.toggleClass('active', data.value <= 0 ? false : true);
     	popup.toggleClass('active', data.count > 0 ? true : false);
 	});
+});
+
+// ---------------------------------------------------------------------------------
+// ------------------------------- LOADER BUTTON -----------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('submit', 'form', function(e) {
+	let $btn = $(this).find('button[type="submit"], input[type="submit"]');
+
+	if ($btn.length) {
+		$btn.addClass('is-loading');
+		$btn.prop('disabled', true);
+	}
+});
+
+
+
+// ---------------------------------------------------------------------------------
+// -------------------------------- Collapse open ----------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '.swiftopen-toggle', function () {
+
+	var id = $(this).attr('data-target');
+	var content = $('.swiftopen-content#' + id);
+	const isOpen = content.hasClass('is-open');
+
+	if (isOpen) {
+		content.removeClass('is-open');
+	} else {
+		content.addClass('is-open');
+	}
 });

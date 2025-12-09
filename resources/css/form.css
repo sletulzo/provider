@@ -29,3 +29,30 @@ input:focus {
 textarea {
     height: auto;
 }
+
+button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+button[type="submit"] .btn-loader {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+button[type="submit"].is-loading .btn-loader {
+    display: inline-block;
+}
+
+/* Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

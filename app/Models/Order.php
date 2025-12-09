@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\URL;
 use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,5 +42,23 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Return boolean if is valid
+     */
+    public function isValid()
+    {
+        return $this->is_sent && $this->is_accepted;
+    }
+
+    /**
+     * Generate url 
+     */
+    public function generateUrl(): string
+    {
+        return URL::signedRoute('front.commande.accept', [
+            'uuid' => $this->uuid,
+        ]);
     }
 }

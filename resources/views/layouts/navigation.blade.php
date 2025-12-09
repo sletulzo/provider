@@ -5,7 +5,7 @@
     </div>
     <div class="nav-title-separator"></div>
     <nav x-data="{ open: false }">
-        <x-nav-link wire:navigate :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        <x-nav-link wire:navigate :href="route('indents')" :active="request()->routeIs('indents')">
             <div class="icon"><i class="fa-solid fa-basket-shopping"></i></div>
             {{ __('Commandes') }}
         </x-nav-link>
@@ -18,7 +18,7 @@
             {{ __('Produits') }}
         </x-nav-link>
         <x-nav-link wire:navigate :href="route('orders')" :active="request()->routeIs('orders')">
-            <div class="icon"><i class="fa-solid fa-pencil"></i></div>
+            <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
             {{ __('Commandes effectués') }}
         </x-nav-link>
         <x-nav-link wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
@@ -38,10 +38,6 @@
                 <div class="icon"><i class="fa-regular fa-building"></i></div>
                 {{ __('Sociétés') }}
             </x-nav-link>
-            <x-nav-link wire:navigate :href="route('dashboard.test')" :active="request()->routeIs('dashboard.test')">
-                <div class="icon"><i class="fa-regular fa-building"></i></div>
-                {{ __('Test') }}
-            </x-nav-link>
         </nav>
     @endif
 </div>
@@ -56,11 +52,17 @@
         <x-nav-link class="nav-item" wire:navigate :href="route('products')" :active="request()->routeIs('products')">
             <div class="icon"><i class="fa-regular fa-lemon"></i></div>
         </x-nav-link>
-        <x-nav-link class="nav-item" wire:navigate :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <div class="icon"><i class="fa-solid fa-basket-shopping"></i></div>
+        <x-nav-link class="nav-item" wire:navigate :href="route('indents')" :active="request()->routeIs('indents')">
+            <div class="icon">
+                <i class="fa-solid fa-basket-shopping relative">
+                    @if (Auth::user()->tenant && Auth::user()->tenant->countOrders())
+                        <span class="bubble">{{ Auth::user()->tenant->countOrders() }}</span>
+                    @endif
+                </i>
+            </div>
         </x-nav-link>
         <x-nav-link class="nav-item" wire:navigate :href="route('orders')" :active="request()->routeIs('orders')">
-            <div class="icon"><i class="fa-solid fa-pencil"></i></div>
+            <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
         </x-nav-link>
         <x-nav-link class="nav-item" wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
             <div class="icon"><i class="fa-regular fa-lightbulb"></i></div>

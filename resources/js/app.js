@@ -46,7 +46,7 @@ document.addEventListener('livewire:navigated', () => {
 // Livewire
 // -----------------------------------------------------------------------
 document.addEventListener('livewire:navigated', () => {
-    // Do nothing
+    window.toastr = toastr;
 });
 
 // Livewire nav
@@ -54,4 +54,4 @@ document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
         item.classList.add('active');
     });
-});
+}); 

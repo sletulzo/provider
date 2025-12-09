@@ -112,6 +112,123 @@
     .indent-container-left-list {
         gap: 15px;
     }
+
+    .toast-top-right {
+        top: auto !important;
+        bottom: 75px;
+        left: 12px;
+        width: calc(100% - 24px);
+    }
+
+    #toast-container > .toast {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    /* List view */
+    /* --------------------------------------------------------------------- */
+    .table-wrapper {
+        background-color: transparent;
+        padding: 0px;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+
+    .table-wrapper-title {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        padding: 20px;
+        margin-top: -20px;
+        background-color: #fff;
+    }
+
+    .mobile-card-item {
+        display: flex;
+        min-height: 60px;
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+    }
+
+    .mobile-card-item.active {
+        box-shadow: 0px 1px 10px -4px #16c516;
+    }
+
+    .mobile-card-item .mobile-card-item-icon {
+        background: rgb(241 245 249);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 14px;
+    }
+
+    .mobile-card-item.active .mobile-card-item-icon {
+        background-color: #14fd1430;
+        color: #16c516;
+    }
+
+    .mobile-card-item .mobile-card-item-right {
+        width: 100%;
+    }
+
+    .mobile-card-item .mobile-card-item-status {
+        display: flex;
+        gap: 10px;
+    }
+
+    .mobile-card-item .mobile-card-item-status-item {
+        background: rgb(241 245 249);
+        font-size: 12px;
+        border-radius: 8px;
+        padding: 1px 10px;
+        line-height: 15px;
+    }
+
+    .mobile-card-item .mobile-card-item-status-item.active {
+        background-color: #14fd1430;
+        color: #16c516;
+    }
+
+    .mobile-card-item .mobile-card-item-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin: 4px 0px;
+    }
+
+    .mobile-card-item .mobile-card-item-title span {
+        font-size: 12px;
+        color: #b7b7b7;
+        margin-left: 4px;
+        font-weight: normal;
+    }
+
+    .mobile-card-item .mobile-card-item-content {
+        display: flex;
+        gap: 14px;
+        color: #676767;
+        font-size: 13px;
+    }
+
+    .mobile-card-item-swiftopen {
+        color: #757575;
+        font-size: 22px;
+    }
+
+    .mobile-card-item-products {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .mobile-card-item-products-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 }
 
 @media screen and (max-width: 576px) {

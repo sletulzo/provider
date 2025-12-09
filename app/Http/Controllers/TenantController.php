@@ -39,6 +39,7 @@ class TenantController extends Controller
         $tenant = new Tenant();
         $tenant->uuid = Str::uuid()->toString();
         $tenant->name = $request->name;
+        $tenant->adress = $request->adress;
         $tenant->smtp_email = $request->email;
         $tenant->smtp_password = $request->smtp_password;
         $tenant->is_locked = $request->has('is_locked') ? true : false;
@@ -65,6 +66,7 @@ class TenantController extends Controller
         try 
         {
             $tenant->name = $request->name;
+            $tenant->adress = $request->adress;
             $tenant->smtp_email = $request->email;
             $tenant->smtp_password = $request->smtp_password;
             $tenant->is_locked = $request->has('is_locked') ? true : false;

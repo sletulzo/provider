@@ -17,6 +17,7 @@
                     <tr>
                         <th>Nom</th>
                         <th>Email</th>
+                        <th>Adresse</th>
                         <th class="align-center">Active</th>
                         <th>Crée le</th>
                         <th class="align-right"></th>
@@ -27,6 +28,7 @@
                         <tr class="hover:bg-gray-50 transition-all duration-200 {{ $tenant->is_locked ? 'tr-locked' : '' }}">
                             <td class="px-6 py-4">{{ $tenant->name }}</td>
                             <td class="px-6 py-4">{{ $tenant->smtp_email }}</td>
+                            <td class="px-6 py-4">{{ $tenant->adress }}</td>
                             <td class="px-6 py-4 align-center">
                                 @if (!$tenant->is_locked)
                                     <i class="fa-regular fa-circle-check"></i>

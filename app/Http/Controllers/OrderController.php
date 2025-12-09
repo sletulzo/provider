@@ -11,8 +11,9 @@ use App\Services\TenantMailer;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
-
 use Illuminate\Http\Request;
+
+use function Ramsey\Uuid\v1;
 
 class OrderController extends Controller
 {
@@ -26,55 +27,23 @@ class OrderController extends Controller
     }
 
     /**
-     * Display provider view
-     */
-    public function save(Provider $provider, Request $request)
-    {
-        // Transform to order
-        $orderWaiting = OrderWaiting::where('provider_id', $provider->id)->get();
-
-        $order = new Order();
-        $order->uuid = Str::uuid()->toString();
-        $order->provider_id = $provider->id;
-        $order->user_id = $request->user()->id;
-        $order->save();
-
-        foreach($orderWaiting as $item)
-        {
-            $orderLine = OrderLine::firstOrCreate([
-                'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'unity_id' => $item->unity_id,
-            ]);
-
-            $orderLine->quantity = $item->quantity;
-            $orderLine->update();
-            $item->delete();
-        }
-
-        $data = [
-            'subject' => $request->subject,
-            'content' => $request->email_content
-        ];
-
-        if ($provider->email)
-        {
-            TenantMailer::send(
-                $provider->tenant,
-                $provider->email,
-                new ProviderEmail($data)
-            );
-        }
-
-        return Redirect::route('dashboard')->with('status', 'email-sent');
-    }
-
-    /**
      * Display products
      */
     public function products(Order $order)
     {
         return view('order.products', compact('order'));
+    }
+
+    /**
+     * Accept provider order
+     */
+    public function accept(Request $request)
+    {
+        $order = Order::where('uuid', $request->uuid)->firstOrFail();
+        $order->is_accepted = true;
+        $order->update();
+
+        return view('front.accept', ['order' => $order]);
     }
 
     /**

@@ -166,13 +166,9 @@
     height: 68px;
     position: fixed;
     z-index: 1001;
-    margin-bottom: -60px;
-
-    height: calc(68px + env(safe-area-inset-bottom));
-    bottom: env(safe-area-inset-bottom);
+    bottom: 0;
     left: 0;
     right: 0;
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .nav-mobile-bottom > nav {

@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <textarea name="content" placeholder="Objet" rows="3" class="w-100">Bonjour {{ $provider->name }}, Merci de préparer la commande suivante pour livraison selon vos tournées : </textarea>
+                        <textarea name="content" placeholder="Objet" rows="3" class="w-100">Bonjour {{ $provider->name }},\n Merci de préparer la commande suivante pour livraison selon vos tournées : </textarea>
                     </div>
 
                     <div class="preview-products">
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="mt-4">
-                        @php ($remerciement = "Merci !\n". Auth::user()->tenant?->name ." \nPort de Sainte-Marine")
+                        @php ($remerciement = "Merci !\n". Auth::user()->tenant?->name ." \n" . Auth::user()->tenant?->adress)
                         <textarea name="footer" placeholder="Objet" rows="3" class="w-100">{{ $remerciement }}</textarea>
                     </div>
                 </div>
@@ -56,7 +56,10 @@
     <div class="shop-cart-footer">
         <div class="shop-cart-footer-actions">
             <a href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}" class="btn-default ajax-modal-up">Annuler</a>
-            <button type="submit" class="btn-primary">Confirmer et envoyer</button>
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Confirmer et envoyer</span>
+            </button>
         </div>
     </div>
 </div>

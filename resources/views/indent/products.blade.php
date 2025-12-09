@@ -7,7 +7,7 @@
 
     <div class="indent-container">
         <div class="indent-container-header">
-            <a wire:navigate href="{{ route('dashboard.test') }}"><i class="fa-solid fa-arrow-left"></i></a>
+            <a wire:navigate href="{{ route('indents') }}"><i class="fa-solid fa-arrow-left"></i></a>
             <div class="indent-container-header-title">
                 <div>{{ $provider->name }}</div>
                 <span>{{ $provider->email }}</span>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="indent-container-right">
-            @include('test.items')
+            @include('indent.items')
         </div>
     </div>
   

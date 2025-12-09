@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
+use App\Models\Tenant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,50 +16,31 @@ class ProviderEmail extends Mailable
     use Queueable, SerializesModels;
 
     public array $data;
+    public Order $order;
+    public string $url;
+    public Tenant $tenant;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct($data, Order $order)
     {
         $this->data = $data;
-    }
-
-    public function build()
-    {
-        return $this->subject($this->data['subject'])
-                    ->markdown('emails.provider')
-                    ->with($this->data);
+        $this->order = $order;
+        $this->url = $order->generateUrl();
     }
 
     /**
-     * Get the message envelope.
+     * Build email
      */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: $this->data['subject'],
-    //     );
-    // }
-
-    // /**
-    //  * Get the message content definition.
-    //  */
-    // public function content(): Content
-    // {
-    //     return new Content(
-    //         view: 'emails.provider',
-    //         with: $this->data
-    //     );
-    // }
-
-    // /**
-    //  * Get the attachments for the message.
-    //  *
-    //  * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-    //  */
-    // public function attachments(): array
-    // {
-    //     return [];
-    // }
+    public function build()
+    {
+        return $this->subject($this->data['subject'])
+            ->markdown('emails.provider')
+            ->with([
+                'subject' => $this->data['subject'],
+                'content' => nl2br($this->data['content']),
+                'url' => $this->url
+            ]);
+    }
 }

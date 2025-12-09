@@ -28,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 // Home page
 Route::get('/', [HomeController::class, 'index'])->middleware('redirect.auth')->name('home');
 
+// Indent provider
+Route::get('/commande/accept', [OrderController::class, 'accept'])->name('front.commande.accept')->middleware('signed');
+
 
 Route::middleware('auth')->group(function () {
     // Dashboard 
@@ -77,10 +80,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/unities/{unity}/delete', [UnityController::class, 'destroy'])->name('unities.delete');
 
     // Indent
-    Route::post('/indent/{product}/quantity', [IndentController::class, 'quantity'])->name('indent.update.quantity');
-    Route::post('/indent/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
-    Route::post('/indent/{provider}/preview', [IndentController::class, 'preview'])->name('indent.preview');
-    Route::post('/indent/{provider}/send', [IndentController::class, 'send'])->name('indent.send');
+    Route::get('/indents', [IndentController::class, 'index'])->name('indents');
+    Route::get('/indents/{provider}/products', [IndentController::class, 'products'])->name('indent.products');
+    Route::post('/indents/items', [IndentController::class, 'items'])->name('indent.items');
+    Route::post('/indents/{product}/quantity', [IndentController::class, 'quantity'])->name('indent.update.quantity');
+    Route::post('/indents/{provider}/shop-cart', [IndentController::class, 'shopCart'])->name('indent.shop-cart');
+    Route::post('/indents/{provider}/preview', [IndentController::class, 'preview'])->name('indent.preview');
+    Route::post('/indents/{provider}/send', [IndentController::class, 'send'])->name('indent.send');
 
 
     Route::middleware('admin')->group(function () {
@@ -102,7 +108,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/tenants/{tenant}/delete', [TenantController::class, 'destroy'])->name('tenants.delete');
 
         // TODO : test
-        Route::get('/dashboard/test', [DashboardController::class, 'newIndex'])->name('dashboard.test');
         Route::post('/dashboard/items', [DashboardController::class, 'productList'])->name('dashboard.items');
         Route::get('/dashboard/{provider}/products', [DashboardController::class, 'providerProduct'])->name('dashboard.provider');
         Route::post('/dashboard/{product}/quantity', [DashboardController::class, 'productQuantity'])->name('dashboard.quantities');

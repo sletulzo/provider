@@ -32,9 +32,9 @@
                 class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
             Annuler
         </button>
-        <button type="submit"
-                class="btn-primary">
-            Enregistrer
+        <button type="submit" class="btn-primary">
+            <span class="btn-loader"></span>
+            <span class="btn-text">Mettre à jour</span>
         </button>
     </div>
 </form>
@@ -42,8 +42,9 @@
 <div class="flex justify-end pt-2">
     <form action="{{ route('users.sendReset', $user) }}" method="POST">
         @csrf
-        <button class="btn btn-primary">
-            Envoyer lien de création / reset mot de passe
+        <button type="submit" class="btn btn-primary">
+            <span class="btn-loader"></span>
+            <span class="btn-text">Envoyer lien de création / reset mot de passe</span>
         </button>
     </form>
 </div>
