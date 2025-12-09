@@ -25,7 +25,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <textarea name="content" placeholder="Objet" rows="3" class="w-100">Bonjour {{ $provider->name }},\n Merci de préparer la commande suivante pour livraison selon vos tournées : </textarea>
+                        @php ($content = "Bonjour " . $provider->name . ",\nMerci de préparer la commande suivante pour livraison selon vos tournées :")
+                        <textarea name="content" placeholder="Objet" rows="3" class="w-100">{{ $content }}</textarea>
                     </div>
 
                     <div class="preview-products">
