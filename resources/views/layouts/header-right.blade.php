@@ -17,8 +17,6 @@
                 {{ __('Profil') }}
             </x-dropdown-link>
 
-            <div class="divider"></div>
-
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

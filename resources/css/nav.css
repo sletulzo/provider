@@ -203,3 +203,9 @@
 .nav-mobile-bottom > nav > a.active .icon {
     color: #fff;
 }
+
+.nav-title-separator {
+    border-top: 1px solid #eee;
+    margin-top: 5px;
+    padding-bottom: 5px;
+}

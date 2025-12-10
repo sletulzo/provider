@@ -1,4 +1,4 @@
-<div class="mobile-card-item {{ $order->isValid() ? 'active' : '' }}">
+<div class="mobile-card-item swiftopen-toggle {{ $order->isValid() ? 'active' : '' }}" data-target="swiftopen_order_{{ $order->id }}">
     <div class="mobile-card-item-left">
         <div class="mobile-card-item-icon">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -20,24 +20,19 @@
                 {{ carbon($order->created_at)->format('d/m/Y à H:i') }}
             </div>
         </div>
-    </div>
 
-    <div class="mobile-card-item-swiftopen">
-        <div class="swiftopen-toggle" data-target="swiftopen_order_{{ $order->id }}">
-            <i class="fa-regular fa-circle-down"></i>
+        <div class="swiftopen-content" id="swiftopen_order_{{ $order->id }}">
+            <div class="mobile-card-item-products">
+                @foreach($order->lines as $line)
+                    <div class="mobile-card-item-products-item">
+                        <i class="fa-regular fa-lemon"></i>
+                        <b>{{ $line->product?->name }}</b>
+                        <div>x{{ $line->quantity }}</div>
+                        <div>{{ $line->unity?->name }}</div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
 
-<div class="swiftopen-content" id="swiftopen_order_{{ $order->id }}">
-    <div class="mobile-card-item-products">
-        @foreach($order->lines as $line)
-            <div class="mobile-card-item-products-item">
-                <i class="fa-regular fa-lemon"></i>
-                <b>{{ $line->product?->name }}</b>
-                <div>x{{ $line->quantity }}</div>
-                <div>{{ $line->unity?->name }}</div>
-            </div>
-        @endforeach
-    </div>
-</div>

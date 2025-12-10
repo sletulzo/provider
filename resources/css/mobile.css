@@ -156,10 +156,6 @@
         padding: 15px;
     }
 
-    .mobile-card-item.active {
-        box-shadow: 0px 1px 10px -4px #16c516;
-    }
-
     .mobile-card-item .mobile-card-item-icon {
         background: rgb(241 245 249);
         width: 35px;
@@ -172,8 +168,8 @@
     }
 
     .mobile-card-item.active .mobile-card-item-icon {
-        background-color: #14fd1430;
-        color: #16c516;
+        background-color: #4fd1c441;
+        color: #4FD1C5;
     }
 
     .mobile-card-item .mobile-card-item-right {
@@ -194,8 +190,8 @@
     }
 
     .mobile-card-item .mobile-card-item-status-item.active {
-        background-color: #14fd1430;
-        color: #16c516;
+        background-color: #4fd1c441;
+        color: #4FD1C5;
     }
 
     .mobile-card-item .mobile-card-item-title {

@@ -15,7 +15,7 @@
                     </div>
                     <div class="shop-cart-body-item-actions">
                         <div class="price">{{ $indent->getPrice() / 100 }}€</div>
-                        <a href=""><i class="fa-regular fa-trash-can"></i></a>
+                        <!-- <a href=""><i class="fa-regular fa-trash-can"></i></a> -->
                     </div>
                 </div>
             @endforeach
