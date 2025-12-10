@@ -18,9 +18,9 @@ class RedirectIfAuthenticatedToHome
     {
         if (Auth::check()) 
         {
-            if (!$request->routeIs('dashboard')) 
+            if (!$request->routeIs('indents')) 
             {
-                return redirect()->route('dashboard');
+                return redirect()->route('indents');
             }
         }
 
