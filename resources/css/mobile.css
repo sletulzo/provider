@@ -150,6 +150,7 @@
 
     .mobile-card-item {
         display: flex;
+        flex-wrap: wrap;
         min-height: 60px;
         background-color: #fff;
         border-radius: 12px;
@@ -172,8 +173,12 @@
         color: #4FD1C5;
     }
 
+    .mobile-card-item .mobile-card-item-left {
+        width: 50px;
+    }
+
     .mobile-card-item .mobile-card-item-right {
-        width: 100%;
+        width: calc(100% - 50px);
     }
 
     .mobile-card-item .mobile-card-item-status {
@@ -233,6 +238,13 @@
 
     .mobile-card-item-products-item:first-child {
         padding-top: 10px;
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+    }
+
+    .mobile-card-item .swiftopen-content {
+        flex-basis: 100%;
+        width: 100%;
     }
 }
 
