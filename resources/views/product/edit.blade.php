@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('products.update', ['product' => $product->id]) }}" id="createFournisseurForm" class="space-y-5">
+<form method="POST" action="{{ route('products.update', ['product' => $product->id]) }}" id="createFournisseurForm" class="form-modal" class="space-y-5">
     @csrf
 
     <h2 class="text-lg font-semibold text-gray-800">Modifier le produit</h2>

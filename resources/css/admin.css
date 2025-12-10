@@ -161,6 +161,7 @@ body {
 
 body.backdrop {
     transition: all 0.5s;
+    pointer-events: none;
 }
 
 body.backdrop::after {
@@ -1152,6 +1153,7 @@ table input {
     border-top-right-radius: 15px;
     transition: all 0.4s;
     z-index: 1000;
+    pointer-events: all;
 }
 
 .modal-slide-up.large {

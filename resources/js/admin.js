@@ -299,6 +299,7 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 	var url = $(this).attr('href');
 	var modal = $('#ajaxModalSlideUp');
 	var size = $(this).attr('data-size');
+	var method = $(this).attr('data-method') ?? 'POST';
 	var modalContent = modal.find('#ajaxModalSlideUpContent');
 	var body = $('body');
 
@@ -317,7 +318,7 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 	modal.addClass(size);
 
 	$.ajax({
-		method: "POST",
+		method: method,
 		url: url
 	}).done(function(view) {
 		modalContent.html(view);

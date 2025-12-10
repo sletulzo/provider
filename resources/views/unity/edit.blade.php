@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('unities.update', ['unity' => $unity->id]) }}" id="createFournisseurForm" class="space-y-5">
+<form method="POST" action="{{ route('unities.update', ['unity' => $unity->id]) }}" id="createFournisseurForm" class="form-modal">
     @csrf
 
     <h2 class="text-lg font-semibold text-gray-800">Modifier l'unité</h2>

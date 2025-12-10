@@ -1,15 +1,10 @@
-self.addEventListener("install", (event) => {
-    console.log("Service Worker: installé");
-    self.skipWaiting();
+self.addEventListener('install', event => {
+  self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
-    console.log("Service Worker: activé");
+self.addEventListener('activate', event => {
+  event.waitUntil(clients.claim());
 });
 
-self.addEventListener("fetch", (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => response || fetch(event.request))
-    );
-});
+// IMPORTANT : ne rien intercepter
+self.addEventListener('fetch', event => {});

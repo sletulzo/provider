@@ -192,6 +192,7 @@
         border-radius: 8px;
         padding: 1px 10px;
         line-height: 15px;
+        color: #919191;
     }
 
     .mobile-card-item .mobile-card-item-status-item.active {
@@ -234,6 +235,7 @@
         display: flex;
         align-items: flex-start;
         gap: 5px;
+        color: #66797d;
     }
 
     .mobile-card-item-products-item > i {
@@ -262,4 +264,104 @@
     .nav-mobile.active {
         width: calc(100% - 40px);
     }
+}
+
+
+
+
+
+
+
+/* Card */
+.card-mobile-container {
+    margin-left: -20px;
+    width: calc(100% + 40px);
+    margin-top: -12px;
+}
+
+.card-mobile {
+    width: 100%;
+    height: 58px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-top: 1px solid #eee;
+}
+
+.card-mobile-separator {
+    /* width: 100%;
+    height: 35px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    padding: 0px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #eeee; */
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    color: #a7a7a7;
+    font-weight: bold;
+    background-color: #fff;
+    padding: 0px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.card-mobile-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #51d3c9;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.card-mobile-content {
+    display: flex;
+    width: 100%;
+}
+
+.card-mobile-content-left {
+    line-height: 18px;
+}
+
+.card-mobile-content-name {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.card-mobile-content-subname {
+    color: #8b8b8b;
+    font-size: 13px;
+}
+
+.card-mobile-content-right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.card-mobile-content-price {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-mobile-content-quantity {
+    color: #8b8b8b;
+    font-size: 13px;
+}
+
+#ajaxModalSlideUpContent .form-modal {
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100% - 60px);
 }
