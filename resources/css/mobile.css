@@ -292,15 +292,14 @@
 
 .card-mobile-separator {
     width: 100%;
-    height: 35px;
-    font-size: 16px;
-    color: #333;
+    height: 30px;
+    font-size: 14px;
+    color: #a7a7a7;
     font-weight: bold;
+    background-color: #fff;
     padding: 0px 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-top: 1px solid #eeee;
 }
 
 .card-mobile-icon {
