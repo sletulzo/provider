@@ -64,7 +64,8 @@ class IndentController extends Controller
             'provider_id' => $product->provider_id
         ]);
 
-        $quantity = ($request->type == 'add') ? $orderWaiting->quantity + 1 : $orderWaiting->quantity - 1;
+        $step = $product->quantity_step ?? 1;
+        $quantity = ($request->type == 'add') ? $orderWaiting->quantity + $step : $orderWaiting->quantity - $step;
         $orderWaiting->quantity = $quantity;
         $orderWaiting->price = $product->price * $orderWaiting->quantity;
         $orderWaiting->unity_id = $product->unity_id;

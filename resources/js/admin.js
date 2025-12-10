@@ -354,7 +354,7 @@ $(document).on('click', '.trigger-updown', function(e) {
 	var url = updown.attr('data-url');
 	var item = $(this).closest('.indent-container-right-item');
 	var display = updown.find('.updown-display');
-  var popup = $('.indent-order-popup');
+  	var popup = $('.indent-order-popup');
 
   	if (parseInt(display.html()) == 0 && type == 'remove')
 		return;
