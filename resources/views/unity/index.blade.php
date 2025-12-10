@@ -8,8 +8,9 @@
     <div class="table-wrapper">
         <div class="table-wrapper-title">
             <input type="text" name="search-table" placeholder="Rechercher une unité...">
-            <a href="{{ route('unities.create') }}" class="ajax-modal table-wrapper-action">Créer une unité</a>
+            <a href="{{ route('unities.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer une unité</a>
         </div>
+        
         <div class="hidden sm:block">
             <div class="overflow-x-auto">
                 <table class="table">

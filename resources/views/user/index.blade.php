@@ -8,35 +8,46 @@
    <div class="table-wrapper">
         <div class="table-wrapper-title">
             <input type="text" name="search-table" placeholder="Rechercher un utilisateur...">
-            <a href="{{ route('users.create') }}" class="ajax-modal table-wrapper-action">Créer un utilisateur</a>
+            <a href="{{ route('users.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer un utilisateur</a>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Société</th>
-                        <th>Crée le</th>
-                        <th class="align-right"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
-                        <tr class="hover:bg-gray-50 transition-all duration-200">
-                            <td class="px-6 py-4">{{ $user->name }}</td>
-                            <td class="px-6 py-4">{{ $user->email }}</td>
-                            <td class="px-6 py-4">{{ $user->tenant?->name }}</td>
-                            <td class="px-6 py-4">{{ carbon($user->created_at)->format('d/m/Y') }}</td>
-                            <td class="align-right actions">
-                                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="{{ route('users.delete', ['user' => $user->id]) }}" class="confirm-delete"><i class="fa-regular fa-trash-can"></i></a>
-                            </td>
-                        </tr> 
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="hidden sm:block">
+            <div class="overflow-x-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Société</th>
+                            <th>Crée le</th>
+                            <th class="align-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users->sortBy('name') as $user)
+                            <tr class="hover:bg-gray-50 transition-all duration-200">
+                                <td class="px-6 py-4">{{ $user->name }}</td>
+                                <td class="px-6 py-4">{{ $user->email }}</td>
+                                <td class="px-6 py-4">{{ $user->tenant?->name }}</td>
+                                <td class="px-6 py-4">{{ carbon($user->created_at)->format('d/m/Y') }}</td>
+                                <td class="align-right actions">
+                                    <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a href="{{ route('users.delete', ['user' => $user->id]) }}" class="confirm-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                </td>
+                            </tr> 
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Mobile view -->
+        <div class="block sm:hidden">
+            <div class="card-mobile-container">
+                @foreach($users->sortBy('name') as $user)
+                    @include('user.card', ['user' => $user])
+                @endforeach
+            </div>
         </div>
    </div>
 </x-app-layout>

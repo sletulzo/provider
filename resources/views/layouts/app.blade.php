@@ -53,7 +53,10 @@
         ])
 
         @livewireScripts
-        @include('layouts.notifications')
+        
+        @persist('notifications')
+            @include('layouts.notifications')
+        @endpersist
 
         <div x-data="{ loading: false }" x-on:livewire:navigate.window="loading = true" x-on:livewire:navigated.window="loading = false">
             <template x-if="loading">

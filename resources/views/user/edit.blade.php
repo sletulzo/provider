@@ -1,7 +1,7 @@
-<form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="space-y-5">
+<form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="form-modal">
     @csrf
 
-    <h2 class="text-lg font-semibold text-gray-800">Créer un utilisateur</h2>
+    <h2 class="text-lg font-semibold text-gray-800">Modifier un utilisateur</h2>
 
     <!-- Nom -->
     <div>
@@ -28,10 +28,10 @@
 
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
-        <button type="button"
-                class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
-            Annuler
-        </button>
+        <a href="{{ route('users.delete', ['user' => $user->id]) }}" class="btn-delete m-r-auto confirm-delete">
+            <i class="fa-regular fa-trash-can"></i>
+        </a>
+        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
         <button type="submit" class="btn-primary">
             <span class="btn-loader"></span>
             <span class="btn-text">Mettre à jour</span>
@@ -39,7 +39,7 @@
     </div>
 </form>
 
-<div class="flex justify-end pt-2">
+<div class="flex justify-center" style="margin-top: -75px;">
     <form action="{{ route('users.sendReset', $user) }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary">

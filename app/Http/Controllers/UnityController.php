@@ -62,7 +62,7 @@ class UnityController extends Controller
         $unity->name = $request->name;
         $unity->update();
 
-        return Redirect::route('unities')->with('status', 'unity-updated');
+        return Redirect::route('unities')->with('success', 'Mise à jour réussie');
     }
 
     /**
@@ -71,6 +71,6 @@ class UnityController extends Controller
     public function destroy(Unity $unity): RedirectResponse
     {
         $unity->delete();
-        return Redirect::route('unities')->with('status', 'unity-deleted');
+        return Redirect::route('unities')->with('success', 'Suppression réussie');
     }
 }

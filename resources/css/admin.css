@@ -89,6 +89,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     gap: 20px;
 }
 
+.m-r-auto {
+    margin-right: auto;
+}
+
+.m-r-10 {
+    margin-right: 10px;
+}
+
 /* -------------------------------------------------------- */
 /* ------------------------- MARGIN ----------------------- */
 /* -------------------------------------------------------- */
@@ -149,6 +157,10 @@ header > h2 {
 
 header > h2 > i {
     margin-right: 10px;
+}
+
+.swal2-container {
+    pointer-events: all;
 }
 
 /* -------------------------------------------------------- */
@@ -267,6 +279,36 @@ body.backdrop::after {
     padding-inline-end: 1rem;
     background-color: #eee;
     color: #aaa;
+    text-transform: uppercase;
+}
+
+.btn-delete {
+    display: inline-flex;
+    appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    width: auto;
+    line-height: 1.2;
+    border-radius: 15px;
+    font-weight: 600;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 0.2s;
+    border: 1px solid red;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    font-size: 0.75rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    background-color: #fff;
+    color: red;
     text-transform: uppercase;
 }
 
@@ -449,6 +491,7 @@ table input {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 0.95;
 }
 
 #toast-container > div {
@@ -1175,6 +1218,7 @@ table input {
     right: 20px;
     top: 12px;
     font-size: 19px;
+    z-index: 1;
 }
 
 .modal-slide-up #ajaxModalSlideUpContent {

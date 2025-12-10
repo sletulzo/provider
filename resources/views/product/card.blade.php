@@ -1,4 +1,4 @@
-<a href="{{ route('products.edit', ['product' => $product->id]) }}" data-method="GET" class="card-mobile ajax-modal-up">
+<a href="{{ route('products.edit', ['product' => $product->id]) }}" data-method="GET" class="card-mobile ajax-modal-up" data-size="large">
     <div class="card-mobile-icon">
         <i class="fa-solid fa-cube"></i>
     </div>

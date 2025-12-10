@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('unities.store') }}" id="createFournisseurForm" class="space-y-5">
+<form method="POST" action="{{ route('unities.store') }}" id="createFournisseurForm" class="form-modal">
     @csrf
 
     <h2 class="text-lg font-semibold text-gray-800">Créer une unité</h2>
@@ -13,10 +13,7 @@
 
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
-        <button type="button"
-                class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
-            Annuler
-        </button>
+        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
         <button type="submit" class="btn-primary">
             <span class="btn-loader"></span>
             <span class="btn-text">Enregistrer</span>

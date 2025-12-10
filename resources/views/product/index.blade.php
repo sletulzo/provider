@@ -8,9 +8,8 @@
     <div class="table-wrapper">
         <div class="table-wrapper-title">
             <input type="text" name="search-table" placeholder="Rechercher un produit...">
-            <a href="{{ route('products.create') }}" class="ajax-modal table-wrapper-action">Créer un produit</a>
+            <a href="{{ route('products.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer un produit</a>
         </div>
-
 
         <div class="hidden sm:block">
             <div class="overflow-x-auto">

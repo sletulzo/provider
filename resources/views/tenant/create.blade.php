@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('tenants.store') }}" class="space-y-5">
+<form method="POST" action="{{ route('tenants.store') }}" class="form-modal">
     @csrf
 
     <h2 class="text-lg font-semibold text-gray-800">Créer une société</h2>

@@ -1,4 +1,4 @@
-<a href="{{ route('providers.edit', ['provider' => $provider->id]) }}" data-method="GET" class="card-mobile ajax-modal-up">
+<a href="{{ route('providers.edit', ['provider' => $provider->id]) }}" data-method="GET" data-size="large" class="card-mobile ajax-modal-up">
     <div class="card-mobile-icon">
         <i class="fa-regular fa-address-book"></i>
     </div>

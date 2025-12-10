@@ -60,10 +60,10 @@
 
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
-        <button type="button"
-                class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
-            Annuler
-        </button>
+        <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="btn-delete m-r-auto confirm-delete">
+            <i class="fa-regular fa-trash-can"></i>
+        </a>
+        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
         <button type="submit" class="btn-primary">
             <span class="btn-loader"></span>
             <span class="btn-text">Mettre à jour</span>
