@@ -75,10 +75,10 @@ class UserController extends Controller
         }
         catch(\Exception $e)
         {
-            return Redirect::route('users')->with('status', 'error');
+            return Redirect::route('users')->with('error', 'Erreur dans la mise à jour');
         }
 
-        return Redirect::route('users')->with('status', 'profile-updated');
+        return Redirect::route('users')->with('success', 'Mise à jour réussie');
     }
 
     /**
@@ -87,6 +87,6 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
-        return Redirect::route('users')->with('status', 'profile-deleted');
+        return Redirect::route('users')->with('success', 'Suppression effectuée');
     }
 }
