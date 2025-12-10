@@ -8,7 +8,7 @@
             <div class="card-mobile-content-subname">{{ $product->unity?->name }}</div>
         </div>
         <div class="card-mobile-content-right">
-            <div class="card-mobile-content-price">{{ $product->id }}€</div>
+            <div class="card-mobile-content-price">{{ $product->price ? $product->price / 100 . '€' : '' }}</div>
             @if ($product->quantity_min)
                 <div class="card-mobile-content-quantity">Quantité min : {{ $product->quantity_min }}</div>
             @endif
