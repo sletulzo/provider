@@ -28,7 +28,7 @@
                 <div class="mobile-card-item-products-item">
                     <i class="fa-regular fa-lemon"></i>
                     <b>{{ $line->product?->name }}</b>
-                    <div>x{{ $line->quantity }}</div>
+                    <div style="margin-left: auto;">x{{ $line->quantity }}</div>
                     <div>{{ $line->unity?->name }}</div>
                 </div>
             @endforeach
