@@ -232,8 +232,12 @@
 
     .mobile-card-item-products-item {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 5px;
+    }
+
+    .mobile-card-item-products-item > i {
+        margin-top: 3px;
     }
 
     .mobile-card-item-products-item:first-child {
