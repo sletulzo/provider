@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Concerns\BelongsToTenant;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Provider extends Model
 {
@@ -43,6 +43,17 @@ class Provider extends Model
     {
         return $this->orderWaitings()->sum('quantity');
     } 
+
+    /**
+     * Get default mail content
+     */
+    public function getMailContent()
+    {
+        if ($this->email_content)
+            return $this->email_content;
+
+        return "Merci !\n". Auth::user()->tenant?->name ." \n" . Auth::user()->tenant?->adress;
+    }
     
     /**
      * Get price

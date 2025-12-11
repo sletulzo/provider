@@ -47,8 +47,7 @@
                     </div>
 
                     <div class="mt-4">
-                        @php ($remerciement = "Merci !\n". Auth::user()->tenant?->name ." \n" . Auth::user()->tenant?->adress)
-                        <textarea name="footer" placeholder="Objet" rows="3" class="w-100">{{ $remerciement }}</textarea>
+                        <textarea name="footer" placeholder="Objet" rows="3" class="w-100">{{ $provider->getMailContent() }}</textarea>
                     </div>
                 </div>
             </div>
