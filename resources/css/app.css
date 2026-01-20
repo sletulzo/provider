@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --primary: #242c6b;
+    --secondary: #44beee;
+
+    --primary-bg: #242c6b41;
+    --secondary-bg: #44beee4d;
+}

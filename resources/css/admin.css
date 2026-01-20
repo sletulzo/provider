@@ -132,15 +132,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 /* ----------------------- HEADER ------------------------- */
 /* -------------------------------------------------------- */
 header {
-    width: calc(100% - 260px);
+    width: 100%;
     position: fixed;
-    margin-left: 260px;
     height: 70px;
     display: flex;
     align-items: center;
     padding-right: 20px;
     padding-left: 20px;
-    justify-content: space-between;
     z-index: 1;
     transition: all 0.2s;
 }
@@ -159,6 +157,10 @@ header > h2 > i {
     margin-right: 10px;
 }
 
+header > .flex-center {
+    margin-left: auto;
+}
+
 .swal2-container {
     pointer-events: all;
 }
@@ -168,7 +170,8 @@ header > h2 > i {
 /* -------------------------------------------------------- */
 body {
     overflow: hidden;
-    position: relative;
+    position: relative;    
+    letter-spacing: 0.02rem;
 }
 
 body.backdrop {
@@ -211,10 +214,9 @@ body.backdrop::after {
 .main-wrapper main {
     position: relative;
     display: block;
-    width: calc(100% - 260px);
+    width: 100%;
     height: calc(100vh - 70px);
     overflow: auto;
-    margin-left: 260px;
     margin-top: 70px;
     padding: 20px;
     transition: all 0.2s;
@@ -248,7 +250,7 @@ body.backdrop::after {
     font-size: 0.75rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
-    background-color: #4FD1C5;
+    background-color: var(--primary);
     color: #fff;
     text-transform: uppercase;
 }
@@ -719,6 +721,7 @@ table input {
     width: 48px;
     height: 48px;
     background-color: rgb(117, 223, 212);
+    background-color: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -839,16 +842,16 @@ table input {
 }
 
 .indent-container-right-item.active {
-    background-color: #4fd1c52e;
-    border: 1px solid #4fd1c5;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--secondary);
 }
 
 .indent-container-right-item.active .indent-container-right-item-icon {
-    background-color: #4fd1c5;
+    background-color: var(--secondary);
 }
 
 .indent-container-right-item.active .updown > span {
-    color: #4fd1c5;
+    color: var(--secondary);
 }
 
 .indent-container-header {
@@ -907,7 +910,7 @@ table input {
     align-items: center;
     gap: 8px;
     padding: 10px 20px 10px 10px;
-    background-color: #4fd1c5;
+    background-color: var(--secondary);
     border-radius: 10px;
     color: #fff;
     font-weight: bold;
@@ -977,7 +980,7 @@ table input {
 }
 
 .shop-cart-title-label {
-    background-color: #4fd1c5;
+    background-color: var(--secondary);
     font-size: 10px;
     padding: 2px 6px;
     display: inline-block;
@@ -1018,8 +1021,8 @@ table input {
 .shop-cart-body-item-icon {
     width: 26px;
     height: 26px;
-    background-color: #4fd1c43b;
-    color: #4fd1c5;
+    background-color: var(--secondary-bg);
+    color: var(--secondary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1044,7 +1047,7 @@ table input {
 
 .shop-cart-body-item-actions .price {
     font-weight: bold;
-    color: #4fd1c5;
+    color: var(--secondary);
 }
 
 .shop-cart-footer {
@@ -1123,7 +1126,7 @@ table input {
 }
 
 .shop-cart-body-preview-bigbox .header {
-    background-color: #4fd1c5;
+    background-color: var(--secondary);
     padding: 10px 15px;
     color: #fff;
     line-height: 26px;
@@ -1144,7 +1147,7 @@ table input {
 
 .shop-cart-body-preview-bigbox .preview-products {
     padding: 10px;
-    background: #4fd1c524;
+    background: var(--secondary-bg);
     border-radius: 12px;
 }
 
@@ -1216,7 +1219,7 @@ table input {
 .modal-slide-up #ajaxModalSlideUpClose {
     position: absolute;
     right: 20px;
-    top: 12px;
+    top: 17px;
     font-size: 19px;
     z-index: 1;
 }

@@ -19,7 +19,7 @@
         </x-nav-link>
         <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
             <div class="icon"><i class="fa-solid fa-pencil"></i></div>
-            {{ __('Commandes effectués') }}
+            {{ __('Commandes effectuées') }}
         </x-nav-link>
         <x-nav-link :href="route('unities')" :active="request()->routeIs('unities')">
             <div class="icon"><i class="fa-regular fa-lightbulb"></i></div>

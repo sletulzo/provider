@@ -60,7 +60,7 @@
                 {{ __('Produits') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
-                {{ __('Commandes effectués') }}
+                {{ __('Commandes effectuées') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('unities')" :active="request()->routeIs('unities')">
                 {{ __('Unités') }}
