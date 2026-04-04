@@ -9,7 +9,7 @@
             <div class="mobile-card-item-status-item {{ $order->is_sent ? 'active' : '' }}">{{ $order->is_sent ? 'Envoyée' : 'En attente' }}</div>
             <div class="mobile-card-item-status-item {{ $order->is_accepted ? 'active' : '' }}">{{ $order->is_accepted ? 'Acceptée' : 'En attente' }}</div>
         </div>
-        <div class="mobile-card-item-title">{{ $order->provider->name }} ●<span>Commande n°{{ $order->id }}</span></div>
+        <div class="mobile-card-item-title">{{ $order->provider?->name }} ●<span>Commande n°{{ $order->id }}</span></div>
         <div class="mobile-card-item-content">
             <div class="mobile-card-item-content-item">
                 <i class="fa-regular fa-lemon"></i>
