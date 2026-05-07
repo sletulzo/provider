@@ -19,6 +19,7 @@ export default defineConfig({
                 'resources/css/table.css',
                 'resources/css/form.css',
                 'resources/css/mobile.css',
+                'resources/css/dashboard.css',
                 'resources/js/app.js',
                 'resources/js/admin.js',
                 'resources/js/nav.js'
