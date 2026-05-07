@@ -70,6 +70,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     text-align: center !important;
 }
 
+hr {
+    margin: 20px 0px;
+}
+
 /* -------------------------------------------------------- */
 /* ------------------------- FLEX ------------------------- */
 /* -------------------------------------------------------- */
@@ -139,7 +143,7 @@ header {
     align-items: center;
     padding-right: 20px;
     padding-left: 20px;
-    z-index: 1;
+    z-index: 1003;
     transition: all 0.2s;
 }
 
@@ -195,7 +199,7 @@ body.backdrop::after {
 .main-wrapper {
     position: relative;
     display: flex;
-    background-color: #f6fafd;
+    background-color: #f9f9fb;
     overflow: hidden;
 }
 
@@ -800,6 +804,10 @@ table input {
     flex-shrink: 0;
 }
 
+.indent-container-right-item-icon span {
+    font-weight: bold;
+}
+
 .indent-container-right-item-name {
     display: flex;
     flex-direction: column;
@@ -852,6 +860,11 @@ table input {
 
 .indent-container-right-item.active .updown > span {
     color: var(--secondary);
+}
+
+.indent-container-right-item.disabled {
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 .indent-container-header {

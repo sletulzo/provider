@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductStock;
 use App\Models\Provider;
 use App\Models\Unity;
 use Illuminate\Http\RedirectResponse;
@@ -76,6 +77,15 @@ class ProductController extends Controller
         $product->quantity_min = $request->quantity_min;
         $product->quantity_step = $request->quantity_step;
         $product->price = $request->price * 100;
+
+        if ($request->has('stock'))
+        {
+            ProductStock::updateOrCreate(
+                ['product_id' => $product->id],
+                ['quantity' => $request->stock]
+            );
+        }
+
         $product->update();
 
         return Redirect::route('products')->with('success', 'Modifications enregistrées avec succès !');

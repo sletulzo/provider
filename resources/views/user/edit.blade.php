@@ -15,6 +15,17 @@
         <input type="text" name="email" id="email" value="{{ $user->email }}" required placeholder="Email de l'utilisateur">
     </div>
 
+    <!-- User type -->
+    <div>
+        <label for="user_type_id">Groupe utilisateur <span class="text-red-500">*</span></label>
+        <select class="form-control" id="user_type_id" name="user_type_id" required>
+            <option value="">Choisir dans la liste</option>
+            @foreach($userTypes as $userType)
+                <option value="{{ $userType->id }}" {{ $user->user_type_id == $userType->id ? 'selected' : '' }}>{{ $userType->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
     <!-- Tenant -->
     <div>
         <label for="tenant_id">Société <span class="text-red-500">*</span></label>

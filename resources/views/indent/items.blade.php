@@ -1,7 +1,12 @@
 @foreach($products as $product)
-    <div class="indent-container-right-item {{ $product->quantity ? 'active' : '' }}">
+    @php ($stock = $product->getStock())
+    <div class="indent-container-right-item {{ $product->quantity ? 'active' : '' }} {{ $provider->is_stock && $stock == 0 ? 'disabled' : '' }}">
         <div class="indent-container-right-item-body">
-            <div class="indent-container-right-item-icon"><i class="fa-solid fa-cube"></i></div>
+            @if ($provider->is_stock)
+                <div class="indent-container-right-item-icon"><span>{{ $stock }}</span></div>
+            @else
+                <div class="indent-container-right-item-icon"><i class="fa-solid fa-cube"></i></div>
+            @endif
             <div class="indent-container-right-item-name">
                 <div class="name">{{ $product->name }}</div>
                 <div class="description">{{ $product->unity?->name }}</div>

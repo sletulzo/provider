@@ -1,0 +1,107 @@
+.dashboard {
+
+}
+
+.dashboard > h2 {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.dashboard > h2 b {
+    display: block;
+}
+
+.dashboard .dashboard-prices {
+    position: relative;
+    background-color: var(--primary);
+    color: #fff;
+    padding: 15px 17px;
+    line-height: 26px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.dashboard .dashboard-prices .dashboard-prices-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dashboard .dashboard-prices .dashboard-prices-percent {
+    font-size: 13px;
+    color: #cfcfcf;
+    font-weight: 100;
+}
+
+.dashboard .dashboard-prices .dashboard-prices-image {
+    position: absolute;
+    right: 0px;
+    width: 122px;
+    top: 0;
+}
+
+.dashboard .dashboard-title {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard .dashboard-title a {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.dashboard .dashboard-orders {
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.dashboard .dashboard-orders .dashboard-orders-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding: 10px 16px;
+}
+
+.dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-title {
+    margin-right: auto;
+}
+
+.dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-title div {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+}
+
+.dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-title span {
+    display: block;
+    color: #333;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-status {
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+.dashboard .dashboard-populars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dashboard .dashboard-populars > a {
+    box-shadow: 1px 2px 0px #dddddd57;
+    border-radius: 10px;
+}

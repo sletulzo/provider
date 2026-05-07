@@ -11,7 +11,7 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
         <!-- Scripts -->
         @vite([
@@ -21,6 +21,7 @@
             'resources/css/table.css',
             'resources/css/form.css',
             'resources/css/mobile.css',
+            'resources/css/dashboard.css',
         ])
 
         @livewireStyles
@@ -29,12 +30,17 @@
 
         <div class="main-wrapper">
             <header>
-                <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                {{ isset($header) ? $header : 'Dashboard' }}
-                @include('layouts.header-right')
+                @include('layouts.navigations.burger.' . Auth::user()->getNavigationSlug())
+
+                <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
+                {{ isset($header) ? $header : '' }}
+                
+                @if (isset($headerActions))
+                    {!! $headerActions !!}
+                @endif
             </header>
 
-            @include('layouts.navigation')
+            @include('layouts.navigations.' . Auth::user()->getNavigationSlug())
 
             <!-- Page Content -->
             <main>
@@ -49,7 +55,8 @@
 
         @vite([
             'resources/js/app.js',
-            'resources/js/admin.js'
+            'resources/js/admin.js',
+            'resources/js/nav.js',
         ])
 
         @livewireScripts
@@ -60,7 +67,7 @@
 
         <div x-data="{ loading: false }" x-on:livewire:navigate.window="loading = true" x-on:livewire:navigated.window="loading = false">
             <template x-if="loading">
-                <div class="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-[9999] pointer-events-auto"></div>
+                <div class="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center pointer-events-auto"></div>
             </template>
         </div>
     </body>

@@ -53,6 +53,36 @@ class Order extends Model
     }
 
     /**
+     * Get status of order
+     */
+    public function getStatus()
+    {
+        if ($this->is_refused)
+        {
+            return [
+                'slug' => 'refused',
+                'color' => '#db4d2b',
+                'label' => 'Refusé'
+            ];
+        }
+
+        if ($this->is_accepted)
+        {
+            return [
+                'slug' => 'accepted',
+                'color' => '#44beee',
+                'label' => 'Accepté'
+            ];
+        }
+
+        return [
+            'slug' => 'waiting',
+            'color' => '#f1f5f9',
+            'label' => 'En attente'
+        ];
+    }
+
+    /**
      * Generate url 
      */
     public function generateUrl(): string

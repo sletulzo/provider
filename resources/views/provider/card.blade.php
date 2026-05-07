@@ -10,5 +10,6 @@
         <div class="card-mobile-content-right">
             <div class="card-mobile-content-price">{{ $provider->phone }}</div>
         </div>
+        <div class="card-mobile-content-caret"><i class="fa-solid fa-angle-right"></i></div>
     </div>
 </a>

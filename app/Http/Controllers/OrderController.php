@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderWaiting;
 use App\Models\Order;
-use App\Models\OrderLine;
-use App\Models\Provider;
-use App\Mail\ProviderEmail;
-use App\Services\TenantMailer;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-
-use function Ramsey\Uuid\v1;
 
 class OrderController extends Controller
 {
     /**
      * Display provider view
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('created_at', 'desc')->get();
+        $auth = $request->user();
+        $orders = $auth->getOrders();
         return view('order.index', compact('orders'));
+    }
+
+    /**
+     * Edit order
+     */
+    public function edit(Order $order)
+    {
+        return view('order.edit', compact('order'));
     }
 
     /**
@@ -35,7 +35,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Accept provider order
+     * Accept order
      */
     public function accept(Request $request)
     {
@@ -44,6 +44,44 @@ class OrderController extends Controller
         $order->update();
 
         return view('front.accept', ['order' => $order]);
+    }
+
+    /**
+     * Accept order from provider
+     */
+    public function providerAccept(Order $order)
+    {
+        $order->is_refused = false;
+        $order->is_accepted = true;
+        $order->update();
+
+        return Redirect::route('orders')->with('status', 'done');
+    }
+
+    /**
+     * Refuse order from provider
+     */
+    public function providerRefuse(Order $order)
+    {
+        $order->is_refused = true;
+        $order->is_accepted = false;
+        $order->update();
+
+        // Update stock
+        $provider = $order->provider;
+
+        if ($provider->is_stock)
+        {
+            foreach($order->lines as $line)
+            {
+                $product = $line->product;
+
+                if ($product)
+                    $product->addToStock($line->quantity);
+            }
+        }
+
+        return Redirect::route('orders')->with('status', 'done');
     }
 
     /**

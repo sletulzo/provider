@@ -7,7 +7,10 @@
 
     <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <input type="text" name="search-table" placeholder="Rechercher une commande...">
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher une commande...">
+            </div>
         </div>
 
         <div class="hidden sm:block">
@@ -45,10 +48,16 @@
         </div>
 
         <!-- Mobile view -->
-        <div class="block sm:hidden space-y-4">
-            @foreach($orders as $order)
-                @include('order.card', ['order' => $order])
-            @endforeach
+        <div class="block sm:hidden">
+            <div class="card-mobile-container">
+                @foreach($orders as $order)
+                    @if (Auth::user()->isProvider())
+                        @include('order.provider-card', ['order' => $order])
+                    @else
+                        @include('order.card', ['order' => $order])
+                    @endif
+                @endforeach
+            </div>
         </div>
    </div>
 </x-app-layout>

@@ -5,10 +5,18 @@
         </h2>
     </x-slot>
 
+    @if (!Auth::user()->is_only_order)
+        <x-slot name="headerActions">
+            <a href="{{ route('products.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+        </x-slot>
+    @endif
+
     <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <input type="text" name="search-table" placeholder="Rechercher un produit...">
-            <a href="{{ route('products.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer un produit</a>
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher un produit...">
+            </div>
         </div>
 
         <div class="hidden sm:block">
@@ -39,8 +47,10 @@
                                     <td class="align-center">{{ $product->quantity_step }}</td>
                                     <td class="align-center">{{ $product->price ? $product->price / 100 . '€' : '' }}</td>
                                     <td class="align-right actions">
-                                        <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
+                                        @if (!Auth::user()->is_only_order)
+                                            <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
+                                        @endif
                                     </td>
                                 </tr> 
                             @endforeach

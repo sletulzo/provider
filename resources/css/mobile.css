@@ -9,6 +9,7 @@
 
     .main-wrapper main {
         height: calc(100vh - 60px);
+        padding: 15px;
         margin-left: 0px;
         padding-bottom: 68px;
         margin-top: 60px;
@@ -20,6 +21,9 @@
         margin-left: 0px;
         width: 100%;
         border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     header > svg {
@@ -27,10 +31,6 @@
         position: absolute;
         width: 36px;
         height: 36px;
-    }
-
-    header > h2 {
-        padding-left: 15px;
     }
 
     header > h2 > i {
@@ -66,16 +66,15 @@
     }
 
     .table-wrapper-action {
-        font-size: 0 !important;
-        padding: 10px 12px;
-    }
-
-    .table-wrapper-action::before {
-        content: "\f067";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        display: inline-block;
-        font-size: 20px; 
+        font-size: 16px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary);
+        color: #fff;
     }
 
     .indent-order-popup.active {
@@ -143,7 +142,29 @@
         margin-left: -20px;
         padding: 20px;
         margin-top: -20px;
+        margin-bottom: 0px !important;
+    }
+
+    .table-wrapper-title .form-group-search {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border: 1px solid #CBD5E0 !important;
         background-color: #fff;
+        border-radius: 10px !important;
+        padding: 0px 12px;
+        height: 44px;
+    }
+
+    .table-wrapper-title .form-group-search > i {
+        font-size: 16px;
+        color: #adadad;
+    }
+
+    .table-wrapper-title .form-group-search input {
+        border: none !important;
+        box-shadow: none;
+        height: auto;
     }
 
     .mobile-card-item {
@@ -151,8 +172,12 @@
         flex-wrap: wrap;
         min-height: 60px;
         background-color: #fff;
-        border-radius: 12px;
-        padding: 15px;
+        padding: 8px 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-card-item.refused {
+        background-color: #ff00001c;
     }
 
     .mobile-card-item .mobile-card-item-icon {
@@ -171,17 +196,18 @@
         color: var(--secondary);
     }
 
-    .mobile-card-item .mobile-card-item-left {
-        width: 50px;
-    }
-
     .mobile-card-item .mobile-card-item-right {
-        width: calc(100% - 50px);
+        display: flex;
+        align-items: center;
+        margin-left: auto;
     }
 
     .mobile-card-item .mobile-card-item-status {
-        display: flex;
+        display: inline-flex;
         gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
     }
 
     .mobile-card-item .mobile-card-item-status-item {
@@ -193,14 +219,20 @@
         color: #919191;
     }
 
-    .mobile-card-item .mobile-card-item-status-item.active {
+    .mobile-card-item .mobile-card-item-status-item.accepted {
         background-color: var(--secondary-bg);
         color: var(--secondary);
         font-weight: 500;
     }
 
+    .mobile-card-item .mobile-card-item-status-item.refused {
+        background-color: red;
+        color: #fff;
+        font-weight: 500;
+    }
+
     .mobile-card-item .mobile-card-item-title {
-        font-size: 17px;
+        font-size: 15px;
         font-weight: bold;
         margin: 4px 0px;
     }
@@ -251,11 +283,41 @@
         flex-basis: 100%;
         width: 100%;
     }
+
+    /* Response order */
+    .mobile-card-item-response {
+        margin-top: 5px !important;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 8px;
+        border-bottom-left-radius: 8px;
+        overflow: hidden;
+    }
+
+    .mobile-card-item-response .btn-order {
+        width: 50%;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        font-size: 16px;
+    }
+
+    .mobile-card-item-response .btn-order.accept {
+        color: var(--secondary);
+    }
+
+    .mobile-card-item-response .btn-order.refuse {
+        color: #ff000085;
+    }
 }
 
 @media screen and (max-width: 576px) {
     header h2 {
-        font-size: 16px !important;
+        font-size: 18px !important;
     }
 }
 
@@ -273,19 +335,20 @@
 
 /* Card */
 .card-mobile-container {
-    margin-left: -20px;
-    width: calc(100% + 40px);
-    margin-top: -12px;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eee;
 }
 
 .card-mobile {
     width: 100%;
-    min-height: 58px;
+    min-height: 62px;
     background-color: #fff;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 16px;
+    padding: 4px 16px;
     border-top: 1px solid #eee;
 }
 
@@ -308,9 +371,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary);
-    color: #fff;
+    color: var(--primary);
     flex-shrink: 0;
+    font-size: 16px;
+}
+
+.card-mobile-icon span {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.card-mobile-icon.red {
+    background-color: #c73434;
 }
 
 .card-mobile-content {
@@ -323,13 +395,13 @@
 }
 
 .card-mobile-content-name {
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
 .card-mobile-content-subname {
-    color: #8b8b8b;
     font-size: 13px;
+    font-weight: 600;
 }
 
 .card-mobile-content-right {
@@ -339,14 +411,29 @@
     align-items: end;
 }
 
+.card-mobile-content-caret {
+    display: flex;
+    align-items: center;
+    color: #838383;
+    font-size: 16px;
+    margin-left: 15px;
+}
+
 .card-mobile-content-price {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
 }
 
 .card-mobile-content-quantity {
     color: #8b8b8b;
+    font-size: 11px;
+}
+
+.card-mobile-content-stock {
+    color: #8b8b8b;
     font-size: 13px;
+    font-weight: bold;
+    height: 21px;
 }
 
 #ajaxModalSlideUpContent .form-modal {

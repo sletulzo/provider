@@ -42,15 +42,27 @@
                   placeholder="Contenu de l'email...">{!! $provider->email_content !!}</textarea>
     </div>
 
+    <label class="toggle-field">
+        <div class="toggle-wrapper">
+            <input type="checkbox" id="notify-toggle" class="toggle-input" name="is_stock" {{ $provider->is_stock ? 'checked' : '' }}>
+            <span class="toggle-label">
+                <span class="toggle-ball"></span>
+            </span>
+        </div>
+        <span class="toggle-text">Activer la gestion des stocks</span>
+    </label>
+
     <!-- Boutons -->
-    <div class="flex justify-end pt-2">
-        <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="btn-delete m-r-auto confirm-delete">
-            <i class="fa-regular fa-trash-can"></i>
-        </a>
-        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
-        <button type="submit" class="btn-primary">
-            <span class="btn-loader"></span>
-            <span class="btn-text">Mettre à jour</span>
-        </button>
-    </div>
+    @if (!Auth::user()->is_only_order)
+        <div class="flex justify-end pt-2">
+            <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="btn-delete m-r-auto confirm-delete">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+            <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Mettre à jour</span>
+            </button>
+        </div>
+    @endif
 </form>

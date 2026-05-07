@@ -52,21 +52,27 @@
     </div>
 
     <div>
-        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix</label>
+        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix unitaire</label>
         <input type="number" name="price" id="price" step="0.01" value="{{ $product->price ? $product->price / 100 : '' }}"
                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                placeholder="Prix du produit">
     </div>
 
-    <!-- Boutons -->
-    <div class="flex justify-end pt-2">
-        <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="btn-delete m-r-auto confirm-delete">
-            <i class="fa-regular fa-trash-can"></i>
-        </a>
-        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
-        <button type="submit" class="btn-primary">
-            <span class="btn-loader"></span>
-            <span class="btn-text">Mettre à jour</span>
-        </button>
-    </div>
+    @if (!Auth::user()->is_only_order)
+        @if ($product->provider?->is_stock)
+            @include('product.stock')
+        @endif
+
+        <!-- Boutons -->
+        <div class="flex justify-end pt-2">
+            <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="btn-delete m-r-auto confirm-delete">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+            <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Mettre à jour</span>
+            </button>
+        </div>
+    @endif
 </form>

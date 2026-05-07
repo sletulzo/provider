@@ -3,9 +3,9 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
      server: {
-        host: '127.0.0.1',
+        host: 'localhost',
         hmr: {
-            host: 'vinste.local',
+            host: 'localhost',
         },
         cors: true,
     },
@@ -20,7 +20,8 @@ export default defineConfig({
                 'resources/css/form.css',
                 'resources/css/mobile.css',
                 'resources/js/app.js',
-                'resources/js/admin.js'
+                'resources/js/admin.js',
+                'resources/js/nav.js'
             ],
             refresh: true,
         }),

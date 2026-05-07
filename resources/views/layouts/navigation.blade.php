@@ -1,7 +1,3 @@
-
-
-<!-- Responsive menu -->
-<!-------------------------------------------------------------------------------------------->
 <div class="nav-mobile-bottom">
     <nav x-data="{ open: false }">
         <x-nav-link class="nav-item" wire:navigate :href="route('providers')" :active="request()->routeIs('providers')">

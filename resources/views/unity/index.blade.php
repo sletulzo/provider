@@ -5,10 +5,18 @@
         </h2>
     </x-slot>
 
+    @if (!Auth::user()->is_only_order)
+        <x-slot name="headerActions">
+            <a href="{{ route('unities.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+        </x-slot>
+    @endif
+
     <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <input type="text" name="search-table" placeholder="Rechercher une unité...">
-            <a href="{{ route('unities.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer une unité</a>
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher une unité...">
+            </div>
         </div>
         
         <div class="hidden sm:block">
@@ -27,8 +35,10 @@
                                 <td class="px-6 py-4">{{ $unity->id }}</td>
                                 <td class="px-6 py-4">{{ $unity->name }}</td>
                                 <td class="align-right actions">
-                                    <a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
+                                    @if (!Auth::user()->is_only_order)
+                                        <a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
+                                    @endif
                                 </td>
                             </tr> 
                         @endforeach

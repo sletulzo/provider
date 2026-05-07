@@ -24,13 +24,33 @@ class Tenant extends Model
     }
 
     /**
-     * Users relation
+     * Order waiting relation
+     *
+     * @var collection
+     */
+    public function ordersWaiting()
+    {
+        return $this->hasMany(OrderWaiting::class, 'tenant_id');
+    }
+    
+    /**
+     * Order relation
      *
      * @var collection
      */
     public function orders()
     {
-        return $this->hasMany(OrderWaiting::class, 'tenant_id');
+        return $this->hasMany(Order::class, 'tenant_id');
+    }
+
+    /**
+     * Count order waiting
+     *
+     * @var integer
+     */
+    public function countOrdersWaiting()
+    {
+        return $this->ordersWaiting()->count();
     }
 
     /**
@@ -40,6 +60,9 @@ class Tenant extends Model
      */
     public function countOrders()
     {
-        return $this->orders()->count();
+        return $this->orders()
+            ->where('orders.is_accepted', false)
+            ->where('orders.is_refused', false)
+            ->count();
     }
 }

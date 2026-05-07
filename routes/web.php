@@ -9,6 +9,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Provider\UserController as ProviderUserController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Auth\SendUserPasswordResetController;
 use App\Http\Controllers\IndentController;
@@ -89,6 +90,24 @@ Route::middleware('auth')->group(function () {
     Route::post('/indents/{provider}/send', [IndentController::class, 'send'])->name('indent.send');
 
 
+    // Provider routes
+    // ---------------------------------------------------------------------------------------------
+    Route::prefix('provider')->middleware('provider')->group(function () {
+        Route::get('/users', [ProviderUserController::class, 'index'])->name('provider.users');
+        Route::get('/users/create', [ProviderUserController::class, 'create'])->name('provider.users.create');
+        Route::get('/users/{user}/edit', [ProviderUserController::class, 'edit'])->name('provider.users.edit');
+        Route::post('/users/save', [ProviderUserController::class, 'store'])->name('provider.users.store');
+        Route::post('/users/{user}/update', [ProviderUserController::class, 'update'])->name('provider.users.update');
+        Route::get('/users/{user}/delete', [ProviderUserController::class, 'destroy'])->name('provider.users.delete');
+        Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('provider.users.sendReset');
+
+        // Order response
+        Route::get('/orders/{order}/provider/accept', [OrderController::class, 'providerAccept'])->name('provider.orders.accept');
+        Route::get('/orders/{order}/provider/refuse', [OrderController::class, 'providerRefuse'])->name('provider.orders.refuse');
+    });
+
+    // Admin routes
+    // ---------------------------------------------------------------------------------------------
     Route::middleware('admin')->group(function () {
         // User
         Route::get('/users', [UserController::class, 'index'])->name('users');

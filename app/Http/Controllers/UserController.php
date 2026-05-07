@@ -6,6 +6,7 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,9 @@ class UserController extends Controller
     public function create(Request $request): View
     {
         $tenants = Tenant::orderBy('name')->get();
-        return view('user.create', compact('tenants'));
+        $userTypes = UserType::orderBy('name')->get();
+
+        return view('user.create', compact('tenants', 'userTypes'));
     }
 
     /**
@@ -41,6 +44,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->user_type_id = $request->user_type_id;
         $user->tenant_id = $request->tenant_id;
         $user->password = Hash::make(Str::random(24));
         $user->save();
@@ -54,10 +58,12 @@ class UserController extends Controller
     public function edit(User $user): View
     {
         $tenants = Tenant::orderBy('name')->get();
+        $userTypes = UserType::orderBy('name')->get();
 
         return view('user.edit', [
             'user' => $user,
-            'tenants' => $tenants
+            'tenants' => $tenants,
+            'userTypes' => $userTypes
         ]);
     }
 
@@ -70,6 +76,7 @@ class UserController extends Controller
         {
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->user_type_id = $request->user_type_id;
             $user->tenant_id = $request->tenant_id;
             $user->update();
         }

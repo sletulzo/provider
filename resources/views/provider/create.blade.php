@@ -42,6 +42,16 @@
                   placeholder="Contenu de l'email..."></textarea>
     </div>
 
+    <label class="toggle-field">
+        <div class="toggle-wrapper">
+            <input type="checkbox" id="notify-toggle" class="toggle-input" name="is_stock">
+            <span class="toggle-label">
+                <span class="toggle-ball"></span>
+            </span>
+        </div>
+        <span class="toggle-text">Activer la gestion des stocks</span>
+    </label>
+
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
         <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>

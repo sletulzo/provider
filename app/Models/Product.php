@@ -35,4 +35,85 @@ class Product extends Model
     {
         return $this->belongsTo(Provider::class, 'provider_id');
     }
+
+    /**
+     * Stocks
+     */
+    public function stock()
+    {
+        return $this->hasOne(ProductStock::class, 'product_id');
+    }
+
+    /**
+     * Stock
+     */
+    public function getStock()
+    {
+        return ProductStock::where('product_id', $this->id)
+            ->select('quantity')
+            ->value('quantity') ?? 0;
+    }
+
+    /**
+     * Get stock label
+     */
+    public function getStockLabel()
+    {
+        $stock = $this->getStock();
+
+        if ($stock > 10) 
+        {
+            return [
+                'name' => 'En stock',
+                'color' => 'green',
+                'quantity' => $stock
+            ];
+        }
+
+        if ($stock > 0)
+        {
+            return [
+                'name' => 'Stock faible',
+                'color' => 'orange',
+                'quantity' => $stock
+            ];
+        }
+
+        return [
+            'name' => 'Rupture de stock',
+            'color' => 'red',
+            'quantity' => $stock
+        ];
+    }
+
+    /**
+     * Update stock
+     */
+    public function removeToStock($quantity)
+    {
+        $stock = $this->getStock();
+        $newStock = $stock - $quantity;
+
+        if ($newStock < 0)
+            $newStock = 0;
+
+        ProductStock::updateOrCreate(
+            ['product_id' => $this->id],
+            ['quantity' => $newStock]
+        );
+    }
+
+    /**
+     * Update stock
+     */
+    public function addToStock($quantity)
+    {
+        $stock = $this->getStock();
+        $newStock = $stock + $quantity;
+
+        ProductStock::updateOrCreate(
+            ['product_id' => $this->id],
+            ['quantity' => $newStock]
+        );
+    }
 }

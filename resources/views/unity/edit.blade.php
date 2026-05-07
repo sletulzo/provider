@@ -12,14 +12,16 @@
     </div>
 
     <!-- Boutons -->
-    <div class="flex justify-end pt-2">
-        <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}" class="btn-delete m-r-auto confirm-delete">
-            <i class="fa-regular fa-trash-can"></i>
-        </a>
-        <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
-        <button type="submit" class="btn-primary">
-            <span class="btn-loader"></span>
-            <span class="btn-text">Mettre à jour</span>
-        </button>
-    </div>
+    @if (!Auth::user()->is_only_order)
+        <div class="flex justify-end pt-2">
+            <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}" class="btn-delete m-r-auto confirm-delete">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+            <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Mettre à jour</span>
+            </button>
+        </div>
+    @endif
 </form>

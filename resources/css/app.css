@@ -4,9 +4,9 @@
 @tailwind utilities;
 
 :root {
-    --primary: #242c6b;
+    --primary: #3645b1;
     --secondary: #44beee;
 
-    --primary-bg: #242c6b41;
+    --primary-bg: #3049ff1a;
     --secondary-bg: #44beee4d;
 }

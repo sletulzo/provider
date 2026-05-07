@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OrderWaiting;
 use App\Models\Product;
 use App\Models\Provider;
 use App\Models\Unity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -16,13 +18,12 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        $providers = Provider::orderBy('name')->get();
-        $products = Product::orderBy('name')->get();
-        $unities = Unity::orderBy('name')->get();
-        $providerOrders = OrderWaiting::orderBy('created_at', 'desc')->get()->groupBy('provider_id');
-        $orderFormatted = OrderWaiting::getFormattedEmail();
-        
-        return view('dashboard', compact('products', 'unities', 'providers', 'providerOrders', 'orderFormatted'));
+        $user = Auth::user();
+        $view = $user->getNavigationSlug();
+        $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
+        $products = Product::take(2)->get();
+
+        return view('dashboard.' . $view, compact('user', 'orders', 'products'));
     }
 
     /**

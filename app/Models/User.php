@@ -53,4 +53,62 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tenant::class, 'tenant_id');
     }
+
+    /**
+     * User Type relation
+     *
+     * @var object
+     */
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class, 'user_type_id');
+    }
+
+    /**
+     * Return true if user is customer
+     *
+     * @var boolean
+     */
+    public function isCustomer()
+    {
+        return $this->userType?->slug == 'customer' ? true : false;
+    }
+
+    /**
+     * Return true if user is provider
+     *
+     * @var boolean
+     */
+    public function isProvider()
+    {
+        return $this->userType?->slug == 'provider' ? true : false;
+    }
+
+    /**
+     * Get navigation slug
+     *
+     * @var object
+     */
+    public function getNavigationSlug()
+    {
+        if ($this->userType)
+            return $this->userType->slug;
+
+        return 'customer';
+    }
+
+    /**
+     * Get orders by provider
+     *
+     * @var object
+     */
+    public function getOrders()
+    {
+        $query = Order::orderBy('created_at', 'desc');
+
+        if ($this->isCustomer())
+            $query = $query->where('user_id', $this->id);
+
+        return $query->get();
+    }
 }

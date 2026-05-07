@@ -41,6 +41,7 @@ class ProviderController extends Controller
         $provider->phone = $request->phone;
         $provider->comment = $request->comment;
         $provider->email_content = $request->email_content;
+        $provider->is_stock = $request->has('is_stock') ? true : false;
         $provider->save();
 
         return Redirect::route('providers')->with('success', 'Fournisseur crée');
@@ -66,6 +67,7 @@ class ProviderController extends Controller
         $provider->phone = $request->phone;
         $provider->comment = $request->comment;
         $provider->email_content = $request->email_content;
+        $provider->is_stock = $request->has('is_stock') ? true : false;
         $provider->update();
 
         return Redirect::route('providers')->with('success', 'Fournisseur mis à jour');
@@ -76,6 +78,16 @@ class ProviderController extends Controller
      */
     public function destroy(Provider $provider)
     {
+        foreach($provider->orderWaitings as $orderWaiting)
+        {
+            $orderWaiting->delete();
+        }
+
+        foreach($provider->products as $product)
+        {
+            $product->delete();
+        }
+
         $provider->delete();
     }
 

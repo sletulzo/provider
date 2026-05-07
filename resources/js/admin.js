@@ -298,6 +298,33 @@ $(document).on('click', 'a.confirm-delete', function(e) {
 
 
 // ---------------------------------------------------------------------------------
+// -------------------------------- GLOABl SWAL ------------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', 'a.confirm-validate', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+	var url = $(this).attr('href');
+	var text = $(this).attr('data-text');
+	var type = $(this).attr('data-type');
+
+    Swal.fire({
+		title: "Confirmer l'action",
+		text: text,
+		icon: type,
+		showCancelButton: true,
+		confirmButtonText: "Oui, je confirme",
+		cancelButtonText: "Annuler",
+		confirmButtonColor: "#4FD1C5",
+    	cancelButtonColor: "#ddd"
+	}).then((result) => {
+		if (result.isConfirmed) {
+			window.location.href = url;
+		}
+	});
+});
+
+// ---------------------------------------------------------------------------------
 // --------------------------- Ajax modal up and down ------------------------------
 // ---------------------------------------------------------------------------------
 $(document).on('click', '.ajax-modal-up', function(e) {

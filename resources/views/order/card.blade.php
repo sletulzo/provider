@@ -1,4 +1,6 @@
-<div class="mobile-card-item swiftopen-toggle {{ $order->isValid() ? 'active' : '' }}" data-target="swiftopen_order_{{ $order->id }}">
+@php ($status = $order->getStatus())
+
+<div class="mobile-card-item swiftopen-toggle {{ $status['slug'] }}" data-target="swiftopen_order_{{ $order->id }}">
     <div class="mobile-card-item-left">
         <div class="mobile-card-item-icon">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -6,8 +8,8 @@
     </div>
     <div class="mobile-card-item-right">
         <div class="mobile-card-item-status">
-            <div class="mobile-card-item-status-item {{ $order->is_sent ? 'active' : '' }}">{{ $order->is_sent ? 'Envoyée' : 'En attente' }}</div>
-            <div class="mobile-card-item-status-item {{ $order->is_accepted ? 'active' : '' }}">{{ $order->is_accepted ? 'Acceptée' : 'En attente' }}</div>
+            <!-- <div class="mobile-card-item-status-item {{ $order->is_sent ? 'accepted' : '' }}">{{ $order->is_sent ? 'Envoyée' : 'En attente' }}</div> -->
+            <div class="mobile-card-item-status-item {{ $status['slug'] }}">{{ $status['label'] }}</div>
         </div>
         <div class="mobile-card-item-title">{{ $order->provider?->name }} ●<span>Commande n°{{ $order->id }}</span></div>
         <div class="mobile-card-item-content">

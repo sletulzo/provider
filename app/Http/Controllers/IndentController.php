@@ -66,6 +66,19 @@ class IndentController extends Controller
 
         $step = $product->quantity_step ?? 1;
         $quantity = ($request->type == 'add') ? $orderWaiting->quantity + $step : $orderWaiting->quantity - $step;
+        
+        // Check stock before update
+        // ---------------------------------------------------------
+        $provider = $product->provider;
+
+        if ($provider->is_stock)
+        {
+            $stock = $product->getStock();
+
+            if ($quantity > $stock)
+                $quantity = $stock;
+        }
+
         $orderWaiting->quantity = $quantity;
         $orderWaiting->price = $product->price * $orderWaiting->quantity;
         $orderWaiting->unity_id = $product->unity_id;
@@ -119,6 +132,13 @@ class IndentController extends Controller
 
             foreach($orderWaiting as $item)
             {
+                // Update prodct stock
+                if ($provider->is_stock)
+                {
+                    $product = Product::find($item->product_id);
+                    $product->removeToStock($item->quantity);
+                }
+
                 $orderLine = OrderLine::firstOrCreate([
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,

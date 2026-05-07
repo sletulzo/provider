@@ -50,7 +50,7 @@
     </div>
 
     <div>
-        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix</label>
+        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix unitaire</label>
         <input type="number" name="price" id="price" step="0.01"
                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                placeholder="Prix du produit">
