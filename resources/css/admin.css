@@ -78,7 +78,7 @@ hr {
 /* ------------------------- FLEX ------------------------- */
 /* -------------------------------------------------------- */
 .w-100 {
-    width: 100%;
+    width: 100% !important;
 }
 
 .d-flex {
@@ -101,11 +101,19 @@ hr {
     margin-right: 10px;
 }
 
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
 /* -------------------------------------------------------- */
 /* ------------------------- MARGIN ----------------------- */
 /* -------------------------------------------------------- */
 .m-b-20 {
     margin-bottom: 20px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
 }
 
 /* -------------------------------------------------------- */
@@ -245,18 +253,46 @@ body.backdrop::after {
     outline-offset: 2px;
     width: auto;
     line-height: 1.2;
-    border-radius: 15px;
+    border-radius: 9px;
     font-weight: 600;
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
     transition-duration: 0.2s;
     height: 2.5rem;
     min-width: 2.5rem;
-    font-size: 0.75rem;
+    font-size: 0.90rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
     background-color: var(--primary);
     color: #fff;
-    text-transform: uppercase;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    width: auto;
+    line-height: 1.2;
+    border-radius: 9px;
+    font-weight: 600;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 0.2s;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    font-size: 0.90rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    background-color: #fff;
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .btn-default {
@@ -280,12 +316,11 @@ body.backdrop::after {
     transition-duration: 0.2s;
     height: 2.5rem;
     min-width: 2.5rem;
-    font-size: 0.75rem;
+    font-size: 0.90rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
     background-color: #eee;
     color: #aaa;
-    text-transform: uppercase;
 }
 
 .btn-delete {
@@ -315,7 +350,6 @@ body.backdrop::after {
     padding-inline-end: 1rem;
     background-color: #fff;
     color: red;
-    text-transform: uppercase;
 }
 
 
@@ -1172,6 +1206,108 @@ table input {
     border: 1px solid #4fd1c55c;
     font-size: 12px;
     padding: 2px 6px;
+}
+
+/* ------------------------------------------------------------ */
+/* ---------------------- ORDER DETAILS ----------------------- */
+/* ------------------------------------------------------------ */
+.order-detail {
+
+}
+.order-detail .order-detail-title {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-detail .order-detail-top {
+    background-color: #fff;
+    box-shadow: 1px 2px 0px #dddddd57;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.order-detail .order-detail-top .order-detail-top-number {
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    line-height: 13px;
+    font-size: 11px;
+}
+
+.order-detail .order-detail-top .order-detail-top-status {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 1px 8px;
+    line-height: 19px;
+    font-weight: 600;
+}
+
+.order-detail .order-detail-top .order-detail-provider {
+    color: #000;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.order-detail .order-detail-top .order-detail-date {
+    color: #999999;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.order-detail .order-detail-products {
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.order-detail .order-detail-products .order-detail-products-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding: 10px 16px;
+}
+
+.order-detail .order-detail-products .order-detail-products-item .order-detail-products-item-icon {
+    color: var(--primary);
+}
+
+.order-detail .order-detail-products-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-name {
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+    font-weight: bold;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-subname {
+    color: #aaa;
+    font-weight: bold;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-right {
+    font-weight: bold;
+    font-size: 15px;
 }
 
 /* ------------------------------------------------------------ */

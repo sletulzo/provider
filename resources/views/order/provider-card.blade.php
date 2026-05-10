@@ -1,6 +1,6 @@
 @php ($status = $order->getStatus())
 
-<div class="mobile-card-item" data-target="swiftopen_order_{{ $order->id }}">
+<a href="{{ route('orders.edit', ['order' => $order->id]) }}" class="mobile-card-item" data-target="swiftopen_order_{{ $order->id }}">
     <div class="mobile-card-item-left">
         <div class="mobile-card-item-title">CMD-{{ $order->id }}</div>
         <div class="mobile-card-item-subtitle">{{ $order->user?->name }}</div>
@@ -11,7 +11,7 @@
     <div class="mobile-card-item-status">
         <div class="mobile-card-item-status-item {{ $status['slug'] }}">{{ $status['label'] }}</div>
     </div>
-</div>
+</a>
 
 @if ($status['slug'] == 'waiting')
     <div class="mobile-card-item-response">

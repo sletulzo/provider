@@ -98,6 +98,19 @@ class User extends Authenticatable
     }
 
     /**
+     * Return color of user
+     *
+     * @var string
+     */
+    public function getColor()
+    {
+        if ($this->isProvider())
+            return '#3645b1';
+
+        return '#0a9f38';
+    }
+
+    /**
      * Get orders by provider
      *
      * @var object

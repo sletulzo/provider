@@ -8,15 +8,6 @@
             <div class="icon"><i class="fa-regular fa-lemon"></i></div>
             <div class="title">Produits</div>
         </x-nav-link>
-        <!-- <x-nav-link class="nav-item" wire:navigate :href="route('indents')" :active="request()->routeIs('indents')">
-            <div class="icon">
-                <i class="fa-regular fa-basket-shopping relative">
-                    @if (Auth::user()->tenant && Auth::user()->tenant->countOrders())
-                        <span class="bubble">{{ Auth::user()->tenant->countOrders() }}</span>
-                    @endif
-                </i>
-            </div>
-        </x-nav-link> -->
         <x-nav-link class="nav-item" wire:navigate :href="route('orders')" :active="request()->routeIs('orders')">
             <div class="icon">
                 <i class="fa-solid fa-cart-shopping relative">
@@ -27,14 +18,6 @@
             </div>
             <div class="title">Commandes</div>
         </x-nav-link>
-        <!-- <x-nav-link class="nav-item" wire:navigate :href="route('providers')" :active="request()->routeIs('providers')">
-            <div class="icon"><i class="fa-regular fa-address-book"></i></div>
-            <div class="title">Fournisseurs</div>
-        </x-nav-link>
-        <x-nav-link class="nav-item" wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
-            <div class="icon"><i class="fa-regular fa-scale-unbalanced-flip"></i></div>
-            <div class="title">Réglages</div>
-        </x-nav-link> -->
         <x-nav-link class="nav-item" wire:navigate :href="route('unities')" :active="request()->routeIs('unities')">
             <div class="icon"><i class="fa-regular fa-user"></i></div>
             <div class="title">Profil</div>

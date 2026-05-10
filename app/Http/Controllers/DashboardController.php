@@ -22,8 +22,9 @@ class DashboardController extends Controller
         $view = $user->getNavigationSlug();
         $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
         $products = Product::take(2)->get();
+        $providers = Provider::orderBy('name')->get();
 
-        return view('dashboard.' . $view, compact('user', 'orders', 'products'));
+        return view('dashboard.' . $view, compact('user', 'orders', 'products', 'providers'));
     }
 
     /**

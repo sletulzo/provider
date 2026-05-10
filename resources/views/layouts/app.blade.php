@@ -25,6 +25,18 @@
         ])
 
         @livewireStyles
+
+         <!-- Color -->
+        @php ($color = auth()->user()->getColor())
+        <style>
+            :root {
+                --primary: {{ $color ?? '#3645b1' }};
+                --secondary: {{ $color ?? '#44beee' }};
+
+                --primary-bg: {{ $color ?? '#3645b1' }}1a;
+                --secondary-bg: {{ $color ?? '#44beee' }}4d;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
 

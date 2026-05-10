@@ -23,7 +23,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('order.edit', compact('order'));
+        $status = $order->getStatus();
+        return view('order.edit', compact('order', 'status'));
     }
 
     /**

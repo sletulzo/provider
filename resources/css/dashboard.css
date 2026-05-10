@@ -86,6 +86,10 @@
     font-size: 12px;
 }
 
+.dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-price {
+    font-size: 12px;
+}
+
 .dashboard .dashboard-orders .dashboard-orders-item .dashboard-orders-item-status {
     margin-left: 10px;
     border-radius: 10px;
@@ -99,9 +103,46 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 15px;
 }
 
 .dashboard .dashboard-populars > a {
     box-shadow: 1px 2px 0px #dddddd57;
     border-radius: 10px;
+}
+
+.dashboard .dashboard-populars > a:first-child {
+    border-top: none;
+}
+
+.dashboard .dashboard-providers {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+}
+
+.dashboard .dashboard-providers .dashboard-providers-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    width: 90px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.dashboard .dashboard-providers .dashboard-providers-item .image {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.dashboard .dashboard-providers .dashboard-providers-item .name {
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
 }

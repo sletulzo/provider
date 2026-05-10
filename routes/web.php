@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     // Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::post('/orders/{provider}/save', [OrderController::class, 'save'])->name('orders.save');
+    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
     Route::get('/orders/{order}/delete', [OrderController::class, 'delete'])->name('orders.delete');
     Route::get('/orders/{order}/products', [OrderController::class, 'products'])->name('orders.products');
 
