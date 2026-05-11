@@ -22,7 +22,9 @@ export default defineConfig({
                 'resources/css/dashboard.css',
                 'resources/js/app.js',
                 'resources/js/admin.js',
-                'resources/js/nav.js'
+                'resources/js/nav.js',
+
+                'resources/images/chart.png'
             ],
             refresh: true,
         }),
