@@ -134,6 +134,7 @@
     justify-content: center;
     gap: 5px;
     flex-shrink: 0;
+    padding: 5px;
 }
 
 .dashboard .dashboard-providers .dashboard-providers-item .image {
@@ -146,4 +147,10 @@
     font-weight: bold;
     font-size: 12px;
     text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    text-overflow: ellipsis;
 }

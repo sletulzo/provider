@@ -69,7 +69,12 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="#" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Déconnexion</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> {{ __('Déconnexion') }}
+                    </button>
+                </form>
             </li>
         </ul>
     </aside>

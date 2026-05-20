@@ -322,7 +322,7 @@
     margin-bottom: 10px;
 }
 
-.menu-links li a {
+.menu-links li a, .menu-links li button {
     display: flex;
     align-items: center;
     gap: 15px;

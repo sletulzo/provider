@@ -1,6 +1,12 @@
 <x-app-layout>
     <x-slot name="headerActions">
-        <a href="{{ route('indent.shop-cart', ['provider' => 1]) }}" class="ajax-modal-up table-wrapper-action"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="{{ route('indents') }}" class="table-wrapper-action relative">
+            <i class="fa-solid fa-cart-shopping">
+                @if (Auth::user()->tenant && Auth::user()->tenant->countOrdersWaiting())
+                    <span class="bubble">{{ Auth::user()->tenant->countOrdersWaiting() }}</span>
+                @endif
+            </i>
+        </a>
     </x-slot>
 
     <div class="dashboard">
