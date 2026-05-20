@@ -151,7 +151,7 @@ header {
     align-items: center;
     padding-right: 20px;
     padding-left: 20px;
-    z-index: 1003;
+    z-index: 900;
     transition: all 0.2s;
 }
 
@@ -850,8 +850,8 @@ table input {
 
 .indent-container-right-item-name .name {
     font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 14px;
 }
 
 .indent-container-right-item-name .description {

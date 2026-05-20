@@ -5,28 +5,35 @@
         </h2>
     </x-slot>
 
+    <div class="table-wrapper">
+        <div class="table-wrapper-title">
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher un fournisseur...">
+            </div>
+        </div>
 
-    <div class="indent-container">
+        <div class="block sm:hidden">
+            <div class="card-mobile-container">
+                @foreach($providers as $provider)
+                    @include('indent.card', ['provider' => $provider])
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="indent-container">
         <div class="indent-container-left">
             <div class="indent-container-left-title">Commande</div>
             <div class="indent-container-left-subtitle">Sélectionnez un fournisseur</div>
 
             <div class="indent-container-left-list" data-url="{{ route('indent.items') }}">
                 @foreach($providers as $i => $provider)
-                    <a wire:navigate href="{{ route('indent.products', ['provider' => $provider->id]) }}" class="indent-container-left-item" data-provider="{{ $provider->id }}">
-                        <div class="indent-container-left-item-icon"><i class="fa-regular fa-address-book"></i></div>
-                        <div class="indent-container-left-item-name">
-                            <div class="name">{{ $provider->name }}</div>
-                            <div class="email">{{ $provider->email }}</div>
-                        </div>
-                        @if ($provider->sumOrderWaitings())
-                            <div class="indent-container-left-item-count">{{ $provider->sumOrderWaitings() }}</div>
-                        @endif
-                    </a>
+                    @include('indent.card', ['provider' => $provider])
                 @endforeach
             </div>
         </div>
         <div class="indent-container-right"></div>
-    </div>
+    </div> -->
   
 </x-app-layout>

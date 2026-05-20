@@ -77,7 +77,7 @@ class Order extends Model
 
         return [
             'slug' => 'waiting',
-            'color' => '#f1f5f9',
+            'color' => '#6f6c6c',
             'label' => 'En attente'
         ];
     }
