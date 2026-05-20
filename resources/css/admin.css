@@ -45,6 +45,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     margin-bottom: 20px;
 }
 
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.f-11 {
+    font-size: 11px;
+}
+
 .layout-fixed {
     table-layout: fixed;
 }

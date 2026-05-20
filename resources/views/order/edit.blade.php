@@ -37,8 +37,8 @@
 
 
         @if (auth()->user()->isProvider())
-            <a href="{{ route('provider.orders.accept', ['order' => $order->id]) }}" class="btn-order accept confirm-validate" data-text="Etes-vous sûr de vouloir accepter cette commande ?" data-type="success">Confirmer la commande</a>
-            <a href="{{ route('provider.orders.refuse', ['order' => $order->id]) }}" class="btn-order refuse confirm-validate" data-text="Etes-vous sûr de vouloir refuser cette commande ?" data-type="error">Refuser la commande</a>
+            <a href="{{ route('provider.orders.accept', ['order' => $order->id]) }}" class="btn-order btn-primary w-100 accept confirm-validate" data-text="Etes-vous sûr de vouloir accepter cette commande ?" data-type="success">Confirmer la commande</a>
+            <a href="{{ route('provider.orders.refuse', ['order' => $order->id]) }}" class="btn-order btn-secondary m-t-10 w-100 refuse confirm-validate" data-text="Etes-vous sûr de vouloir refuser cette commande ?" data-type="error">Refuser la commande</a>
         @endif
     </div>
 </x-app-layout>
