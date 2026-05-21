@@ -65,7 +65,6 @@
             <x-responsive-nav-link :href="route('unities')" :active="request()->routeIs('unities')">
                 {{ __('Unités') }}
             </x-responsive-nav-link>
-            
         </div>
 
         <!-- Responsive Settings Options -->

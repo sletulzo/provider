@@ -55,6 +55,23 @@
                 </x-nav-link>
             </li>
             <li class="divider"></li>
+
+            @if (Auth::user()->is_admin)
+                <li>
+                    <x-nav-link class="nav-item" wire:navigate :href="route('users')" :active="request()->routeIs('users')">
+                        <div class="icon"><i class="fa-solid fa-user-group"></i></div>
+                        <div class="title">{{ __('Utilisateurs') }}</div>
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link class="nav-item" wire:navigate :href="route('tenants')" :active="request()->routeIs('tenants')">
+                        <div class="icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+                        <div class="title">{{ __('Sociétés') }}</div>
+                    </x-nav-link>
+                </li>
+                <li class="divider"></li>
+            @endif
+
             <li>
                 <x-nav-link class="nav-item" wire:navigate :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                     <div class="icon"><i class="fa-regular fa-user"></i></div>
