@@ -13,9 +13,9 @@
         <h2>Bonjour, <b>{{ $user->name }}👋</b></h2>
 
         <div class="dashboard-prices">
-            <div class="dashboard-prices-title">Chiffre d'affaires</div>
-            <div class="dashboard-prices-price">12 450,00 €</div>
-            <div class="dashboard-prices-percent">+12% ce mois</div>
+            <div class="dashboard-prices-title">Produits commandés</div>
+            <div class="dashboard-prices-price">{{ $user->getOrdersProducts() }}</div>
+            <div class="dashboard-prices-percent">{{ $user->getOrders()->count() }} commandes</div>
             <div class="dashboard-prices-image">
                 <img src="{{ Vite::asset('resources/images/chart.png') }}">
             </div>

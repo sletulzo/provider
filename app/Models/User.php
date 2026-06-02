@@ -124,4 +124,20 @@ class User extends Authenticatable
 
         return $query->get();
     }
+
+    /**
+     * Get orders products
+     *
+     * @var object
+     */
+    public function getOrdersProducts()
+    {
+        $query = Order::orderBy('created_at', 'desc');
+
+        if ($this->isCustomer())
+            $query = $query->where('user_id', $this->id);
+
+        return $query->join('orders_lines', 'orders_lines.order_id', '=', 'orders.id')
+            ->sum('orders_lines.quantity');
+    }
 }
