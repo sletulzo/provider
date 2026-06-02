@@ -24,3 +24,13 @@ function carbon($date = null, $format = null)
         return null;
     }
 }
+
+/**
+ * Format carbon
+ * 
+ * @param {Integer} $price.
+ */
+function price($price, $decimal = 0) 
+{
+    return number_format($price / 100, $decimal, ',', ' ');
+}

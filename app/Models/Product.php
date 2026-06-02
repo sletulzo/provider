@@ -45,6 +45,18 @@ class Product extends Model
     }
 
     /**
+     * Popular product
+     */
+    public static function popular(int $limit = 4)
+    {
+        return self::select('products.*')
+            ->join('orders_lines', 'products.id', '=', 'orders_lines.product_id')
+            ->groupBy('products.id')
+            ->orderByRaw('COUNT(orders_lines.product_id) DESC')
+            ->limit($limit);
+    }
+
+    /**
      * Stock
      */
     public function getStock()

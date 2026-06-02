@@ -20,9 +20,19 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $view = $user->getNavigationSlug();
-        $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
         $products = Product::take(2)->get();
         $providers = Provider::orderBy('name')->get();
+
+        if ($user->isCustomer()) 
+        {
+            $orders = Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->take(4)->get();
+            $products = Product::popular()->get();
+        } 
+        else
+        {
+            $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
+            $products = Product::popular()->get();
+        }
 
         return view('dashboard.' . $view, compact('user', 'orders', 'products', 'providers'));
     }

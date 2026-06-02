@@ -14,6 +14,7 @@
             <div>
                 <h3>Bonjour {{ Auth::user()->name }}</h3>
                 <p>{{ Auth::user()->email }}</p>
+                <p class="bold upper">{{ Auth::user()->tenant?->name }}</p>
             </div>
         </div>
 
@@ -67,12 +68,20 @@
                     <div class="title">Profil</div>
                 </x-nav-link>
             </li>
-            <li>
-                <a href="#">
-                    <div class="icon"><i class="fa-solid fa-gear"></i></div>
-                    <div class="title">Paramètres</div>
-                </a>
-            </li>
+            @if (Auth::user()->is_admin)
+                <li>
+                    <x-nav-link class="nav-item" wire:navigate :href="route('users')" :active="request()->routeIs('users')">
+                        <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <div class="title">{{ __('Utilisateurs') }}</div>
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link class="nav-item" wire:navigate :href="route('tenants')" :active="request()->routeIs('tenants')">
+                        <div class="icon"><i class="fa-regular fa-building"></i></div>
+                        <div class="title">{{ __('Sociétés') }}</div>
+                    </x-nav-link>
+                </li>
+            @endif
             <li class="divider"></li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">

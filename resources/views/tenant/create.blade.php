@@ -34,7 +34,7 @@
                 <span class="toggle-ball"></span>
             </span>
         </div>
-        <span class="toggle-text">Agence bloquée</span>
+        <span class="toggle-text">Société bloquée</span>
     </label>
 
     <!-- Boutons -->

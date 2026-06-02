@@ -5,10 +5,18 @@
         </h2>
     </x-slot>
 
+    @if (Auth::user()->is_admin)
+        <x-slot name="headerActions">
+            <a href="{{ route('users.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+        </x-slot>
+    @endif
+
    <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <input type="text" name="search-table" placeholder="Rechercher un utilisateur...">
-            <a href="{{ route('users.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large">Créer un utilisateur</a>
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher un utilisateur...">
+            </div>
         </div>
 
         <div class="hidden sm:block">

@@ -53,6 +53,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     font-size: 11px;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
 .layout-fixed {
     table-layout: fixed;
 }

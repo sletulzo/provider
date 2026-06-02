@@ -23,10 +23,10 @@
                     </div>
                     <div class="order-detail-products-item-content">
                         <div class="order-detail-products-item-content-left">
-                            <div class="order-detail-products-item-content-name">Glace chocolat</div>
+                            <div class="order-detail-products-item-content-name">{{ $line->product?->name }}</div>
                             <div class="order-detail-products-item-content-subname">Qte : {{ $line->quantity }}</div>
                         </div>
-                        <div class="order-detail-products-item-content-right">25,00 €</div>
+                        <div class="order-detail-products-item-content-right">{{ $line->product?->price ? price($line->product?->price * $line->quantity, 2) . ' €' : '' }}</div>
                     </div>
                 </div>
             @endforeach

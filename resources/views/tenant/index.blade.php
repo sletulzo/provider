@@ -5,10 +5,18 @@
         </h2>
     </x-slot>
 
+    @if (Auth::user()->is_admin)
+        <x-slot name="headerActions">
+            <a href="{{ route('tenants.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+        </x-slot>
+    @endif
+
    <div class="table-wrapper">
         <div class="table-wrapper-title">
-            <input type="text" name="search-table" placeholder="Rechercher une société...">
-            <a href="{{ route('tenants.create') }}" class="ajax-modal-up table-wrapper-action"  data-method="GET" data-size="large">Créer une société</a>
+            <div class="form-group-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="search-table" placeholder="Rechercher une société...">
+            </div>
         </div>
 
         <div class="hidden sm:block">
