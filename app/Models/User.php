@@ -119,7 +119,7 @@ class User extends Authenticatable
     {
         $query = Order::orderBy('created_at', 'desc');
 
-        if ($this->isCustomer())
+        if ($this->isCustomer() && $this->is_only_order)
             $query = $query->where('user_id', $this->id);
 
         return $query->get();
@@ -134,6 +134,8 @@ class User extends Authenticatable
         }
 
         return $query
+            ->select('orders.id')
+            ->distinct()
             ->whereBetween('created_at', [
                 now()->startOfMonth(),
                 now()->endOfMonth()
@@ -150,6 +152,8 @@ class User extends Authenticatable
         }
 
         return $query
+            ->select('orders.id')
+            ->distinct()
             ->whereBetween('created_at', [
                 now()->subMonth()->startOfMonth(),
                 now()->subMonth()->endOfMonth()

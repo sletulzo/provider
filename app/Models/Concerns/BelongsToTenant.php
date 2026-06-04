@@ -17,8 +17,13 @@ trait BelongsToTenant
         });
 
         static::addGlobalScope('tenant', function (Builder $builder) {
-            if (Auth::check()) {
-                $builder->where($builder->getModel()->getTable() . '.tenant_id', Auth::user()->tenant_id);
+            $user = auth()->user();
+
+            if ($user) {
+                $builder->where(
+                    $builder->getModel()->getTable() . '.tenant_id',
+                    $user->tenant_id
+                );
             }
         });
     }
