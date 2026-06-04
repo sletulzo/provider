@@ -11,11 +11,40 @@ class OrderController extends Controller
     /**
      * Display provider view
      */
+    // public function index(Request $request)
+    // {
+        
+    //     $auth = $request->user();
+    //     $orders = $auth->getOrders();
+    //     return view('order.index', compact('orders'));
+    // }
+
     public function index(Request $request)
     {
-        $auth = $request->user();
-        $orders = $auth->getOrders();
-        return view('order.index', compact('orders'));
+        $user = $request->user();
+
+        $query = Order::query()
+            ->with(['provider', 'user', 'lines'])
+            ->withCount('lines')
+            ->orderByDesc('created_at');
+
+        if ($user->isCustomer() && $user->is_only_order) {
+            $query->where('user_id', $user->id);
+        }
+
+        // filtre mois / année
+        $month = $request->filled('month') ? $request->month : now()->month;
+        $year = $request->filled('year') ? $request->year : now()->year;
+
+        $query->whereMonth('created_at', $month);
+        $query->whereYear('created_at', $year);
+        $orders = $query->get();
+
+        return view('order.index', [
+            'orders' => $orders,
+            'month' => $month,
+            'year' => $year,
+        ]);
     }
 
     /**

@@ -428,3 +428,30 @@ $(document).on('click', '.swiftopen-toggle', function () {
 		content.addClass('is-open');
 	}
 });
+
+
+// ---------------------------------------------------------------------------------
+// -------------------------------- Order search -----------------------------------
+// ---------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.querySelector('.orders-months');
+    if (!container) return;
+
+    const active = document.querySelector('.orders-month-item.active');
+    const fallback = document.querySelector('.orders-month-item[data-month="' + new Date().getMonth()+1 + '"]');
+
+    const target = active || fallback;
+    if (!target) return;
+
+    const containerWidth = container.offsetWidth;
+
+    container.scrollTo({
+        left: target.offsetLeft - (containerWidth / 2) + (target.offsetWidth / 2),
+        behavior: 'smooth'
+    });
+});
+
+function setMonth(month) {
+    document.getElementById('month-input').value = month;
+    document.querySelector('.orders-filters').submit();
+}
