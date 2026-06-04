@@ -125,19 +125,50 @@ class User extends Authenticatable
         return $query->get();
     }
 
-    /**
-     * Get orders products
-     *
-     * @var object
-     */
-    public function getOrdersProducts()
+    public function getOrdersCurrentMonth()
     {
-        $query = Order::orderBy('created_at', 'desc');
+        $query = Order::query();
 
-        if ($this->isCustomer())
-            $query = $query->where('user_id', $this->id);
+        if ($this->isCustomer() && $this->is_only_order) {
+            $query->where('user_id', $this->id);
+        }
 
-        return $query->join('orders_lines', 'orders_lines.order_id', '=', 'orders.id')
-            ->sum('orders_lines.quantity');
+        return $query
+            ->whereBetween('created_at', [
+                now()->startOfMonth(),
+                now()->endOfMonth()
+            ])
+            ->count();
+    }
+
+    public function getOrdersPreviousMonth()
+    {
+        $query = Order::query();
+
+        if ($this->isCustomer() && $this->is_only_order) {
+            $query->where('user_id', $this->id);
+        }
+
+        return $query
+            ->whereBetween('created_at', [
+                now()->subMonth()->startOfMonth(),
+                now()->subMonth()->endOfMonth()
+            ])
+            ->count();
+    }
+
+    public function getOrdersEvolutionPercentage(): float
+    {
+        $currentMonth = $this->getOrdersCurrentMonth();
+        $previousMonth = $this->getOrdersPreviousMonth();
+
+        if ($previousMonth == 0) {
+            return $currentMonth > 0 ? 100 : 0;
+        }
+
+        return round(
+            (($currentMonth - $previousMonth) / $previousMonth) * 100,
+            1
+        );
     }
 }

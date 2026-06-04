@@ -407,6 +407,9 @@
 
 .card-mobile-content-left {
     line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card-mobile-content-name {
