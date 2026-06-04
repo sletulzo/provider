@@ -134,8 +134,6 @@ class User extends Authenticatable
         }
 
         return $query
-            ->select('orders.id')
-            ->distinct()
             ->whereBetween('created_at', [
                 now()->startOfMonth(),
                 now()->endOfMonth()
@@ -152,8 +150,6 @@ class User extends Authenticatable
         }
 
         return $query
-            ->select('orders.id')
-            ->distinct()
             ->whereBetween('created_at', [
                 now()->subMonth()->startOfMonth(),
                 now()->subMonth()->endOfMonth()

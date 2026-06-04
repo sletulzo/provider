@@ -45,14 +45,21 @@ class Product extends Model
     }
 
     /**
+     * Order lines
+     */
+    public function ordersLines()
+    {
+        return $this->hasMany(OrderLine::class, 'product_id');
+    }
+
+    /**
      * Popular product
      */
     public static function popular(int $limit = 4)
     {
-        return self::select('products.*')
-            ->join('orders_lines', 'products.id', '=', 'orders_lines.product_id')
-            ->groupBy('products.id')
-            ->orderByRaw('COUNT(orders_lines.product_id) DESC')
+        return self::query()
+            ->withCount('ordersLines')
+            ->orderByDesc('orders_lines_count')
             ->limit($limit);
     }
 
