@@ -169,7 +169,6 @@
 
     .mobile-card-item {
         display: flex;
-        flex-wrap: wrap;
         min-height: 60px;
         background-color: #fff;
         padding: 8px 15px;
@@ -208,6 +207,7 @@
         align-items: center;
         justify-content: center;
         margin-left: 10px;
+        white-space: nowrap;
     }
 
     .mobile-card-item .mobile-card-item-status-item {
