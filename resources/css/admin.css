@@ -57,6 +57,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
     font-weight: bold;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
 .upper {
     text-transform: uppercase;
 }
