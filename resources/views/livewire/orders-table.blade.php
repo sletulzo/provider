@@ -90,16 +90,10 @@
 
 <script>
 document.addEventListener('livewire:init', () => {
-    Livewire.on('centerMonth', ({ month }) => {
-        const el = document.querySelector(`[data-month="${month}"]`);
-
-        if (!el) return;
-
-        el.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest'
-        });
+    Livewire.on('scroll-month', ({ month }) => {
+        document
+            .querySelector(`[data-month="${month}"]`)
+            ?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
     });
 });
 </script>

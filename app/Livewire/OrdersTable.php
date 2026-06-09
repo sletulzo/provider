@@ -20,7 +20,7 @@ class OrdersTable extends Component
     public function setMonth($month)
     {
         $this->month = $month;
-        $this->dispatch('centerMonth', month: $month);
+        $this->dispatch('scroll-month', month: $month);
     }
 
     public function setYear($year)
