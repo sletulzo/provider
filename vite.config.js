@@ -24,7 +24,9 @@ export default defineConfig({
                 'resources/js/admin.js',
                 'resources/js/nav.js',
 
-                'resources/images/chart.png'
+                'resources/images/chart.png',
+                'resources/images/logo.png',
+                'resources/images/logo-no-bg.png',
             ],
             refresh: true,
         }),
