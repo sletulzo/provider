@@ -15,8 +15,8 @@
 
 .login-container .login-container-mobile .login-container-logo {
     width: 75px;
-    height: 60px;
-    background-image: url('../images/logo.png');
+    height: 75px;
+    background-image: url('../images/logo-no-bg.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
