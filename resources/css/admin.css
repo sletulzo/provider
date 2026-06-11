@@ -1312,6 +1312,7 @@ table input {
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .order-detail .order-detail-products-item-content .order-detail-products-item-content-name {
@@ -1328,7 +1329,9 @@ table input {
 
 .order-detail .order-detail-products-item-content .order-detail-products-item-content-right {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------ */
