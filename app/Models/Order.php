@@ -53,6 +53,18 @@ class Order extends Model
     }
 
     /**
+     * Total amount in cents
+     */
+    public function getTotal(): int
+    {
+        $this->loadMissing('lines.product');
+
+        return $this->lines->sum(function ($line) {
+            return ($line->product?->price ?? 0) * ($line->quantity ?? 0);
+        });
+    }
+
+    /**
      * Get status of order
      */
     public function getStatus()

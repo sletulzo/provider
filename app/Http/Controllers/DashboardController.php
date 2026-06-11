@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\OrderWaiting;
-use App\Models\Product;
-use App\Models\Provider;
-use App\Models\Unity;
+use App\Services\CustomerDashboardService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -20,18 +17,22 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $view = $user->getNavigationSlug();
-        $products = Product::take(2)->get();
-        $providers = Provider::orderBy('name')->get();
-        $products = Product::popular()->get();
 
-        if ($user->is_only_order) 
-        {
-            $orders = Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->take(4)->get();
-        } 
-        else
-        {
-            $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
+        if ($user->isCustomer()) {
+            $dashboard = new CustomerDashboardService($user);
+
+            return view('dashboard.customer', [
+                'user' => $user,
+                'stats' => $dashboard->getStats(),
+                'draftCarts' => $dashboard->getDraftCarts(),
+                'products' => $dashboard->getPopularProducts(),
+                'providers' => $dashboard->getProviders(),
+            ]);
         }
+
+        $orders = $user->getOrders()->take(4);
+        $products = \App\Models\Product::popular()->with('provider')->get();
+        $providers = \App\Models\Provider::orderBy('name')->get();
 
         return view('dashboard.' . $view, compact('user', 'orders', 'products', 'providers'));
     }

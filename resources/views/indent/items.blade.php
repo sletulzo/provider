@@ -1,3 +1,16 @@
+@if ($products->isEmpty())
+    <x-empty-state
+        icon="fa-regular fa-lemon"
+        title="Aucun produit"
+        :description="Auth::user()->is_only_order
+            ? 'Aucun produit n\'est disponible chez ce fournisseur pour le moment.'
+            : 'Ajoutez des produits à ce fournisseur pour pouvoir commander.'"
+        :action="Auth::user()->is_only_order ? null : 'Ajouter un produit'"
+        :href="Auth::user()->is_only_order ? null : route('products.create')"
+        :modal="!Auth::user()->is_only_order"
+    />
+@endif
+
 @foreach($products as $product)
     @php ($stock = $product->getStock())
     <div class="indent-container-right-item {{ $product->quantity ? 'active' : '' }} {{ $provider->is_stock && $stock == 0 ? 'disabled' : '' }}">

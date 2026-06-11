@@ -33,54 +33,64 @@
         </div>
     </div>
 
-    {{-- TABLE --}}
-    <div class="hidden sm:block overflow-x-auto">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Articles</th>
-                    <th>Date</th>
-                    <th>Fournisseur</th>
-                    <th>Créateur</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach($orders as $order)
-                    <tr class="hover:bg-gray-50 transition line">
-                        <td>{{ $order->id }}</td>
-                        <td>Commande</td>
-                        <td>{{ $order->lines_count }}</td>
-                        <td>{{ carbon($order->created_at)->format('d/m/Y') }}</td>
-                        <td>{{ $order->provider?->name }}</td>
-                        <td>{{ $order->user?->name }}</td>
-
-                        <td class="text-right">
-                            <a href="{{ route('orders.products', $order) }}">
-                                <i class="fa-solid fa-table-cells-large"></i>
-                            </a>
-
-                            <a href="{{ route('orders.delete', $order) }}" class="confirm-delete">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </a>
-                        </td>
+    @if ($orders->isEmpty())
+        <x-empty-state
+            icon="fa-solid fa-cart-shopping"
+            title="Aucune commande"
+            :description="'Aucune commande pour ' . \Carbon\Carbon::create()->month($month)->locale('fr')->translatedFormat('F') . ' ' . $year . '.'"
+            action="Passer une commande"
+            :href="route('indents')"
+        />
+    @else
+        {{-- TABLE --}}
+        <div class="hidden sm:block overflow-x-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Articles</th>
+                        <th>Date</th>
+                        <th>Fournisseur</th>
+                        <th>Créateur</th>
+                        <th></th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
 
-    {{-- MOBILE --}}
-    <div class="block sm:hidden">
-        <div class="space-y-3">
-            @foreach($orders as $order)
-                @include(Auth::user()->isProvider() ? 'order.provider-card' : 'order.card', ['order' => $order])
-            @endforeach
+                <tbody>
+                    @foreach($orders as $order)
+                        <tr class="hover:bg-gray-50 transition line">
+                            <td>{{ $order->id }}</td>
+                            <td>Commande</td>
+                            <td>{{ $order->lines_count }}</td>
+                            <td>{{ carbon($order->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ $order->provider?->name }}</td>
+                            <td>{{ $order->user?->name }}</td>
+
+                            <td class="text-right">
+                                <a href="{{ route('orders.products', $order) }}">
+                                    <i class="fa-solid fa-table-cells-large"></i>
+                                </a>
+
+                                <a href="{{ route('orders.delete', $order) }}" class="confirm-delete">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
+
+        {{-- MOBILE --}}
+        <div class="block sm:hidden">
+            <div class="space-y-3">
+                @foreach($orders as $order)
+                    @include(Auth::user()->isProvider() ? 'order.provider-card' : 'order.card', ['order' => $order])
+                @endforeach
+            </div>
+        </div>
+    @endif
 
 </div>
 

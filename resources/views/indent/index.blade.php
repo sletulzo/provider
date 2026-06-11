@@ -13,13 +13,26 @@
             </div>
         </div>
 
-        <div class="block sm:hidden">
-            <div class="card-mobile-container">
-                @foreach($providers as $provider)
-                    @include('indent.card', ['provider' => $provider])
-                @endforeach
+        @if ($providers->isEmpty())
+            <x-empty-state
+                icon="fa-regular fa-address-book"
+                title="Aucun fournisseur"
+                :description="Auth::user()->is_only_order
+                    ? 'Contactez votre administrateur pour configurer vos fournisseurs.'
+                    : 'Ajoutez un fournisseur pour commencer à passer des commandes.'"
+                :action="Auth::user()->is_only_order ? null : 'Ajouter un fournisseur'"
+                :href="Auth::user()->is_only_order ? null : route('providers.create')"
+                :modal="!Auth::user()->is_only_order"
+            />
+        @else
+            <div class="block sm:hidden">
+                <div class="card-mobile-container">
+                    @foreach($providers as $provider)
+                        @include('indent.card', ['provider' => $provider])
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <!-- <div class="indent-container">
