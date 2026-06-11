@@ -8,7 +8,7 @@
             <div class="card-mobile-content-subname">
                 {{ $provider->name }}
                 @if ($product->price)
-                    · {{ price($product->price, 2) }} €
+                    · <x-price :amount="$product->price" />
                 @endif
             </div>
         </div>

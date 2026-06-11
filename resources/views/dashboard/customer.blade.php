@@ -39,7 +39,7 @@
                 <div class="dashboard-stat-icon"><i class="fa-solid fa-euro-sign"></i></div>
                 <div class="dashboard-stat-content">
                     <div class="dashboard-stat-label">Montant du mois</div>
-                    <div class="dashboard-stat-value">{{ price($stats['monthly_spend'], 2) }} €</div>
+                    <div class="dashboard-stat-value"><x-price :amount="$stats['monthly_spend']" /></div>
                     <div class="dashboard-stat-sub">{{ carbon()->translatedFormat('F Y') }}</div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <div class="dashboard-carts-item-icon"><i class="fa-regular fa-address-book"></i></div>
                         <div class="dashboard-carts-item-content">
                             <div class="dashboard-carts-item-name">{{ $cart['provider']->name }}</div>
-                            <div class="dashboard-carts-item-sub">{{ $cart['items_count'] }} article{{ $cart['items_count'] > 1 ? 's' : '' }} · {{ price($cart['total'], 2) }} €</div>
+                            <div class="dashboard-carts-item-sub">{{ $cart['items_count'] }} article{{ $cart['items_count'] > 1 ? 's' : '' }} · <x-price :amount="$cart['total']" /></div>
                         </div>
                         <div class="dashboard-carts-item-action">Finaliser <i class="fa-solid fa-angle-right"></i></div>
                     </a>
