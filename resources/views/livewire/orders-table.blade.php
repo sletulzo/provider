@@ -86,32 +86,28 @@
 
 
 <script>
+function centerMonth(month = null) {
+    const container = document.querySelector('.orders-months');
+
+    const button = month
+        ? document.querySelector(`[data-month="${month}"]`)
+        : document.querySelector('.orders-month-item.active');
+
+    if (!container || !button) return;
+
+    container.scrollTo({
+        left: button.offsetLeft - (container.offsetWidth / 2) + (button.offsetWidth / 2),
+        behavior: 'smooth'
+    });
+}
+
+// Arrivée sur la page via wire:navigate
+document.addEventListener('livewire:navigated', () => {
+    setTimeout(() => centerMonth(), 100);
+});
+
+// Après un update Livewire (clic sur un mois)
 document.addEventListener('livewire:init', () => {
-    const centerMonth = (month = null) => {
-        setTimeout(() => {
-            const container = document.querySelector('.orders-months');
-
-            const button = month
-                ? document.querySelector(`[data-month="${month}"]`)
-                : document.querySelector('.orders-month-item.active');
-
-            if (!container || !button) return;
-
-            const containerWidth = container.offsetWidth;
-            const buttonLeft = button.offsetLeft;
-            const buttonWidth = button.offsetWidth;
-
-            container.scrollTo({
-                left: buttonLeft - (containerWidth / 2) + (buttonWidth / 2),
-                behavior: 'smooth'
-            });
-        }, 100);
-    };
-
-    // Au chargement initial
-    centerMonth();
-
-    // Après changement Livewire
     Livewire.on('scroll-month', ({ month }) => {
         centerMonth(month);
     });
