@@ -18,10 +18,6 @@
     margin-bottom: 16px;
 }
 
-.dashboard > h2 b {
-    display: block;
-}
-
 .dashboard .dashboard-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
