@@ -18,9 +18,9 @@
             <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
             <div class="title">Commandes</div>
         </x-nav-link>
-        <x-nav-link class="nav-item" wire:navigate :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
-            <div class="icon"><i class="fa-regular fa-user"></i></div>
-            <div class="title">Profil</div>
+        <x-nav-link class="nav-item" wire:navigate :href="route('products')" :active="request()->routeIs('products')">
+            <div class="icon"><i class="fa-regular fa-lemon"></i></div>
+            <div class="title">Produits</div>
         </x-nav-link>
     </nav>
 </div>

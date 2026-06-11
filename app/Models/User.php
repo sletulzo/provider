@@ -105,9 +105,9 @@ class User extends Authenticatable
     public function getColor()
     {
         if ($this->isProvider())
-            return '#3645b1';
+            return '#0a9f38';
 
-        return '#0a9f38';
+        return '#3645b1';
     }
 
     /**
