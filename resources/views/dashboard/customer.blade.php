@@ -66,7 +66,7 @@
 
         <div class="dashboard-title">
             Commander rapidement
-            <a href="{{ route('indents') }}">Tous les fournisseurs</a>
+            <a href="{{ route('indents') }}">Voir tous</a>
         </div>
 
         <div class="dashboard-providers">

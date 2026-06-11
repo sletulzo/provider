@@ -11,5 +11,5 @@
             <span><x-price :amount="$order->getTotal()" /></span>
         @endif
     </div>
-    <div class="dashboard-orders-item-status" style="color: {{ $status['color'] }}; background-color: {{ $status['color'] }}29">{{ $status['label'] }}</div>
+    <div class="dashboard-orders-item-status status-badge status-badge--{{ $status['slug'] }}">{{ $status['label'] }}</div>
 </a>

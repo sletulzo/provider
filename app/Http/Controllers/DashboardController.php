@@ -27,7 +27,7 @@ class DashboardController extends Controller
                 'stats' => $dashboard->getStats(),
                 'draftCarts' => $dashboard->getDraftCarts(),
                 'products' => $dashboard->getPopularProducts(),
-                'providers' => $dashboard->getProviders(),
+                'providers' => $dashboard->getPopularProviders(),
             ]);
         }
 

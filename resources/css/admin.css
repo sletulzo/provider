@@ -72,7 +72,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 .big-bubble {
     width: 25px;
     height: 25px;
-    background-color: #4FD1C5;
+    background-color: var(--secondary);
     color: #fff;
     border-radius: 50%;
     display: inline-flex;
@@ -362,14 +362,14 @@ body.backdrop::after {
     font-weight: 600;
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
     transition-duration: 0.2s;
-    border: 1px solid red;
+    border: 1px solid var(--danger);
     height: 2.5rem;
     min-width: 2.5rem;
     font-size: 0.75rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
     background-color: #fff;
-    color: red;
+    color: var(--danger);
 }
 
 
@@ -386,16 +386,16 @@ body.backdrop::after {
     border: none;
     padding: 10px 15px;
     cursor: pointer;
-    border: 1px solid #4FD1C5;
+    border: 1px solid var(--secondary);
     border-radius: 6px;
     transition: all 0.2s;
-    color: #4FD1C5;
+    color: var(--secondary);
     font-weight: 600;
     font-size: 16px;
 }
 
 .tabs-nav button.active {
-    background: #4FD1C5;
+    background: var(--secondary);
     color: #fff;
 }
 
@@ -688,7 +688,7 @@ table input {
 }
 
 .toggle-input:checked + .toggle-label {
-    background: #4FD1C5;
+    background: var(--secondary);
 }
 
 .toggle-input:checked + .toggle-label .toggle-ball {
@@ -767,7 +767,7 @@ table input {
 }
 
 .indent-container-left-item.active {
-    background-color: #4FD1C5;
+    background-color: var(--secondary);
     color: #fff;
 }
 
@@ -895,7 +895,7 @@ table input {
 
 .indent-container-right-item-total {
     font-weight: bold;
-    color: #4FD1C5;
+    color: var(--secondary);
     font-size: 16px;
     opacity: 0;
 }
@@ -1002,7 +1002,7 @@ table input {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
+    background-color: var(--danger);
     color: #fff;
     font-size: 7px;
     border-radius: 50%;
@@ -1015,7 +1015,7 @@ table input {
     position: absolute;
     right: -4px;
     top: -5px;
-    background-color: red;
+    background-color: var(--danger);
     color: #fff;
     font-size: 8px;
     width: 13px;

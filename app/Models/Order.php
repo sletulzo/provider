@@ -69,28 +69,26 @@ class Order extends Model
      */
     public function getStatus()
     {
-        if ($this->is_refused)
-        {
+        if ($this->is_refused) {
             return [
                 'slug' => 'refused',
-                'color' => '#db4d2b',
-                'label' => 'Refusé'
+                'color' => '#ef4444',
+                'label' => 'Refusé',
             ];
         }
 
-        if ($this->is_accepted)
-        {
+        if ($this->is_accepted) {
             return [
                 'slug' => 'accepted',
-                'color' => '#44beee',
-                'label' => 'Accepté'
+                'color' => '#22c55e',
+                'label' => 'Accepté',
             ];
         }
 
         return [
             'slug' => 'waiting',
-            'color' => '#6f6c6c',
-            'label' => 'En attente'
+            'color' => '#64748b',
+            'label' => 'En attente',
         ];
     }
 

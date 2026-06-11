@@ -63,9 +63,11 @@ class CustomerDashboardService
         return Product::popular($limit)->with('provider')->get();
     }
 
-    public function getProviders(): Collection
+    public function getPopularProviders(int $limit = 8): Collection
     {
-        return Provider::orderBy('name')->get();
+        $userId = $this->user->is_only_order ? $this->user->id : null;
+
+        return Provider::popular($limit, $userId)->get();
     }
 
     private function ordersQuery()

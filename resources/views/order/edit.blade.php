@@ -7,7 +7,7 @@
         <div class="order-detail-top">
             <div class="flex-between">
                 <div class="order-detail-top-number">CMD-{{ $order->id }}</div>
-                <div class="order-detail-top-status" style="background-color: {{ $status['color'] }}26; border-color: {{ $status['color'] }}; color: {{ $status['color'] }}">{{ $status['label'] }}</div>
+                <div class="order-detail-top-status status-badge status-badge--{{ $status['slug'] }}">{{ $status['label'] }}</div>
             </div>
             <div class="order-detail-provider">{{ $order->provider?->name }}</div>
             <div class="order-detail-date">Passée le {{ carbon($order->created_at)->format('d/m/Y à H:i') }}</div>

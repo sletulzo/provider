@@ -80,28 +80,26 @@ class Product extends Model
     {
         $stock = $this->getStock();
 
-        if ($stock > 10) 
-        {
+        if ($stock > 10) {
             return [
                 'name' => 'En stock',
-                'color' => 'green',
-                'quantity' => $stock
+                'color' => '#22c55e',
+                'quantity' => $stock,
             ];
         }
 
-        if ($stock > 0)
-        {
+        if ($stock > 0) {
             return [
                 'name' => 'Stock faible',
-                'color' => 'orange',
-                'quantity' => $stock
+                'color' => '#f59e0b',
+                'quantity' => $stock,
             ];
         }
 
         return [
             'name' => 'Rupture de stock',
-            'color' => 'red',
-            'quantity' => $stock
+            'color' => '#ef4444',
+            'quantity' => $stock,
         ];
     }
 

@@ -9,6 +9,6 @@
         <span class="f-11">{{ $order->lines()->sum('quantity') }} articles</span>
     </div>
     <div class="mobile-card-item-status">
-        <div class="mobile-card-item-status-item" style="color: {{ $status['color'] }}; background-color: {{ $status['color'] }}29">{{ $status['label'] }}</div>
+        <div class="mobile-card-item-status-item status-badge status-badge--{{ $status['slug'] }}">{{ $status['label'] }}</div>
     </div>
 </a>

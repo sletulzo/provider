@@ -1,5 +1,8 @@
 import $ from 'jquery';
 
+function themeColor() {
+	return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#3645b1';
+}
 
 function initAjaxModal() {
     const modal = document.getElementById('ajaxModal');
@@ -276,7 +279,7 @@ $(document).on('click', 'a.confirm-delete', function(e) {
 		showCancelButton: true,
 		confirmButtonText: "Oui, supprimer",
 		cancelButtonText: "Annuler",
-		confirmButtonColor: "#4FD1C5",
+		confirmButtonColor: themeColor(),
     	cancelButtonColor: "#ddd"
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -315,7 +318,7 @@ $(document).on('click', 'a.confirm-validate', function(e) {
 		showCancelButton: true,
 		confirmButtonText: "Oui, je confirme",
 		cancelButtonText: "Annuler",
-		confirmButtonColor: "#4FD1C5",
+		confirmButtonColor: themeColor(),
     	cancelButtonColor: "#ddd"
 	}).then((result) => {
 		if (result.isConfirmed) {

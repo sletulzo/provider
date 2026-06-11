@@ -57,7 +57,7 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    color: #51d3c9;
+    color: var(--secondary);
     transition: all 0.2s;
 }
 
@@ -69,7 +69,7 @@
 
 .nav nav > a.active .icon, 
 .nav nav > a:hover .icon {
-    background-color: #51d3c9;
+    background-color: var(--secondary);
     color: #fff;
 }
 
@@ -140,7 +140,7 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    color: #51d3c9;
+    color: var(--secondary);
     transition: all 0.2s;
 }
 
@@ -152,7 +152,7 @@
 
 .nav-mobile > nav > a.active .icon,
 .nav-mobile > nav > a:hover .icon {
-    background-color: #51d3c9;
+    background-color: var(--secondary);
     color: #fff;
 }
 
@@ -346,7 +346,7 @@
 }
 
 .logout{
-    color:red;
+    color: var(--danger);
     text-decoration:none;
     font-weight:bold;
 }

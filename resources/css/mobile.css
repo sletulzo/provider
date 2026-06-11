@@ -180,7 +180,7 @@
     }
 
     .mobile-card-item.refused {
-        background-color: #ff00001c;
+        background-color: color-mix(in srgb, var(--danger) 11%, transparent);
     }
 
     .mobile-card-item .mobile-card-item-icon {
@@ -215,24 +215,24 @@
     }
 
     .mobile-card-item .mobile-card-item-status-item {
-        background: rgb(204 208 211 / 49%);
+        background: color-mix(in srgb, var(--status-waiting) 16%, transparent);
         font-size: 11px;
         border-radius: 10px;
         padding: 2px 10px;
         line-height: 15px;
-        color: #6f6c6c;
+        color: var(--status-waiting);
         font-weight: bold;
     }
 
     .mobile-card-item .mobile-card-item-status-item.accepted {
-        background-color: var(--secondary-bg);
-        color: var(--secondary);
+        background-color: color-mix(in srgb, var(--status-accepted) 16%, transparent);
+        color: var(--status-accepted);
         font-weight: 500;
     }
 
     .mobile-card-item .mobile-card-item-status-item.refused {
-        background-color: red;
-        color: #fff;
+        background-color: color-mix(in srgb, var(--status-refused) 16%, transparent);
+        color: var(--status-refused);
         font-weight: 500;
     }
 
@@ -322,7 +322,7 @@
     }
 
     .mobile-card-item-response .btn-order.refuse {
-        color: #ff000085;
+        color: var(--danger);
     }
 }
 

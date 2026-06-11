@@ -31,9 +31,33 @@ class Provider extends Model
     /**
      * Relation
      */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'provider_id');
+    }
+
+    /**
+     * Relation
+     */
     public function orderWaitings()
     {
         return $this->hasMany(OrderWaiting::class, 'provider_id');
+    }
+
+    /**
+     * Most ordered providers
+     */
+    public static function popular(int $limit = 8, ?int $userId = null)
+    {
+        return self::query()
+            ->withCount(['orders' => function ($query) use ($userId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                }
+            }])
+            ->orderByDesc('orders_count')
+            ->orderBy('name')
+            ->limit($limit);
     }
 
     /**

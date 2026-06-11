@@ -44,11 +44,11 @@
 
 a.dashboard-stat-card:hover {
     border-color: var(--primary);
-    box-shadow: 0 2px 8px rgba(54, 69, 177, 0.1);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .dashboard .dashboard-stat-card--primary {
-    background: linear-gradient(135deg, var(--primary) 0%, #2a3690 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     border-color: transparent;
     color: #fff;
     grid-column: 1 / -1;
@@ -64,8 +64,8 @@ a.dashboard-stat-card:hover {
 }
 
 .dashboard .dashboard-stat-card--alert {
-    border-color: #f0ad4e;
-    background-color: #fffbf5;
+    border-color: var(--warning);
+    background-color: var(--surface-alert);
 }
 
 .dashboard .dashboard-stat-card--active {
@@ -92,7 +92,7 @@ a.dashboard-stat-card:hover {
 
 .dashboard .dashboard-stat-label {
     font-size: 12px;
-    color: #718096;
+    color: var(--text-muted);
     margin-bottom: 2px;
 }
 
@@ -112,16 +112,16 @@ a.dashboard-stat-card:hover {
 
 .dashboard .dashboard-stat-sub {
     font-size: 11px;
-    color: #a0aec0;
+    color: var(--text-light);
     margin-top: 2px;
 }
 
 .dashboard .dashboard-stat-sub--up {
-    color: #48bb78;
+    color: var(--trend-up);
 }
 
 .dashboard .dashboard-stat-sub--down {
-    color: #fc8181;
+    color: var(--trend-down);
 }
 
 .dashboard .dashboard-stat-card--primary .dashboard-stat-sub--up,
@@ -167,7 +167,7 @@ a.dashboard-stat-card:hover {
 
 .dashboard .dashboard-carts-item-sub {
     font-size: 12px;
-    color: #718096;
+    color: var(--text-muted);
     margin-top: 2px;
     line-height: 1.4;
 }
@@ -175,7 +175,7 @@ a.dashboard-stat-card:hover {
 .dashboard .dashboard-carts-item-sub .price-display {
     font-size: 11px;
     font-weight: 600;
-    color: #4a5568;
+    color: var(--text-muted);
 }
 
 .dashboard .dashboard-carts-item-action {
@@ -208,8 +208,8 @@ a.dashboard-stat-card:hover {
 }
 
 .dashboard .dashboard-orders--pending {
-    border: 1px solid #f0ad4e;
-    background-color: #fffbf5;
+    border: 1px solid var(--warning);
+    background-color: var(--surface-alert);
 }
 
 .dashboard .dashboard-orders .dashboard-orders-item {
@@ -253,7 +253,7 @@ a.dashboard-stat-card:hover {
     flex-direction: column;
     align-items: flex-end;
     font-size: 12px;
-    color: #718096;
+    color: var(--text-muted);
     gap: 2px;
 }
 

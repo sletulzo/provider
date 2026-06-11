@@ -104,10 +104,29 @@ class User extends Authenticatable
      */
     public function getColor()
     {
-        if ($this->isProvider())
-            return '#0a9f38';
+        return $this->getTheme()['primary'];
+    }
 
-        return '#3645b1';
+    /**
+     * Theme colors for the current user type
+     *
+     * @return array{primary: string, primary_dark: string, secondary: string}
+     */
+    public function getTheme(): array
+    {
+        if ($this->isProvider()) {
+            return [
+                'primary' => '#0a9f38',
+                'primary_dark' => '#087a2b',
+                'secondary' => '#3ecf7a',
+            ];
+        }
+
+        return [
+            'primary' => '#3645b1',
+            'primary_dark' => '#2a3690',
+            'secondary' => '#44beee',
+        ];
     }
 
     /**

@@ -27,14 +27,14 @@
         @livewireStyles
 
          <!-- Color -->
-        @php ($color = auth()->user()->getColor())
+        @php ($theme = auth()->user()->getTheme())
         <style>
             :root {
-                --primary: {{ $color ?? '#3645b1' }};
-                --secondary: {{ $color ?? '#44beee' }};
-
-                --primary-bg: {{ $color ?? '#3645b1' }}1a;
-                --secondary-bg: {{ $color ?? '#44beee' }}4d;
+                --primary: {{ $theme['primary'] }};
+                --primary-dark: {{ $theme['primary_dark'] }};
+                --secondary: {{ $theme['secondary'] }};
+                --primary-bg: {{ $theme['primary'] }}1a;
+                --secondary-bg: {{ $theme['secondary'] }}29;
             }
         </style>
     </head>
