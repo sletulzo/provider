@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderWaiting;
 use App\Services\CustomerDashboardService;
+use App\Services\ProviderDashboardService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -30,11 +31,14 @@ class DashboardController extends Controller
             ]);
         }
 
-        $orders = $user->getOrders()->take(4);
-        $products = \App\Models\Product::popular()->with('provider')->get();
-        $providers = \App\Models\Provider::orderBy('name')->get();
+        $dashboard = new ProviderDashboardService($user);
 
-        return view('dashboard.' . $view, compact('user', 'orders', 'products', 'providers'));
+        return view('dashboard.provider', [
+            'user' => $user,
+            'stats' => $dashboard->getStats(),
+            'pendingOrders' => $dashboard->getPendingOrders(),
+            'products' => $dashboard->getPopularProducts(),
+        ]);
     }
 
     /**

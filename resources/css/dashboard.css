@@ -5,6 +5,13 @@
     letter-spacing: -0.02em;
 }
 
+.dashboard .price-display__currency {
+    font-size: 0.72em;
+    font-weight: 600;
+    margin-left: 0.08em;
+    opacity: 0.9;
+}
+
 .dashboard > h2 {
     font-size: 22px;
     font-weight: 500;
@@ -198,6 +205,11 @@ a.dashboard-stat-card:hover {
     background-color: #fff;
     border-radius: 10px;
     margin-bottom: 20px;
+}
+
+.dashboard .dashboard-orders--pending {
+    border: 1px solid #f0ad4e;
+    background-color: #fffbf5;
 }
 
 .dashboard .dashboard-orders .dashboard-orders-item {
