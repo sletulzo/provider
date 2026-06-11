@@ -4,9 +4,18 @@
 
         <div class="orders-filters-title">
             Filtrer les commandes
+
+            <div class="orders-filters-bottom">
+                <select wire:change="setYear($event.target.value)" class="orders-select">
+                    @foreach(range(date('Y'), date('Y') - 4) as $y)
+                        <option value="{{ $y }}" @selected($year == $y)>
+                            {{ $y }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
-        {{-- MOIS --}}
         <div class="orders-months">
             @foreach(range(1,12) as $m)
                 @php
@@ -22,18 +31,6 @@
                 </button>
             @endforeach
         </div>
-
-        {{-- ANNÉE --}}
-        <div class="orders-filters-bottom">
-            <select wire:change="setYear($event.target.value)" class="orders-select">
-                @foreach(range(date('Y'), date('Y') - 4) as $y)
-                    <option value="{{ $y }}" @selected($year == $y)>
-                        {{ $y }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
     </div>
 
     {{-- TABLE --}}
@@ -90,10 +87,26 @@
 
 <script>
 document.addEventListener('livewire:init', () => {
+    const centerActiveMonth = (month = null) => {
+        requestAnimationFrame(() => {
+            const button = month
+                ? document.querySelector(`[data-month="${month}"]`)
+                : document.querySelector('.orders-month-item.active');
+
+            button?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        });
+    };
+
+    // Centrage par défaut au chargement
+    centerActiveMonth();
+
+    // Centrage après changement de mois Livewire
     Livewire.on('scroll-month', ({ month }) => {
-        document
-            .querySelector(`[data-month="${month}"]`)
-            ?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        centerActiveMonth(month);
     });
 });
 </script>

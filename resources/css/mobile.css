@@ -484,6 +484,9 @@
 
 /* TITRE */
 .orders-filters-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-size: 14px;
     font-weight: 600;
     color: #111827;
@@ -533,6 +536,16 @@
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.orders-filters-bottom select {
+    background-color: transparent;
+    border: none !important;
+    box-shadow: none;
+    padding: 0px;
+    height: auto;
+    font-size: 18px !important;
+    font-weight: bold;
 }
 
 /* SELECT ANNÉE */
