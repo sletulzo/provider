@@ -22,16 +22,15 @@ class DashboardController extends Controller
         $view = $user->getNavigationSlug();
         $products = Product::take(2)->get();
         $providers = Provider::orderBy('name')->get();
+        $products = Product::popular()->get();
 
-        if ($user->isCustomer()) 
+        if ($user->is_only_order) 
         {
             $orders = Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->take(4)->get();
-            $products = Product::popular()->get();
         } 
         else
         {
             $orders = Order::orderBy('created_at', 'desc')->take(4)->get();
-            $products = Product::popular()->get();
         }
 
         return view('dashboard.' . $view, compact('user', 'orders', 'products', 'providers'));

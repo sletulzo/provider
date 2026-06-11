@@ -175,6 +175,10 @@
         border-bottom: 1px solid #eee;
     }
 
+    .mobile-card-item.hovered:hover {
+        background-color: var(--secondary-bg);
+    }
+
     .mobile-card-item.refused {
         background-color: #ff00001c;
     }
