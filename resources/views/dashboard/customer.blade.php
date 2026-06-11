@@ -50,8 +50,8 @@
                     @php ($status = $order->getStatus())
                     <div class="dashboard-orders-item">
                         <div class="dashboard-orders-item-title">
-                            <div>CMD-{{ $order->id }}</div>
-                            <span>{{ $order->user?->name }}</span>
+                            <div>{{ $order->provider?->name }}</div>
+                            <span>CMD-{{ $order->id }} - {{ $order->user?->name }}</span>
                         </div>
                         <div class="dashboard-orders-item-price">{{ $order->lines()->count() }} articles</div>
                         <div class="dashboard-orders-item-status" style="color: {{ $status['color'] }}; background-color: {{ $status['color'] }}29">{{ $status['label'] }}</div>
