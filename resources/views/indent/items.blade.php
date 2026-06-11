@@ -5,7 +5,7 @@
             @if ($provider->is_stock)
                 <div class="indent-container-right-item-icon"><span>{{ $stock }}</span></div>
             @else
-                <div class="indent-container-right-item-icon"><i class="fa-solid fa-cube"></i></div>
+                <div class="card-mobile-icon"><i class="fa-solid fa-cube"></i></div>
             @endif
             <div class="indent-container-right-item-name">
                 <div class="name">{{ $product->name }}</div>

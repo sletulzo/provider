@@ -87,26 +87,33 @@
 
 <script>
 document.addEventListener('livewire:init', () => {
-    const centerActiveMonth = (month = null) => {
-        requestAnimationFrame(() => {
+    const centerMonth = (month = null) => {
+        setTimeout(() => {
+            const container = document.querySelector('.orders-months');
+
             const button = month
                 ? document.querySelector(`[data-month="${month}"]`)
                 : document.querySelector('.orders-month-item.active');
 
-            button?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
+            if (!container || !button) return;
+
+            const containerWidth = container.offsetWidth;
+            const buttonLeft = button.offsetLeft;
+            const buttonWidth = button.offsetWidth;
+
+            container.scrollTo({
+                left: buttonLeft - (containerWidth / 2) + (buttonWidth / 2),
+                behavior: 'smooth'
             });
-        });
+        }, 100);
     };
 
-    // Centrage par défaut au chargement
-    centerActiveMonth();
+    // Au chargement initial
+    centerMonth();
 
-    // Centrage après changement de mois Livewire
+    // Après changement Livewire
     Livewire.on('scroll-month', ({ month }) => {
-        centerActiveMonth(month);
+        centerMonth(month);
     });
 });
 </script>

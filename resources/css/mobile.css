@@ -495,8 +495,10 @@
 /* SLIDER MOIS */
 .orders-months {
     display: flex;
-    gap: 8px;
+    flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
     padding-bottom: 6px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -518,6 +520,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .orders-month-item:hover {
