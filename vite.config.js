@@ -20,6 +20,7 @@ export default defineConfig({
                 'resources/css/form.css',
                 'resources/css/mobile.css',
                 'resources/css/dashboard.css',
+                'resources/css/ui-v2.css',
                 'resources/css/order-response.css',
                 'resources/js/app.js',
                 'resources/js/admin.js',

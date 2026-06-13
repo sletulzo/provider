@@ -35,6 +35,7 @@ class OrdersTable extends Component
         $query = Order::query()
             ->with(['provider', 'user', 'lines'])
             ->withCount('lines')
+            ->withSum('lines as lines_qty', 'quantity')
             ->orderByDesc('created_at');
 
         if ($user->isCustomer() && $user->is_only_order) {

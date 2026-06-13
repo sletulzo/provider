@@ -22,6 +22,7 @@
             'resources/css/form.css',
             'resources/css/mobile.css',
             'resources/css/dashboard.css',
+            'resources/css/ui-v2.css',
         ])
 
         @livewireStyles
@@ -41,23 +42,25 @@
     <body class="font-sans antialiased">
 
         <div class="main-wrapper">
-            <header>
-                @include('layouts.navigations.burger.' . Auth::user()->getNavigationSlug())
+            @include('layouts.navigations.sidebar.' . Auth::user()->getNavigationSlug())
 
-                <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
-                {{ isset($header) ? $header : '' }}
-                
-                @if (isset($headerActions))
-                    {!! $headerActions !!}
-                @endif
-            </header>
+            <div class="app-shell">
+                <header>
+                    @include('layouts.navigations.burger.' . Auth::user()->getNavigationSlug())
+
+                    {{ isset($header) ? $header : '' }}
+
+                    @if (isset($headerActions))
+                        {!! $headerActions !!}
+                    @endif
+                </header>
+
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
 
             @include('layouts.navigations.' . Auth::user()->getNavigationSlug())
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
         </div>
 
         @include('layouts.modal')
@@ -79,7 +82,7 @@
 
         <div x-data="{ loading: false }" x-on:livewire:navigate.window="loading = true" x-on:livewire:navigated.window="loading = false">
             <template x-if="loading">
-                <div class="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center pointer-events-auto"></div>
+                <div class="fixed inset-0 bg-stone-100/60 backdrop-blur-sm flex items-center justify-center pointer-events-auto"></div>
             </template>
         </div>
     </body>
