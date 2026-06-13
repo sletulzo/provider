@@ -17,8 +17,13 @@
 
 {!! $content !!}
 
+<<<<<<< Updated upstream
 @component('mail::button', ['url' => $data['url'] ?? '#'])
 Voir le fournisseur
+=======
+@component('mail::button', ['url' => $url ?? '#'])
+    Traiter la commande
+>>>>>>> Stashed changes
 @endcomponent
 
 Merci,<br>

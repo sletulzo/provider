@@ -1098,6 +1098,192 @@ table input {
 }
 
 /* ------------------------------------------------------------ */
+<<<<<<< Updated upstream
+=======
+/* ---------------------- ORDER DETAILS ----------------------- */
+/* ------------------------------------------------------------ */
+.order-detail {
+
+}
+.order-detail .order-detail-title {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-detail .order-detail-top {
+    background-color: #fff;
+    box-shadow: 1px 2px 0px #dddddd57;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.order-detail .order-detail-top .order-detail-top-number {
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    line-height: 13px;
+    font-size: 11px;
+}
+
+.order-detail .order-detail-top .order-detail-top-status {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 1px 8px;
+    line-height: 19px;
+    font-weight: 600;
+}
+
+.order-detail .order-detail-top .order-detail-provider {
+    color: #000;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.order-detail .order-detail-top .order-detail-date {
+    color: #999999;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.order-detail .order-detail-products {
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.order-detail .order-detail-products .order-detail-products-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding: 10px 16px;
+}
+
+.order-detail .order-detail-products .order-detail-products-item .order-detail-products-item-icon {
+    color: var(--primary);
+}
+
+.order-detail .order-detail-products-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-name {
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+    font-weight: bold;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-subname {
+    color: #aaa;
+}
+
+.order-detail .order-detail-products-item-content .order-detail-products-item-content-right {
+    font-weight: bold;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.order-detail .order-detail-note {
+    background: var(--surface-muted, #f9fafc);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--primary);
+}
+
+.order-detail .order-detail-note-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.order-detail .order-detail-note p {
+    margin: 0;
+    font-size: 14px;
+    white-space: pre-wrap;
+    color: var(--text);
+}
+
+.order-detail .order-detail-summary {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.order-detail .order-detail-summary-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.order-detail .order-detail-summary-item--ok {
+    background: color-mix(in srgb, var(--success) 12%, #fff);
+    color: var(--success);
+}
+
+.order-detail .order-detail-summary-item--ko {
+    background: color-mix(in srgb, var(--danger) 12%, #fff);
+    color: var(--danger);
+}
+
+.order-detail .order-detail-products-item--missing {
+    opacity: 0.85;
+}
+
+.order-detail .order-detail-products-total {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border-light, #eee);
+}
+
+.order-detail .order-detail-products-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+    color: var(--text-muted);
+}
+
+.order-detail .order-detail-products-total-row--accepted {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    border-top: 1px solid var(--border-light, #eee);
+    margin-top: 6px;
+    padding-top: 10px;
+}
+
+/* ------------------------------------------------------------ */
+>>>>>>> Stashed changes
 /* ------------------------- MODAL ---------------------------- */
 /* ------------------------------------------------------------ */
 .close-modal-button {
