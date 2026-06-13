@@ -169,6 +169,7 @@ class IndentController extends Controller
 
             } catch(\Exception $e)
             {
+                dd($e->getMessage());
                 return Redirect::route('indents')->with('error', "Erreur dans l'envoi de l'email");
             }
         });
