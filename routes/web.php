@@ -29,9 +29,10 @@ use Illuminate\Support\Facades\Route;
 // Home page
 Route::get('/', [HomeController::class, 'index'])->middleware('redirect.auth')->name('home');
 
-// Indent provider
+// Commande — interface publique fournisseur (URL signée)
 Route::get('/commande/accept', [OrderController::class, 'accept'])->name('front.commande.accept')->middleware('signed');
-
+Route::get('/commande/{uuid}', [OrderController::class, 'responseForm'])->name('front.commande.show')->middleware('signed');
+Route::post('/commande/{uuid}', [OrderController::class, 'submitResponse'])->name('front.commande.submit')->middleware('signed');
 
 Route::middleware('auth')->group(function () {
     // Dashboard 
@@ -103,6 +104,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('provider.users.sendReset');
 
         // Order response
+        Route::get('/orders/{order}/respond', [OrderController::class, 'providerResponseForm'])->name('provider.orders.respond');
+        Route::post('/orders/{order}/respond', [OrderController::class, 'providerSubmitResponse'])->name('provider.orders.submit');
         Route::get('/orders/{order}/provider/accept', [OrderController::class, 'providerAccept'])->name('provider.orders.accept');
         Route::get('/orders/{order}/provider/refuse', [OrderController::class, 'providerRefuse'])->name('provider.orders.refuse');
     });

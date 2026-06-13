@@ -1228,7 +1228,6 @@ table input {
     padding: 2px 6px;
 }
 
-/* ------------------------------------------------------------ */
 /* ---------------------- ORDER DETAILS ----------------------- */
 /* ------------------------------------------------------------ */
 .order-detail {
@@ -1330,6 +1329,85 @@ table input {
     font-size: 13px;
     white-space: nowrap;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.order-detail .order-detail-note {
+    background: var(--surface-muted, #f9fafc);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--primary);
+}
+
+.order-detail .order-detail-note-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.order-detail .order-detail-note p {
+    margin: 0;
+    font-size: 14px;
+    white-space: pre-wrap;
+    color: var(--text);
+}
+
+.order-detail .order-detail-summary {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.order-detail .order-detail-summary-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.order-detail .order-detail-summary-item--ok {
+    background: color-mix(in srgb, var(--success) 12%, #fff);
+    color: var(--success);
+}
+
+.order-detail .order-detail-summary-item--ko {
+    background: color-mix(in srgb, var(--danger) 12%, #fff);
+    color: var(--danger);
+}
+
+.order-detail .order-detail-products-item--missing {
+    opacity: 0.85;
+}
+
+.order-detail .order-detail-products-total {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border-light, #eee);
+}
+
+.order-detail .order-detail-products-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+    color: var(--text-muted);
+}
+
+.order-detail .order-detail-products-total-row--accepted {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    border-top: 1px solid var(--border-light, #eee);
+    margin-top: 6px;
+    padding-top: 10px;
 }
 
 /* ------------------------------------------------------------ */

@@ -146,6 +146,7 @@ class IndentController extends Controller
                 ]);
 
                 $orderLine->quantity = $item->quantity;
+                $orderLine->status = OrderLine::STATUS_PENDING;
                 $orderLine->update();
                 $item->delete();
             }
