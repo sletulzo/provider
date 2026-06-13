@@ -20,10 +20,11 @@
         height: 60px;
         margin-left: 0px;
         width: 100%;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: var(--surface);
     }
 
     header > svg {
@@ -134,6 +135,7 @@
         background-color: transparent;
         padding: 0px;
         box-shadow: none;
+        border: none;
         margin-bottom: 20px;
     }
 
@@ -170,9 +172,9 @@
     .mobile-card-item {
         display: flex;
         min-height: 60px;
-        background-color: #fff;
+        background-color: var(--surface);
         padding: 8px 15px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-light);
     }
 
     .mobile-card-item.hovered:hover {
@@ -353,20 +355,22 @@
 /* Card */
 .card-mobile-container {
     width: 100%;
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid #eee;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--surface);
 }
 
 .card-mobile {
     width: 100%;
     min-height: 62px;
-    background-color: #fff;
+    background-color: var(--surface);
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 4px 16px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-light);
 }
 
 .card-mobile:first-child {

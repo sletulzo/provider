@@ -1,5 +1,5 @@
 .table-wrapper {
-    padding: 22px;
+    padding: var(--space-xl);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -7,8 +7,9 @@
     min-width: 0px;
     overflow-wrap: break-word;
     background: var(--surface);
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 3.5px 5.5px;
-    border-radius: 15px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
 }
 
 .table-wrapper a.table-wrapper-action {
@@ -26,7 +27,7 @@
     outline-offset: 2px;
     width: auto;
     line-height: 1.2;
-    border-radius: 15px;
+    border-radius: var(--radius-md);
     font-weight: 600;
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
     transition-duration: 0.2s;
@@ -35,21 +36,29 @@
     font-size: 0.75rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
-    background: linear-gradient(81.62deg, var(--primary) 2.25%, var(--primary-dark) 79.87%);
+    background: var(--primary);
     color: #fff;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: var(--shadow-sm);
+}
+
+.table-wrapper a.table-wrapper-action:hover {
+    background: var(--primary-dark);
 }
 
 .table-wrapper .table-wrapper-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: var(--space-md);
 }
 
 .table-wrapper .table-wrapper-title h6 {
     font-size: 18px;
     font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
 }
 
 .table-wrapper .table-wrapper-title > input[name="search-table"] {
@@ -59,18 +68,23 @@
 }
 
 .table-wrapper table thead tr th {
-    color: var(--text-light);
+    color: var(--text-muted);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     border-bottom: 1px solid var(--border);
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 600;
     padding: 12px 0px;
 }
 
 .table-wrapper table tbody tr td {
     padding: 20px 0px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-light);
     color: var(--text);
+}
+
+.table-wrapper table tbody tr:hover td {
+    background-color: var(--surface-hover);
 }
 
 .table-wrapper table tbody tr td.actions a {
@@ -92,8 +106,10 @@
 .empty-state--compact {
     padding: 28px 16px;
     min-height: auto;
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
 }
 
 .empty-state-icon {
@@ -125,7 +141,7 @@
 
 .empty-state-description {
     font-size: 14px;
-    color: #718096;
+    color: var(--text-muted);
     max-width: 320px;
     line-height: 1.5;
     margin-bottom: 4px;
@@ -135,7 +151,7 @@
     margin-top: 16px;
     text-transform: none;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     padding: 10px 20px;
     height: auto;
     min-width: auto;

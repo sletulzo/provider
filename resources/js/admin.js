@@ -382,9 +382,10 @@ $(document).on('click', '.trigger-updown', function(e) {
 	var updown = $(this).closest('.updown');
 	var type = $(this).attr('data-type');
 	var url = updown.attr('data-url');
-	var item = $(this).closest('.indent-container-right-item');
+	var item = $(this).closest('.indent-container-right-item, .indent-v2__product');
 	var display = updown.find('.updown-display');
   	var popup = $('.indent-order-popup');
+  	var stickyCart = $('.indent-v2__sticky-cart');
 
   	if (parseInt(display.html()) == 0 && type == 'remove')
 		return;
@@ -400,6 +401,11 @@ $(document).on('click', '.trigger-updown', function(e) {
 		display.html(data.value);
 		item.toggleClass('active', data.value <= 0 ? false : true);
     	popup.toggleClass('active', data.count > 0 ? true : false);
+    	stickyCart.toggleClass('active', data.count > 0 ? true : false);
+    	if (stickyCart.length && data.total !== undefined) {
+    		stickyCart.find('.indent-v2__sticky-cart-total').text(data.total);
+    		stickyCart.find('.indent-v2__sticky-cart-label').text('Panier · ' + data.count + ' article' + (data.count > 1 ? 's' : ''));
+    	}
 	});
 });
 
@@ -458,3 +464,24 @@ function setMonth(month) {
     document.getElementById('month-input').value = month;
     document.querySelector('.orders-filters').submit();
 }
+
+function initIndentProductSearch() {
+    const search = document.getElementById('indentProductSearch');
+    const list = document.getElementById('indentProductList');
+    if (!search || !list) return;
+
+    const input = search.tagName === 'INPUT' ? search : search.querySelector('input');
+    if (!input || input.__indentSearchInit) return;
+    input.__indentSearchInit = true;
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
+        list.querySelectorAll('.indent-v2__product').forEach((row) => {
+            const name = row.getAttribute('data-product-name') || '';
+            row.style.display = !query || name.includes(query) ? '' : 'none';
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initIndentProductSearch);
+document.addEventListener('livewire:navigated', initIndentProductSearch);

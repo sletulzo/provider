@@ -1,25 +1,37 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <i class="fa-regular fa-paste"></i> {{ __('Test steven') }}
-        </h2>
-    </x-slot>
-
-    <div class="indent-container">
-        <div class="indent-container-header">
-            <a wire:navigate href="{{ route('indents') }}"><i class="fa-solid fa-arrow-left"></i></a>
-            <div class="indent-container-header-title">
-                <div>{{ $provider->name }}</div>
-                <span>{{ $provider->email }}</span>
+    <div class="indent-v2">
+        <div class="indent-v2__top">
+            <div class="indent-v2__top-row">
+                <a wire:navigate href="{{ route('indents') }}" class="indent-v2__back" aria-label="Retour"><i class="fa-solid fa-arrow-left"></i></a>
+                <div>
+                    <div class="indent-v2__provider-name">{{ $provider->name }}</div>
+                    @if ($provider->email)
+                        <div class="indent-v2__provider-email">{{ $provider->email }}</div>
+                    @endif
+                </div>
             </div>
-            <div class="indent-container-header-search">
-                <input type="text" name="search" placeholder="Rechercher...">
+            <div style="margin-top: 12px;">
+                <x-search-bar placeholder="Rechercher un produit…" id="indentProductSearch" />
             </div>
         </div>
 
-        <div class="indent-container-right">
+        <div class="indent-v2__filters" aria-hidden="true">
+            <span class="indent-v2__filter indent-v2__filter--active">Tous</span>
+        </div>
+
+        <div class="indent-v2__products" id="indentProductList">
             @include('indent.items')
         </div>
+
+        <a
+            href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}"
+            @class(['indent-v2__sticky-cart', 'ajax-modal-up', 'active' => ($orderCount ?? 0) > 0])
+        >
+            <div>
+                <div class="indent-v2__sticky-cart-label">Panier · {{ $orderCount ?? 0 }} article{{ ($orderCount ?? 0) > 1 ? 's' : '' }}</div>
+                <div class="indent-v2__sticky-cart-total">{{ price($cartTotal ?? 0, 2) }} €</div>
+            </div>
+            <span class="btn-primary indent-v2__sticky-cart-action">Voir le panier</span>
+        </a>
     </div>
-  
 </x-app-layout>

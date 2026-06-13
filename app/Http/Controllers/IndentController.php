@@ -32,13 +32,15 @@ class IndentController extends Controller
      */
     public function products(Provider $provider)
     {
-        $orderCount = OrderWaiting::where('provider_id', $provider->id)->sum('quantity');
+        $cartItems = OrderWaiting::where('provider_id', $provider->id)->with('product')->get();
+        $orderCount = $cartItems->sum('quantity');
+        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
             ->where('products.provider_id', $provider->id)
             ->orderBy('products.name')
             ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
-        return view('indent.products', compact('provider', 'products', 'orderCount'));
+        return view('indent.products', compact('provider', 'products', 'orderCount', 'cartTotal'));
     }
 
     /**
@@ -46,12 +48,16 @@ class IndentController extends Controller
      */
     public function items(Request $request)
     {
+        $provider = Provider::findOrFail($request->provider_id);
+        $cartItems = OrderWaiting::where('provider_id', $provider->id)->with('product')->get();
+        $orderCount = $cartItems->sum('quantity');
+        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
         $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
-            ->where('products.provider_id', $request->provider_id)
+            ->where('products.provider_id', $provider->id)
             ->orderBy('products.name')
             ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
 
-        return view('indent.items', compact('products'));
+        return view('indent.items', compact('products', 'provider', 'orderCount', 'cartTotal'));
     }
 
     /**
@@ -90,9 +96,14 @@ class IndentController extends Controller
             $orderWaiting->delete();
         }
 
+        $cartItems = OrderWaiting::where('provider_id', $product->provider_id)->get();
+        $cartCount = floatval($cartItems->sum('quantity'));
+        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+
         return response()->json([
             'value' => $quantity,
-            'count' => floatval(OrderWaiting::where('provider_id', $product->provider_id)->sum('quantity'))
+            'count' => $cartCount,
+            'total' => price($cartTotal, 2) . ' €',
         ]);
     }
 

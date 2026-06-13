@@ -1,19 +1,17 @@
 <x-app-layout>
-    <x-slot name="headerActions">
-        <a href="{{ route('indents') }}" class="table-wrapper-action relative">
-            <i class="fa-solid fa-cart-shopping">
-                @if (Auth::user()->tenant && Auth::user()->tenant->countOrdersWaiting())
-                    <span class="bubble">{{ Auth::user()->tenant->countOrdersWaiting() }}</span>
-                @endif
-            </i>
-        </a>
-    </x-slot>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <i class="fa-solid fa-pencil"></i> Commandes effectuées
-        </h2>
-    </x-slot>
+    <div class="orders-list-page">
+        <div class="orders-list-page__header">
+            <div>
+                <p class="orders-list-page__context">{{ Auth::user()->isProvider() ? 'Espace fournisseur' : 'Espace client' }}</p>
+                <h1 class="orders-list-page__title">Commandes</h1>
+            </div>
+            @if (Auth::user()->isCustomer())
+                <a wire:navigate href="{{ route('indents') }}" class="orders-list-page__action" aria-label="Catalogue">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </a>
+            @endif
+        </div>
 
-    <livewire:orders-table />
-
+        <livewire:orders-table />
+    </div>
 </x-app-layout>

@@ -1,15 +1,21 @@
 @php ($status = $order->getStatus())
 
-<a wire:navigate href="{{ route('orders.edit', ['order' => $order->id]) }}" class="dashboard-orders-item">
-    <div class="dashboard-orders-item-title">
-        <div>{{ $order->user?->name ?? 'Client' }}</div>
-        <span>CMD-{{ $order->id }} · {{ carbon($order->created_at)->format('d/m/Y') }}</span>
+<div class="dashboard-v2__order-card">
+    <x-avatar :name="$order->user?->name ?? 'Client'" size="md" />
+    <div class="dashboard-v2__order-card-body">
+        <div class="dashboard-v2__order-card-name">{{ $order->user?->name ?? 'Client' }}</div>
+        <div class="dashboard-v2__order-card-meta">
+            CMD-{{ $order->id }} · {{ carbon($order->created_at)->format('d/m/Y') }} · {{ $order->lines_count }} article{{ $order->lines_count > 1 ? 's' : '' }}
+        </div>
     </div>
-    <div class="dashboard-orders-item-meta">
-        <span>{{ $order->lines_count }} article{{ $order->lines_count > 1 ? 's' : '' }}</span>
+    <div class="dashboard-v2__order-card-side">
         @if ($order->getTotal() > 0)
-            <span><x-price :amount="$order->getTotal()" /></span>
+            <span class="dashboard-v2__order-card-amount"><x-price :amount="$order->getTotal()" /></span>
+        @endif
+        @if ($order->isPending())
+            <a href="{{ route('provider.orders.respond', $order) }}" class="btn-primary">Traiter</a>
+        @else
+            <span class="status-badge status-badge--{{ $status['slug'] }}">{{ $status['label'] }}</span>
         @endif
     </div>
-    <div class="dashboard-orders-item-status status-badge status-badge--{{ $status['slug'] }}">{{ $status['label'] }}</div>
-</a>
+</div>
