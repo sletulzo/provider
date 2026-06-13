@@ -28,6 +28,14 @@ use Illuminate\Support\Facades\Route;
 // Home page
 Route::get('/', [HomeController::class, 'index'])->middleware('redirect.auth')->name('home');
 
+<<<<<<< Updated upstream
+=======
+// Commande — interface publique fournisseur (URL signée)
+Route::get('/commande/accept', [OrderController::class, 'accept'])->name('front.commande.accept')->middleware('signed');
+Route::get('/commande/{uuid}', [OrderController::class, 'responseForm'])->name('front.commande.show')->middleware('signed');
+Route::post('/commande/{uuid}', [OrderController::class, 'submitResponse'])->name('front.commande.submit')->middleware('signed');
+
+>>>>>>> Stashed changes
 
 Route::middleware('auth')->group(function () {
     // Dashboard 
@@ -83,6 +91,29 @@ Route::middleware('auth')->group(function () {
     Route::post('/indent/{provider}/send', [IndentController::class, 'send'])->name('indent.send');
 
 
+<<<<<<< Updated upstream
+=======
+    // Provider routes
+    // ---------------------------------------------------------------------------------------------
+    Route::prefix('provider')->middleware('provider')->group(function () {
+        Route::get('/users', [ProviderUserController::class, 'index'])->name('provider.users');
+        Route::get('/users/create', [ProviderUserController::class, 'create'])->name('provider.users.create');
+        Route::get('/users/{user}/edit', [ProviderUserController::class, 'edit'])->name('provider.users.edit');
+        Route::post('/users/save', [ProviderUserController::class, 'store'])->name('provider.users.store');
+        Route::post('/users/{user}/update', [ProviderUserController::class, 'update'])->name('provider.users.update');
+        Route::get('/users/{user}/delete', [ProviderUserController::class, 'destroy'])->name('provider.users.delete');
+        Route::post('/users/{user}/send-reset', SendUserPasswordResetController::class)->name('provider.users.sendReset');
+
+        // Order response
+        Route::get('/orders/{order}/respond', [OrderController::class, 'providerResponseForm'])->name('provider.orders.respond');
+        Route::post('/orders/{order}/respond', [OrderController::class, 'providerSubmitResponse'])->name('provider.orders.submit');
+        Route::get('/orders/{order}/provider/accept', [OrderController::class, 'providerAccept'])->name('provider.orders.accept');
+        Route::get('/orders/{order}/provider/refuse', [OrderController::class, 'providerRefuse'])->name('provider.orders.refuse');
+    });
+
+    // Admin routes
+    // ---------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
     Route::middleware('admin')->group(function () {
         // User
         Route::get('/users', [UserController::class, 'index'])->name('users');

@@ -19,6 +19,11 @@ export default defineConfig({
                 'resources/css/table.css',
                 'resources/css/form.css',
                 'resources/css/mobile.css',
+<<<<<<< Updated upstream
+=======
+                'resources/css/dashboard.css',
+                'resources/css/order-response.css',
+>>>>>>> Stashed changes
                 'resources/js/app.js',
                 'resources/js/admin.js'
             ],

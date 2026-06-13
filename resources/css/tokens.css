@@ -1,0 +1,89 @@
+:root {
+    /* Marque (surchargées par le layout selon le type d'utilisateur) */
+    --primary: #3645b1;
+    --primary-dark: #2a3690;
+    --primary-bg: #3645b11a;
+    --secondary: #44beee;
+    --secondary-bg: #44beee29;
+
+    /* Sémantique */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #64748b;
+
+    /* Statuts commande */
+    --status-waiting: #64748b;
+    --status-accepted: #22c55e;
+    --status-refused: #ef4444;
+    --status-partial: #f59e0b;
+    --status-missing: #ef4444;
+
+    /* Stock */
+    --stock-ok: #22c55e;
+    --stock-low: #f59e0b;
+    --stock-out: #ef4444;
+
+    /* Texte */
+    --text: #1f2733;
+    --text-muted: #718096;
+    --text-light: #a0aec0;
+    --text-subtle: #939393;
+
+    /* Surfaces */
+    --surface: #ffffff;
+    --surface-muted: #f9fafc;
+    --surface-hover: #f7f8fc;
+    --surface-alert: #fffbf5;
+
+    /* Bordures */
+    --border: #edf2f7;
+    --border-light: #eeeeee;
+
+    /* Tendances */
+    --trend-up: #22c55e;
+    --trend-down: #ef4444;
+}
+
+.status-badge {
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-badge--waiting {
+    color: var(--status-waiting);
+    background-color: color-mix(in srgb, var(--status-waiting) 16%, transparent);
+}
+
+.status-badge--accepted {
+    color: var(--status-accepted);
+    background-color: color-mix(in srgb, var(--status-accepted) 16%, transparent);
+}
+
+.status-badge--refused {
+    color: var(--status-refused);
+    background-color: color-mix(in srgb, var(--status-refused) 16%, transparent);
+}
+
+.status-badge--partial {
+    color: var(--status-partial);
+    background-color: color-mix(in srgb, var(--status-partial) 16%, transparent);
+}
+
+.status-badge--missing {
+    color: var(--status-missing);
+    background-color: color-mix(in srgb, var(--status-missing) 16%, transparent);
+}
+
+.order-detail-top-status.status-badge--waiting,
+.order-detail-top-status.status-badge--accepted,
+.order-detail-top-status.status-badge--refused,
+.order-detail-top-status.status-badge--partial {
+    border: 1px solid currentColor;
+    padding: 4px 10px;
+    font-size: 12px;
+}
