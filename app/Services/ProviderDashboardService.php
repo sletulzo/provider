@@ -28,8 +28,9 @@ class ProviderDashboardService
             ->count();
 
         $pendingOrders = Order::query()
-            ->where('is_accepted', false)
+            ->whereNull('responded_at')
             ->where('is_refused', false)
+            ->where('is_accepted', false)
             ->count();
 
         return [
@@ -46,8 +47,9 @@ class ProviderDashboardService
     public function getPendingOrders(int $limit = 5): Collection
     {
         return Order::query()
-            ->where('is_accepted', false)
+            ->whereNull('responded_at')
             ->where('is_refused', false)
+            ->where('is_accepted', false)
             ->with(['user', 'lines.product'])
             ->withCount('lines')
             ->orderByDesc('created_at')

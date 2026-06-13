@@ -230,6 +230,12 @@
         font-weight: 500;
     }
 
+    .mobile-card-item .mobile-card-item-status-item.partial {
+        background-color: color-mix(in srgb, var(--status-partial) 16%, transparent);
+        color: var(--status-partial);
+        font-weight: 500;
+    }
+
     .mobile-card-item .mobile-card-item-status-item.refused {
         background-color: color-mix(in srgb, var(--status-refused) 16%, transparent);
         color: var(--status-refused);
@@ -456,6 +462,7 @@
 .card-mobile-content-quantity {
     color: #8b8b8b;
     font-size: 11px;
+    white-space: nowrap;
 }
 
 .card-mobile-content-stock {

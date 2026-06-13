@@ -32,7 +32,7 @@ class Tenant extends Model
     {
         return $this->hasMany(OrderWaiting::class, 'tenant_id');
     }
-    
+
     /**
      * Order relation
      *
@@ -54,15 +54,16 @@ class Tenant extends Model
     }
 
     /**
-     * Count order waiting
+     * Count pending orders awaiting provider response
      *
      * @var integer
      */
     public function countOrders()
     {
         return $this->orders()
-            ->where('orders.is_accepted', false)
-            ->where('orders.is_refused', false)
+            ->whereNull('responded_at')
+            ->where('is_refused', false)
+            ->where('is_accepted', false)
             ->count();
     }
 }

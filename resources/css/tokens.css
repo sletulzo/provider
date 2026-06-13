@@ -16,6 +16,8 @@
     --status-waiting: #64748b;
     --status-accepted: #22c55e;
     --status-refused: #ef4444;
+    --status-partial: #f59e0b;
+    --status-missing: #ef4444;
 
     /* Stock */
     --stock-ok: #22c55e;
@@ -67,9 +69,20 @@
     background-color: color-mix(in srgb, var(--status-refused) 16%, transparent);
 }
 
+.status-badge--partial {
+    color: var(--status-partial);
+    background-color: color-mix(in srgb, var(--status-partial) 16%, transparent);
+}
+
+.status-badge--missing {
+    color: var(--status-missing);
+    background-color: color-mix(in srgb, var(--status-missing) 16%, transparent);
+}
+
 .order-detail-top-status.status-badge--waiting,
 .order-detail-top-status.status-badge--accepted,
-.order-detail-top-status.status-badge--refused {
+.order-detail-top-status.status-badge--refused,
+.order-detail-top-status.status-badge--partial {
     border: 1px solid currentColor;
     padding: 4px 10px;
     font-size: 12px;
