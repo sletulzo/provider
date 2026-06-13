@@ -45,15 +45,19 @@
             @include('layouts.navigations.sidebar.' . Auth::user()->getNavigationSlug())
 
             <div class="app-shell">
-                <header>
-                    @include('layouts.navigations.burger.' . Auth::user()->getNavigationSlug())
+                <header class="app-header">
+                    @include('layouts.partials.app-bar')
 
                     {{ isset($header) ? $header : '' }}
 
                     @if (isset($headerActions))
-                        {!! $headerActions !!}
+                        <div class="app-header__actions-desktop">
+                            {!! $headerActions !!}
+                        </div>
                     @endif
                 </header>
+
+                @include('layouts.navigations.burger.drawer')
 
                 <main>
                     {{ $slot }}
