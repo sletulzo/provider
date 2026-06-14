@@ -11,7 +11,7 @@ class IndentMail
      * Create html mail
      * @return string
      */
-    public function createIndentMail(Provider $provider, $content, $footer)
+    public function createIndentMail($orderWaitings, $content, $footer)
     {
         $table = '<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px;">'
             . '<tr style="background-color: #3645b1; color: #ffffff;">'
@@ -20,7 +20,7 @@ class IndentMail
                 . '<th style="padding: 10px; border: 1px solid #dddddd; text-align: right;">Unité</th>'
             . '</tr>';
 
-        foreach($provider->orderWaitings as $orderWaiting)
+        foreach($orderWaitings as $orderWaiting)
         {
             $table .= '<tr style="background-color: #f8f9fa;">'
                     . '<td style="padding: 10px; border: 1px solid #dddddd;">' . $orderWaiting->product?->name . '</td>'

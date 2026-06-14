@@ -1,65 +1,122 @@
-<form class="shop-cart" method="POST" action="{{ route('indent.send', ['provider' => $provider->id]) }}">
+@php
+    $defaultContent = "Bonjour {$provider->name},\nMerci de préparer la commande suivante pour livraison selon vos tournées :";
+    $defaultSubject = "Commande {$provider->tenant?->name} - " . \Carbon\Carbon::now()->format('d/m/Y');
+@endphp
+
+<form
+    class="cart-v2 cart-v2--compose"
+    method="POST"
+    action="{{ route('indent.send', ['provider' => $provider->id]) }}"
+>
     @csrf
 
-    <div class="shop-cart-title">
-        Prévisualiser ma commande
-        <span class="shop-cart-title-label">{{ $indents->sum('quantity') }} articles</span>
-    </div>
-    <div class="shop-cart-body">
-        <div class="shop-cart-body-preview">
-            <div class="shop-cart-body-preview-box">
-                <div class="icon"><i class="fa-regular fa-address-book"></i></div>
-                <div class="provider">
-                    <div>{{ $provider->name }}</div>
-                    <span>{{ $provider->email }}</span>
-                </div>
-            </div>
-            <div class="shop-cart-body-preview-bigbox">
-                <div class="header">
-                    <div>Nouvelle commande</div>
-                    <span><i class="fa-regular fa-calendar"></i> {{ carbon()->translatedFormat('l j F') }}</span>
-                </div>
-                <div class="body">
-                    <div class="mb-4">
-                        <input name="subject" placeholder="Objet" class="w-100" value="Commande {{ $provider->tenant?->name }} - {{ \Carbon\Carbon::now()->format('d/m/Y') }}">
-                    </div>
-
-                    <div class="mb-4">
-                        @php ($content = "Bonjour " . $provider->name . ",\nMerci de préparer la commande suivante pour livraison selon vos tournées :")
-                        <textarea name="content" placeholder="Objet" rows="3" class="w-100">{{ $content }}</textarea>
-                    </div>
-
-                    <div class="preview-products">
-                        <table>
-                            <tr>
-                                <td style="font-weight: bold;">Produits</td>
-                                <td style="font-weight: bold;">Quantité</td>
-                                <td style="font-weight: bold;">Unité</td>
-                            </tr>
-                            @foreach($indents as $indent)
-                                <tr>
-                                    <td>{{ $indent->product?->name }}</td>
-                                    <td>{{ $indent->quantity }}</td>
-                                    <td>{{ $indent->unity?->name }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    </div>
-
-                    <div class="mt-4">
-                        <textarea name="footer" placeholder="Objet" rows="3" class="w-100">{{ $provider->getMailContent() }}</textarea>
-                    </div>
-                </div>
-            </div>
+    <div class="cart-v2__chrome" data-modal-drag-handle>
+        <div class="cart-v2__drag">
+            <span class="cart-v2__handle" aria-hidden="true"></span>
         </div>
-    </div>
-    <div class="shop-cart-footer">
-        <div class="shop-cart-footer-actions">
-            <a href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}" class="btn-default ajax-modal-up">Annuler</a>
-            <button type="submit" class="btn-primary">
-                <span class="btn-loader"></span>
-                <span class="btn-text">Confirmer et envoyer</span>
+
+        <div class="cart-v2__hero">
+            <div class="cart-v2__hero-main">
+                <div class="cart-v2__hero-icon">
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="cart-v2__hero-text">
+                    <h2 class="cart-v2__hero-title">Envoyer la commande</h2>
+                    <p class="cart-v2__hero-provider">{{ $provider->name }}</p>
+                </div>
+            </div>
+            <button type="button" class="cart-v2__close close-modal-up" aria-label="Fermer">
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
+
+        <div class="cart-v2__summary">
+            <span class="cart-v2__pill">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }}</span>
+            <span class="cart-v2__pill cart-v2__pill--accent">{{ price($cartTotal, 2) }} €</span>
+        </div>
     </div>
-</div>
+
+    <div class="cart-v2__scroll">
+        <div class="cart-v2__recipient">
+            <div class="cart-v2__recipient-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="cart-v2__recipient-info">
+                <span class="cart-v2__recipient-label">Destinataire</span>
+                <div class="cart-v2__recipient-name">{{ $provider->name }}</div>
+                <div class="cart-v2__recipient-email">{{ $provider->email }}</div>
+            </div>
+        </div>
+
+        <div class="cart-v2__mail-card">
+            <div class="cart-v2__mail-card-head">
+                <span class="cart-v2__mail-card-title">Nouvelle commande</span>
+                <span class="cart-v2__mail-card-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    {{ carbon()->translatedFormat('l j F') }}
+                </span>
+            </div>
+
+            <div class="cart-v2__field">
+                <label class="cart-v2__label" for="order-subject">Objet de l'e-mail</label>
+                <input
+                    id="order-subject"
+                    name="subject"
+                    type="text"
+                    class="cart-v2__input"
+                    value="{{ $defaultSubject }}"
+                >
+            </div>
+
+            <div class="cart-v2__field">
+                <label class="cart-v2__label" for="order-content">Message d'introduction</label>
+                <textarea
+                    id="order-content"
+                    name="content"
+                    rows="4"
+                    class="cart-v2__textarea"
+                >{{ $defaultContent }}</textarea>
+            </div>
+
+            <div class="cart-v2__products-block">
+                <div class="cart-v2__products-title">Produits commandés</div>
+                <div class="cart-v2__products-list">
+                    @foreach ($indents as $indent)
+                        <div class="cart-v2__product-line">
+                            <div class="cart-v2__product-line-info">
+                                <span class="cart-v2__product-line-name">{{ $indent->product?->name }}</span>
+                                @if ($indent->unity?->name)
+                                    <span class="cart-v2__product-line-unit">{{ $indent->unity->name }}</span>
+                                @endif
+                            </div>
+                            <span class="cart-v2__product-line-qty">× {{ $indent->quantity }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="cart-v2__field">
+                <label class="cart-v2__label" for="order-footer">Signature</label>
+                <textarea
+                    id="order-footer"
+                    name="footer"
+                    rows="3"
+                    class="cart-v2__textarea"
+                >{{ $provider->getMailContent() }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-v2__footer cart-v2__footer--actions">
+        <a
+            href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}"
+            class="btn-default cart-v2__btn-back ajax-modal-up"
+        >
+            Retour
+        </a>
+        <button type="submit" class="btn-primary cart-v2__btn-send">
+            <span class="btn-loader"></span>
+            <span class="btn-text">Envoyer la commande</span>
+        </button>
+    </div>
+</form>
