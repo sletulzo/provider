@@ -148,7 +148,10 @@ class IndentController extends Controller
             ->where('provider_id', $provider->id)
             ->get();
 
-        return view('indent.shop-cart', compact('provider', 'indents'));
+        $orderCount = floatval($indents->sum('quantity'));
+        $cartTotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+
+        return view('indent.shop-cart', compact('provider', 'indents', 'orderCount', 'cartTotal'));
     }
 
     /**
@@ -161,7 +164,10 @@ class IndentController extends Controller
             ->where('provider_id', $provider->id)
             ->get();
 
-        return view('indent.preview', compact('provider', 'indents'));
+        $orderCount = floatval($indents->sum('quantity'));
+        $cartTotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+
+        return view('indent.preview', compact('provider', 'indents', 'orderCount', 'cartTotal'));
     }
 
     /**
@@ -170,12 +176,13 @@ class IndentController extends Controller
     public function send(Provider $provider, Request $request)
     {
         DB::transaction(function () use ($provider, $request) {
-            $serviceIndent = new IndentMail();
-            $emailContent = $serviceIndent->createIndentMail($provider, $request->content, $request->footer);
             $orderWaiting = OrderWaiting::query()
                 ->forUserCart($request->user())
                 ->where('provider_id', $provider->id)
                 ->get();
+
+            $serviceIndent = new IndentMail();
+            $emailContent = $serviceIndent->createIndentMail($orderWaiting, $request->content, $request->footer);
 
             $order = new Order();
             $order->uuid = Str::uuid()->toString();
