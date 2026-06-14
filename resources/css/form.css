@@ -56,3 +56,69 @@ button[type="submit"].is-loading .btn-loader {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
+
+/* Tarifs fournisseur (fiche admin) */
+.provider-prices-share {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.provider-prices-share-label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.provider-prices-share-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.provider-prices-share-row input {
+    flex: 1;
+    min-width: 0;
+    height: 40px !important;
+    font-size: 12px !important;
+    background: var(--surface-muted, #f8fafc);
+}
+
+.provider-prices-share-copy,
+.provider-prices-share-send {
+    flex-shrink: 0;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border: none;
+}
+
+.provider-prices-share-copy {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+
+.provider-prices-share-send-form {
+    margin-top: 10px;
+}
+
+.provider-prices-share-send {
+    width: 100%;
+    justify-content: center;
+    background: var(--primary);
+    color: #fff;
+}
+
+.provider-prices-share-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.4;
+}

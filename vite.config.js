@@ -22,6 +22,7 @@ export default defineConfig({
                 'resources/css/dashboard.css',
                 'resources/css/ui-v2.css',
                 'resources/css/order-response.css',
+                'resources/css/provider-prices.css',
                 'resources/js/app.js',
                 'resources/js/admin.js',
                 'resources/js/nav.js',

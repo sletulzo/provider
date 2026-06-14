@@ -52,6 +52,54 @@
         <span class="toggle-text">Activer la gestion des stocks</span>
     </label>
 
+    @if (!Auth::user()->is_only_order)
+        <div class="provider-prices-share">
+            <span class="provider-prices-share-label"><i class="fa-solid fa-tags"></i> Tarifs fournisseur</span>
+            <div class="provider-prices-share-row">
+                <input type="text" id="providerPricesUrl" value="{{ $pricesUrl }}" readonly>
+                <button type="button" class="provider-prices-share-copy" id="copyProviderPricesUrl">
+                    <i class="fa-regular fa-copy"></i> Copier
+                </button>
+            </div>
+            <p class="provider-prices-share-meta">
+                Lien valable 30 jours.
+                @if ($provider->prices_updated_at)
+                    Dernière mise à jour : {{ $provider->prices_updated_at->format('d/m/Y à H:i') }}.
+                @else
+                    Aucune mise à jour enregistrée pour le moment.
+                @endif
+            </p>
+            @if ($provider->email)
+                <form method="POST" action="{{ route('providers.send-prices-link', ['provider' => $provider->id]) }}" class="provider-prices-share-send-form">
+                    @csrf
+                    <button type="submit" class="provider-prices-share-send">
+                        <i class="fa-regular fa-envelope"></i> Envoyer le lien par e-mail
+                    </button>
+                </form>
+            @else
+                <p class="provider-prices-share-meta">Ajoutez un e-mail pour envoyer le lien au fournisseur.</p>
+            @endif
+        </div>
+
+        <script>
+            (function () {
+                var btn = document.getElementById('copyProviderPricesUrl');
+                var input = document.getElementById('providerPricesUrl');
+                if (!btn || !input) return;
+                btn.addEventListener('click', function () {
+                    input.select();
+                    input.setSelectionRange(0, 99999);
+                    navigator.clipboard.writeText(input.value).then(function () {
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copié';
+                        setTimeout(function () {
+                            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier';
+                        }, 2000);
+                    });
+                });
+            })();
+        </script>
+    @endif
+
     <!-- Boutons -->
     @if (!Auth::user()->is_only_order)
         <div class="flex justify-end pt-2">
