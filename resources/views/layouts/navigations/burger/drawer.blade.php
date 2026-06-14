@@ -1,8 +1,8 @@
-<div class="nav-drawer__overlay menu-overlay toggle-burger-menu" id="menuOverlay"></div>
+<div class="nav-drawer__overlay menu-overlay close-burger-menu" id="menuOverlay"></div>
 
 <aside class="nav-drawer burger-menu" id="burgerMenu" aria-label="Menu principal">
     <div class="nav-drawer__hero">
-        <button type="button" class="nav-drawer__close toggle-burger-menu" aria-label="Fermer le menu">
+        <button type="button" class="nav-drawer__close close-burger-menu" aria-label="Fermer le menu">
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
 

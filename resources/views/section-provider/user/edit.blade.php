@@ -17,7 +17,7 @@
 
     <!-- Boutons -->
     <div class="flex justify-end pt-2">
-        <a href="{{ route('users.delete', ['user' => $user->id]) }}" class="btn-delete m-r-auto confirm-delete">
+        <a href="{{ route('provider.users.delete', ['user' => $user->id]) }}" class="btn-delete m-r-auto confirm-delete">
             <i class="fa-regular fa-trash-can"></i>
         </a>
         <button type="button" class="btn-default close-modal-up m-r-10">Annuler</button>
@@ -29,7 +29,7 @@
 </form>
 
 <div class="flex justify-center" style="margin-top: -75px;">
-    <form action="{{ route('users.sendReset', $user) }}" method="POST">
+    <form action="{{ route('provider.users.sendReset', $user) }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-primary">
             <span class="btn-loader"></span>

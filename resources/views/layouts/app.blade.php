@@ -57,8 +57,6 @@
                     @endif
                 </header>
 
-                @include('layouts.navigations.burger.drawer')
-
                 <main>
                     {{ $slot }}
                 </main>
@@ -66,6 +64,8 @@
 
             @include('layouts.navigations.' . Auth::user()->getNavigationSlug())
         </div>
+
+        @include('layouts.navigations.burger.drawer')
 
         @include('layouts.modal')
         @include('layouts.modal-slide-up')

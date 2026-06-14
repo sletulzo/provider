@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Provider;
 
+use App\Http\Controllers\Concerns\AuthorizesProviderClients;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Models\Tenant;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\RedirectResponse;
@@ -18,33 +18,28 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    /**
-     * Display provider view
-     */
+    use AuthorizesProviderClients;
+
     public function index(): View
     {
-        $users = User::where('id', '!=', Auth::user()->id)
+        $customerType = UserType::customer();
+
+        $users = User::query()
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->where('is_only_order', true)
+            ->when($customerType, fn ($query) => $query->where('user_type_id', $customerType->id))
             ->orderBy('name')
             ->get();
 
         return view('section-provider.user.index', compact('users'));
     }
 
-    /**
-     * Display the user's profile form.
-     */
     public function create(Request $request): View
     {
-        $tenants = Tenant::orderBy('name')->get();
-        $userTypes = UserType::orderBy('name')->get();
-
-        return view('section-provider.user.create', compact('tenants', 'userTypes'));
+        return view('section-provider.user.create');
     }
 
-    /**
-     * Display the user's profile form.
-     */
-    public function store(UserStoreRequest $request): RedirectResponse 
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $user = new User();
         $user->name = $request->name;
@@ -55,49 +50,39 @@ class UserController extends Controller
         $user->is_only_order = true;
         $user->save();
 
-        return Redirect::route('provider.users')->with('success', 'Modifications enregistrées avec succès !');
+        return Redirect::route('provider.users')->with('success', 'Client créé avec succès.');
     }
 
-    /**
-     * Display the user's profile form.
-     */
     public function edit(User $user): View
     {
-        $tenants = Tenant::orderBy('name')->get();
-        $userTypes = UserType::orderBy('name')->get();
+        $this->ensureProviderClient($user);
 
         return view('section-provider.user.edit', [
             'user' => $user,
-            'tenants' => $tenants,
-            'userTypes' => $userTypes
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        try 
-        {
+        $this->ensureProviderClient($user);
+
+        try {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->update();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             return Redirect::route('provider.users')->with('error', 'Erreur dans la mise à jour');
         }
 
         return Redirect::route('provider.users')->with('success', 'Mise à jour réussie');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(User $user): RedirectResponse
     {
+        $this->ensureProviderClient($user);
+
         $user->delete();
+
         return Redirect::route('provider.users')->with('success', 'Suppression effectuée');
     }
 }

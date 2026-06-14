@@ -22,8 +22,12 @@ class CustomerDashboardService
             ->whereBetween('created_at', [$monthStart, $monthEnd])
             ->count();
 
-        $cartItems = (int) OrderWaiting::query()->where('quantity', '>', 0)->sum('quantity');
+        $cartItems = (int) OrderWaiting::query()
+            ->forUserCart($this->user)
+            ->where('quantity', '>', 0)
+            ->sum('quantity');
         $cartProviders = (int) OrderWaiting::query()
+            ->forUserCart($this->user)
             ->where('quantity', '>', 0)
             ->distinct()
             ->count('provider_id');
@@ -41,6 +45,7 @@ class CustomerDashboardService
     public function getDraftCarts(): Collection
     {
         return OrderWaiting::query()
+            ->forUserCart($this->user)
             ->where('quantity', '>', 0)
             ->with(['provider', 'product'])
             ->get()
@@ -65,7 +70,7 @@ class CustomerDashboardService
 
     public function getPopularProviders(int $limit = 8): Collection
     {
-        $userId = $this->user->is_only_order ? $this->user->id : null;
+        $userId = ($this->user->isCustomer() && $this->user->is_only_order) ? $this->user->id : null;
 
         return Provider::popular($limit, $userId)->get();
     }
@@ -74,7 +79,7 @@ class CustomerDashboardService
     {
         $query = Order::query();
 
-        if ($this->user->is_only_order) {
+        if ($this->user->isCustomer() && $this->user->is_only_order) {
             $query->where('user_id', $this->user->id);
         }
 

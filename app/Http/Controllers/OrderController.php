@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderLine;
+use App\Models\OrderWaiting;
 use App\Services\OrderResponseService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
@@ -21,6 +23,7 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
+        $this->authorizeOrderAccess($order);
         $order->load(['lines.product', 'lines.unity', 'provider', 'user']);
         $status = $order->getStatus();
 
@@ -184,6 +187,8 @@ class OrderController extends Controller
 
     public function delete(Order $order)
     {
+        $this->authorizeOrderAccess($order);
+
         foreach ($order->lines as $line) {
             $line->delete();
         }
@@ -191,6 +196,15 @@ class OrderController extends Controller
         $order->delete();
 
         return Redirect::route('orders')->with('status', 'done');
+    }
+
+    private function authorizeOrderAccess(Order $order): void
+    {
+        $user = Auth::user();
+
+        if ($user->managesOwnCart() && $order->user_id !== $user->id) {
+            abort(403);
+        }
     }
 
     private function findOrderOrFail(string $uuid): Order
