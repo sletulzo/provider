@@ -330,6 +330,111 @@ $(document).on('click', 'a.confirm-validate', function(e) {
 // ---------------------------------------------------------------------------------
 // --------------------------- Ajax modal up and down ------------------------------
 // ---------------------------------------------------------------------------------
+function closeModalSlideUp() {
+	var modal = $('#ajaxModalSlideUp');
+	$('body').removeClass('backdrop');
+	modal.removeClass('active large is-dragging');
+	modal.css({ transform: '', transition: '' });
+}
+
+function initModalSlideUpSwipe() {
+	var modal = document.getElementById('ajaxModalSlideUp');
+	if (!modal || modal.dataset.swipeBound === '1') {
+		return;
+	}
+
+	modal.dataset.swipeBound = '1';
+
+	var startY = 0;
+	var dragY = 0;
+	var isDragging = false;
+	var activeScroll = null;
+
+	function getDragZone(target) {
+		return target.closest('[data-modal-drag-handle], .cart-v2__chrome, .cart-v2__drag, .cart-v2__handle');
+	}
+
+	function getScrollable(target) {
+		return target.closest('.cart-v2__items, .cart-v2__scroll');
+	}
+
+	modal.addEventListener('touchstart', function(e) {
+		if (!modal.classList.contains('active')) {
+			return;
+		}
+
+		var touch = e.touches[0];
+		var zone = getDragZone(e.target);
+		activeScroll = getScrollable(e.target);
+
+		if (activeScroll && activeScroll.scrollTop > 5) {
+			return;
+		}
+
+		if (!zone && !activeScroll) {
+			var rect = modal.getBoundingClientRect();
+			if (touch.clientY - rect.top > 64) {
+				return;
+			}
+		}
+
+		startY = touch.clientY;
+		dragY = 0;
+		isDragging = true;
+		modal.classList.add('is-dragging');
+	}, { passive: true });
+
+	modal.addEventListener('touchmove', function(e) {
+		if (!isDragging) {
+			return;
+		}
+
+		if (activeScroll && activeScroll.scrollTop > 5) {
+			isDragging = false;
+			modal.classList.remove('is-dragging');
+			modal.style.transform = '';
+			return;
+		}
+
+		var y = e.touches[0].clientY;
+		dragY = Math.max(0, y - startY);
+
+		if (dragY > 0) {
+			e.preventDefault();
+			modal.style.transform = 'translateY(' + dragY + 'px)';
+		}
+	}, { passive: false });
+
+	function endDrag() {
+		if (!isDragging) {
+			return;
+		}
+
+		isDragging = false;
+		modal.classList.remove('is-dragging');
+
+		var threshold = Math.min(120, modal.offsetHeight * 0.18);
+
+		if (dragY > threshold) {
+			modal.style.transition = 'transform 0.22s ease-out';
+			modal.style.transform = 'translateY(100%)';
+			window.setTimeout(closeModalSlideUp, 220);
+		} else {
+			modal.style.transition = 'transform 0.22s ease-out';
+			modal.style.transform = '';
+			window.setTimeout(function() {
+				modal.style.transition = '';
+			}, 220);
+		}
+
+		dragY = 0;
+		activeScroll = null;
+	}
+
+	modal.addEventListener('touchend', endDrag);
+	modal.addEventListener('touchcancel', endDrag);
+}
+
 $(document).on('click', '.ajax-modal-up', function(e) {
 	e.preventDefault();
 	e.stopPropagation();
@@ -341,6 +446,8 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 	var modalContent = modal.find('#ajaxModalSlideUpContent');
 	var body = $('body');
 
+	modal.css({ transform: '', transition: '' });
+
 	modalContent.html( `
 		<div class="flex items-center justify-center h-32">
 		<svg class="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -350,7 +457,7 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 		</div>`);
 	
   
-	modal.removeClass('large');
+	modal.removeClass('large is-dragging');
 	modal.addClass('active');
 	body.addClass('backdrop');
 	modal.addClass(size);
@@ -365,10 +472,11 @@ $(document).on('click', '.ajax-modal-up', function(e) {
 
 // Close modal
 $(document).on('click', '.close-modal-up', function(e) {
-	var modal = $('#ajaxModalSlideUp');
-	$('body').removeClass('backdrop');
-	modal.removeClass('active');
-	modal.removeClass('large');
+	closeModalSlideUp();
+});
+
+$(function() {
+	initModalSlideUpSwipe();
 });
 
 

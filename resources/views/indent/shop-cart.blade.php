@@ -1,54 +1,56 @@
 <div class="cart-v2">
-    <div class="cart-v2__top">
-        <div class="cart-v2__handle" aria-hidden="true"></div>
-
-        <header class="cart-v2__header">
-            <div class="cart-v2__header-text">
-                <h2 class="cart-v2__title">Mon panier</h2>
-                <p class="cart-v2__subtitle">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }}</p>
-            </div>
-            <div class="cart-v2__header-end">
-                <span class="cart-v2__badge">{{ $indents->count() }}</span>
-                <button type="button" class="cart-v2__close close-modal-up" aria-label="Fermer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        </header>
-    </div>
-
-    <div class="cart-v2__provider">
-        <div class="cart-v2__provider-icon">
-            <i class="fa-solid fa-truck-field"></i>
+    <div class="cart-v2__chrome" data-modal-drag-handle>
+        <div class="cart-v2__drag">
+            <span class="cart-v2__handle" aria-hidden="true"></span>
         </div>
-        <div class="cart-v2__provider-info">
-            <div class="cart-v2__provider-name">{{ $provider->name }}</div>
+
+        <div class="cart-v2__hero">
+            <div class="cart-v2__hero-main">
+                <div class="cart-v2__hero-icon">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </div>
+                <div class="cart-v2__hero-text">
+                    <h2 class="cart-v2__hero-title">Mon panier</h2>
+                    <p class="cart-v2__hero-provider">{{ $provider->name }}</p>
+                </div>
+            </div>
+            <button type="button" class="cart-v2__close close-modal-up" aria-label="Fermer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-v2__summary">
+            <span class="cart-v2__pill">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }}</span>
+            <span class="cart-v2__pill cart-v2__pill--accent">{{ $indents->count() }} réf.</span>
             @if ($provider->email)
-                <div class="cart-v2__provider-email">{{ $provider->email }}</div>
+                <span class="cart-v2__pill cart-v2__pill--muted">{{ $provider->email }}</span>
             @endif
         </div>
     </div>
 
-    <div class="cart-v2__items">
-        @foreach ($indents as $indent)
-            <div class="cart-v2__item">
-                <div class="cart-v2__item-icon">
-                    <i class="fa-solid fa-cube"></i>
-                </div>
-                <div class="cart-v2__item-info">
-                    <div class="cart-v2__item-name">{{ $indent->product?->name }}</div>
-                    <div class="cart-v2__item-meta">
-                        {{ $indent->quantity }} × {{ price($indent->product?->price, 2) }} €
-                        @if ($indent->unity?->name)
-                            <span class="cart-v2__item-unit">· {{ $indent->unity->name }}</span>
-                        @endif
+    <div class="cart-v2__body">
+        <div class="cart-v2__items">
+            @foreach ($indents as $indent)
+                <div class="cart-v2__item">
+                    <div class="cart-v2__item-icon">
+                        <i class="fa-solid fa-cube"></i>
                     </div>
+                    <div class="cart-v2__item-info">
+                        <div class="cart-v2__item-name">{{ $indent->product?->name }}</div>
+                        <div class="cart-v2__item-meta">
+                            {{ $indent->quantity }} × {{ price($indent->product?->price, 2) }} €
+                            @if ($indent->unity?->name)
+                                <span class="cart-v2__item-unit">· {{ $indent->unity->name }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="cart-v2__item-price">{{ price($indent->getPrice(), 2) }} €</div>
                 </div>
-                <div class="cart-v2__item-price">{{ price($indent->getPrice(), 2) }} €</div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 
-    <footer class="cart-v2__footer">
+    <div class="cart-v2__footer">
         <div class="cart-v2__total">
             <span class="cart-v2__total-label">Total</span>
             <strong class="cart-v2__total-value">{{ price($cartTotal, 2) }} €</strong>
@@ -60,5 +62,5 @@
         >
             Passer la commande
         </a>
-    </footer>
+    </div>
 </div>

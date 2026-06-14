@@ -20,6 +20,68 @@ use Illuminate\Support\Facades\Redirect;
 class IndentController extends Controller
 {
     /**
+     * Produits du fournisseur avec quantités panier (sans jointure SQL pour éviter les doublons).
+     */
+    private function getProviderCatalog(Provider $provider, $user): array
+    {
+        $this->dedupeCartItems($user, $provider->id);
+
+        OrderWaiting::query()
+            ->forUserCart($user)
+            ->where('provider_id', $provider->id)
+            ->where(function ($query) {
+                $query->whereNull('quantity')->orWhere('quantity', '<=', 0);
+            })
+            ->delete();
+
+        $cartItems = OrderWaiting::query()
+            ->forUserCart($user)
+            ->where('provider_id', $provider->id)
+            ->where('quantity', '>', 0)
+            ->with('product')
+            ->get()
+            ->unique('product_id');
+
+        $cartByProduct = $cartItems->keyBy('product_id');
+        $orderCount = $cartItems->sum('quantity');
+        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+
+        $products = Product::query()
+            ->where('provider_id', $provider->id)
+            ->with('unity')
+            ->orderBy('name')
+            ->get()
+            ->map(function (Product $product) use ($cartByProduct) {
+                $product->quantity = (int) ($cartByProduct->get($product->id)?->quantity ?? 0);
+
+                return $product;
+            });
+
+        return compact('products', 'orderCount', 'cartTotal');
+    }
+
+    /**
+     * Supprime les lignes panier en double (même produit).
+     */
+    private function dedupeCartItems($user, int $providerId): void
+    {
+        $groups = OrderWaiting::query()
+            ->forUserCart($user)
+            ->where('provider_id', $providerId)
+            ->orderByDesc('updated_at')
+            ->get()
+            ->groupBy('product_id');
+
+        foreach ($groups as $group) {
+            if ($group->count() <= 1) {
+                continue;
+            }
+
+            $group->slice(1)->each->delete();
+        }
+    }
+
+    /**
      * Index view
      */
     public function index()
@@ -33,30 +95,12 @@ class IndentController extends Controller
      */
     public function products(Provider $provider)
     {
-        $user = Auth::user();
-        $cartItems = OrderWaiting::query()
-            ->forUserCart($user)
-            ->where('provider_id', $provider->id)
-            ->with('product')
-            ->get();
-        $orderCount = $cartItems->sum('quantity');
-        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $catalog = $this->getProviderCatalog($provider, Auth::user());
 
-        $products = Product::query()
-            ->where('products.provider_id', $provider->id)
-            ->leftJoin('orders_waiting', function ($join) use ($user) {
-                $join->on('orders_waiting.product_id', '=', 'products.id');
-                if ($user->managesOwnCart()) {
-                    $join->where('orders_waiting.user_id', '=', $user->id);
-                } else {
-                    $join->whereNull('orders_waiting.user_id');
-                }
-            })
-            ->orderBy('products.name')
-            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])
-            ->get();
-
-        return view('indent.products', compact('provider', 'products', 'orderCount', 'cartTotal'));
+        return view('indent.products', array_merge(
+            ['provider' => $provider],
+            $catalog
+        ));
     }
 
     /**
@@ -65,30 +109,12 @@ class IndentController extends Controller
     public function items(Request $request)
     {
         $provider = Provider::findOrFail($request->provider_id);
-        $user = Auth::user();
-        $cartItems = OrderWaiting::query()
-            ->forUserCart($user)
-            ->where('provider_id', $provider->id)
-            ->with('product')
-            ->get();
-        $orderCount = $cartItems->sum('quantity');
-        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $catalog = $this->getProviderCatalog($provider, Auth::user());
 
-        $products = Product::query()
-            ->where('products.provider_id', $provider->id)
-            ->leftJoin('orders_waiting', function ($join) use ($user) {
-                $join->on('orders_waiting.product_id', '=', 'products.id');
-                if ($user->managesOwnCart()) {
-                    $join->where('orders_waiting.user_id', '=', $user->id);
-                } else {
-                    $join->whereNull('orders_waiting.user_id');
-                }
-            })
-            ->orderBy('products.name')
-            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])
-            ->get();
-
-        return view('indent.items', compact('products', 'provider', 'orderCount', 'cartTotal'));
+        return view('indent.items', array_merge(
+            ['provider' => $provider],
+            $catalog
+        ));
     }
 
     /**
@@ -127,6 +153,7 @@ class IndentController extends Controller
         $cartItems = OrderWaiting::query()
             ->forUserCart(Auth::user())
             ->where('provider_id', $product->provider_id)
+            ->where('quantity', '>', 0)
             ->get();
         $cartCount = floatval($cartItems->sum('quantity'));
         $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
@@ -146,6 +173,7 @@ class IndentController extends Controller
         $indents = OrderWaiting::query()
             ->forUserCart(Auth::user())
             ->where('provider_id', $provider->id)
+            ->where('quantity', '>', 0)
             ->get();
 
         $orderCount = floatval($indents->sum('quantity'));
@@ -162,6 +190,7 @@ class IndentController extends Controller
         $indents = OrderWaiting::query()
             ->forUserCart(Auth::user())
             ->where('provider_id', $provider->id)
+            ->where('quantity', '>', 0)
             ->get();
 
         $orderCount = floatval($indents->sum('quantity'));
@@ -179,6 +208,7 @@ class IndentController extends Controller
             $orderWaiting = OrderWaiting::query()
                 ->forUserCart($request->user())
                 ->where('provider_id', $provider->id)
+                ->where('quantity', '>', 0)
                 ->get();
 
             $serviceIndent = new IndentMail();

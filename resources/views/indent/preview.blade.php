@@ -10,18 +10,30 @@
 >
     @csrf
 
-    <div class="cart-v2__top">
-        <div class="cart-v2__handle" aria-hidden="true"></div>
+    <div class="cart-v2__chrome" data-modal-drag-handle>
+        <div class="cart-v2__drag">
+            <span class="cart-v2__handle" aria-hidden="true"></span>
+        </div>
 
-        <header class="cart-v2__header">
-            <div class="cart-v2__header-text">
-                <h2 class="cart-v2__title">Préparer la commande</h2>
-                <p class="cart-v2__subtitle">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }} · {{ price($cartTotal, 2) }} €</p>
+        <div class="cart-v2__hero">
+            <div class="cart-v2__hero-main">
+                <div class="cart-v2__hero-icon">
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="cart-v2__hero-text">
+                    <h2 class="cart-v2__hero-title">Envoyer la commande</h2>
+                    <p class="cart-v2__hero-provider">{{ $provider->name }}</p>
+                </div>
             </div>
             <button type="button" class="cart-v2__close close-modal-up" aria-label="Fermer">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-        </header>
+        </div>
+
+        <div class="cart-v2__summary">
+            <span class="cart-v2__pill">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }}</span>
+            <span class="cart-v2__pill cart-v2__pill--accent">{{ price($cartTotal, 2) }} €</span>
+        </div>
     </div>
 
     <div class="cart-v2__scroll">
@@ -95,7 +107,7 @@
         </div>
     </div>
 
-    <footer class="cart-v2__footer cart-v2__footer--actions">
+    <div class="cart-v2__footer cart-v2__footer--actions">
         <a
             href="{{ route('indent.shop-cart', ['provider' => $provider->id]) }}"
             class="btn-default cart-v2__btn-back ajax-modal-up"
@@ -106,5 +118,5 @@
             <span class="btn-loader"></span>
             <span class="btn-text">Envoyer la commande</span>
         </button>
-    </footer>
+    </div>
 </form>
