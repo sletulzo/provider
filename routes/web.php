@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderWaitingController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProviderPricesAdminController;
+use App\Http\Controllers\ProviderPriceController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnityController;
@@ -34,6 +36,10 @@ Route::get('/commande/accept', [OrderController::class, 'accept'])->name('front.
 Route::get('/commande/{uuid}', [OrderController::class, 'responseForm'])->name('front.commande.show')->middleware('signed');
 Route::post('/commande/{uuid}', [OrderController::class, 'submitResponse'])->name('front.commande.submit')->middleware('signed');
 
+// Tarifs — interface publique fournisseur (URL signée, 30 jours)
+Route::get('/tarifs/{uuid}', [ProviderPriceController::class, 'show'])->name('front.tarifs.show')->middleware('signed');
+Route::post('/tarifs/{uuid}', [ProviderPriceController::class, 'submit'])->name('front.tarifs.submit')->middleware('signed');
+
 Route::middleware('auth')->group(function () {
     // Dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -50,6 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/providers/{provider}/edit', [ProviderController::class, 'edit'])->name('providers.edit');
         Route::post('/providers/save', [ProviderController::class, 'store'])->name('providers.store');
         Route::post('/providers/{provider}/update', [ProviderController::class, 'update'])->name('providers.update');
+        Route::post('/providers/{provider}/send-prices-link', [ProviderPricesAdminController::class, 'sendLink'])->name('providers.send-prices-link');
         Route::get('/providers/{provider}/delete', [ProviderController::class, 'destroy'])->name('providers.delete');
         Route::post('/providers/products', [ProviderController::class, 'products'])->name('providers.products');
         Route::post('/providers/products/{product}/quantity', [ProviderController::class, 'updateProductQuantity'])->name('providers.products.quantity');

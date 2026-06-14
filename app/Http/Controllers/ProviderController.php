@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProviderController extends Controller
@@ -52,8 +53,14 @@ class ProviderController extends Controller
      */
     public function edit(Provider $provider): View
     {
+        if (! $provider->uuid) {
+            $provider->uuid = (string) Str::uuid();
+            $provider->save();
+        }
+
         return view('provider.edit', [
-            'provider' => $provider
+            'provider' => $provider,
+            'pricesUrl' => $provider->generatePricesUrl(),
         ]);
     }
 
