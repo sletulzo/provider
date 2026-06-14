@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Services\TenantMailer;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -32,13 +33,28 @@ class IndentController extends Controller
      */
     public function products(Provider $provider)
     {
-        $cartItems = OrderWaiting::where('provider_id', $provider->id)->with('product')->get();
+        $user = Auth::user();
+        $cartItems = OrderWaiting::query()
+            ->forUserCart($user)
+            ->where('provider_id', $provider->id)
+            ->with('product')
+            ->get();
         $orderCount = $cartItems->sum('quantity');
         $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
-        $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+
+        $products = Product::query()
             ->where('products.provider_id', $provider->id)
+            ->leftJoin('orders_waiting', function ($join) use ($user) {
+                $join->on('orders_waiting.product_id', '=', 'products.id');
+                if ($user->managesOwnCart()) {
+                    $join->where('orders_waiting.user_id', '=', $user->id);
+                } else {
+                    $join->whereNull('orders_waiting.user_id');
+                }
+            })
             ->orderBy('products.name')
-            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])
+            ->get();
 
         return view('indent.products', compact('provider', 'products', 'orderCount', 'cartTotal'));
     }
@@ -49,13 +65,28 @@ class IndentController extends Controller
     public function items(Request $request)
     {
         $provider = Provider::findOrFail($request->provider_id);
-        $cartItems = OrderWaiting::where('provider_id', $provider->id)->with('product')->get();
+        $user = Auth::user();
+        $cartItems = OrderWaiting::query()
+            ->forUserCart($user)
+            ->where('provider_id', $provider->id)
+            ->with('product')
+            ->get();
         $orderCount = $cartItems->sum('quantity');
         $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
-        $products = Product::leftJoin('orders_waiting', 'orders_waiting.product_id', '=', 'products.id')
+
+        $products = Product::query()
             ->where('products.provider_id', $provider->id)
+            ->leftJoin('orders_waiting', function ($join) use ($user) {
+                $join->on('orders_waiting.product_id', '=', 'products.id');
+                if ($user->managesOwnCart()) {
+                    $join->where('orders_waiting.user_id', '=', $user->id);
+                } else {
+                    $join->whereNull('orders_waiting.user_id');
+                }
+            })
             ->orderBy('products.name')
-            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])->get();
+            ->select(['products.*', 'orders_waiting.quantity', 'orders_waiting.price as total'])
+            ->get();
 
         return view('indent.items', compact('products', 'provider', 'orderCount', 'cartTotal'));
     }
@@ -65,10 +96,7 @@ class IndentController extends Controller
      */
     public function quantity(Product $product, Request $request)
     {
-        $orderWaiting = OrderWaiting::firstOrCreate([
-            'product_id' => $product->id,
-            'provider_id' => $product->provider_id
-        ]);
+        $orderWaiting = OrderWaiting::findOrCreateForCart($product->id, $product->provider_id);
 
         $step = $product->quantity_step ?? 1;
         $quantity = ($request->type == 'add') ? $orderWaiting->quantity + $step : $orderWaiting->quantity - $step;
@@ -96,7 +124,10 @@ class IndentController extends Controller
             $orderWaiting->delete();
         }
 
-        $cartItems = OrderWaiting::where('provider_id', $product->provider_id)->get();
+        $cartItems = OrderWaiting::query()
+            ->forUserCart(Auth::user())
+            ->where('provider_id', $product->provider_id)
+            ->get();
         $cartCount = floatval($cartItems->sum('quantity'));
         $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
 
@@ -112,7 +143,11 @@ class IndentController extends Controller
      */
     public function shopCart(Provider $provider): View
     {
-        $indents = OrderWaiting::where('provider_id', $provider->id)->get();
+        $indents = OrderWaiting::query()
+            ->forUserCart(Auth::user())
+            ->where('provider_id', $provider->id)
+            ->get();
+
         return view('indent.shop-cart', compact('provider', 'indents'));
     }
 
@@ -121,7 +156,11 @@ class IndentController extends Controller
      */
     public function preview(Provider $provider): View
     {
-        $indents = OrderWaiting::where('provider_id', $provider->id)->get();
+        $indents = OrderWaiting::query()
+            ->forUserCart(Auth::user())
+            ->where('provider_id', $provider->id)
+            ->get();
+
         return view('indent.preview', compact('provider', 'indents'));
     }
 
@@ -133,7 +172,10 @@ class IndentController extends Controller
         DB::transaction(function () use ($provider, $request) {
             $serviceIndent = new IndentMail();
             $emailContent = $serviceIndent->createIndentMail($provider, $request->content, $request->footer);
-            $orderWaiting = OrderWaiting::where('provider_id', $provider->id)->get();
+            $orderWaiting = OrderWaiting::query()
+                ->forUserCart($request->user())
+                ->where('provider_id', $provider->id)
+                ->get();
 
             $order = new Order();
             $order->uuid = Str::uuid()->toString();

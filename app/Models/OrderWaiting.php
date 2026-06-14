@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Concerns\BelongsToTenant;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderWaiting extends Model
@@ -42,6 +44,45 @@ class OrderWaiting extends Model
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id');
+    }
+
+    public function scopeForUserCart(Builder $query, User $user): Builder
+    {
+        if ($user->managesOwnCart()) {
+            return $query->where('user_id', $user->id);
+        }
+
+        return $query->whereNull('user_id');
+    }
+
+    public static function findOrCreateForCart(int $productId, int $providerId): self
+    {
+        $user = auth()->user();
+
+        $query = self::query()
+            ->where('product_id', $productId)
+            ->where('provider_id', $providerId);
+
+        if ($user->managesOwnCart()) {
+            $query->where('user_id', $user->id);
+        } else {
+            $query->whereNull('user_id');
+        }
+
+        $orderWaiting = $query->first();
+
+        if ($orderWaiting) {
+            return $orderWaiting;
+        }
+
+        $orderWaiting = new self([
+            'product_id' => $productId,
+            'provider_id' => $providerId,
+            'user_id' => $user->managesOwnCart() ? $user->id : null,
+        ]);
+        $orderWaiting->save();
+
+        return $orderWaiting;
     }
     
     /**

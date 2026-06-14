@@ -80,8 +80,9 @@ class ProviderDashboardService
         }
 
         return User::query()
+            ->where('tenant_id', $this->user->tenant_id)
             ->where('user_type_id', $customerType->id)
-            ->where('id', '!=', $this->user->id)
+            ->where('is_only_order', true)
             ->count();
     }
 

@@ -1,23 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+    @php
+        $user = Auth::user();
+        $roleLabel = match (true) {
+            $user->isProvider() => 'Fournisseur',
+            $user->is_only_order => 'Client commandeur',
+            default => 'Administrateur',
+        };
+        $contextLabel = $user->tenant?->name
+            ?? ($user->isProvider() ? 'Espace fournisseur' : 'Espace client');
+    @endphp
 
-    <div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+    <div class="profile-v2">
+        <div class="profile-v2__header">
+            <div>
+                <p class="profile-v2__context">{{ $contextLabel }}</p>
+                <h1 class="profile-v2__title">Mon profil</h1>
             </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+        <div class="profile-v2__hero">
+            <x-avatar :name="$user->name" size="lg" class="profile-v2__avatar" />
+            <div class="profile-v2__hero-body">
+                <div class="profile-v2__name">{{ $user->name }}</div>
+                <div class="profile-v2__email">{{ $user->email }}</div>
+                <span class="profile-v2__badge">{{ $roleLabel }}</span>
             </div>
+        </div>
+
+        <div class="profile-v2__sections">
+            @include('profile.partials.update-profile-information-form')
+            @include('profile.partials.update-password-form')
         </div>
     </div>
 </x-app-layout>

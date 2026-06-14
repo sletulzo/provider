@@ -23,12 +23,12 @@
     $actionIcon = $isCustomer ? 'fa-basket-shopping' : 'fa-cart-shopping';
     $actionLabel = $isCustomer ? 'Catalogue' : 'Commandes';
     $actionCount = $isCustomer
-        ? ($user->tenant?->countOrdersWaiting() ?? 0)
+        ? $user->countCartItems()
         : ($user->tenant?->countOrders() ?? 0);
 @endphp
 
 <div class="app-bar">
-    <button type="button" class="app-bar__menu toggle-burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button type="button" class="app-bar__menu open-burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
         <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
 

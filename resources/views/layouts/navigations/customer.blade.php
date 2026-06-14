@@ -7,8 +7,8 @@
         <x-nav-link class="nav-item" wire:navigate :href="route('indents')" :active="request()->routeIs('indents')">
             <div class="icon">
                 <i class="fa-solid fa-basket-shopping relative">
-                    @if (Auth::user()->tenant && Auth::user()->tenant->countOrdersWaiting())
-                        <span class="bubble">{{ Auth::user()->tenant->countOrdersWaiting() }}</span>
+                    @if (Auth::user()->countCartItems() > 0)
+                        <span class="bubble">{{ Auth::user()->countCartItems() }}</span>
                     @endif
                 </i>
             </div>

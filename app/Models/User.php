@@ -3,7 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Tenant;
+use App\Models\Order;
+use App\Models\OrderWaiting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -82,6 +83,22 @@ class User extends Authenticatable
     public function isProvider()
     {
         return $this->userType?->slug == 'provider' ? true : false;
+    }
+
+    /**
+     * Client commandeur créé par un fournisseur (accès limité aux commandes).
+     */
+    public function managesOwnCart(): bool
+    {
+        return $this->isCustomer() && $this->is_only_order;
+    }
+
+    public function countCartItems(): int
+    {
+        return (int) OrderWaiting::query()
+            ->forUserCart($this)
+            ->where('quantity', '>', 0)
+            ->sum('quantity');
     }
 
     /**

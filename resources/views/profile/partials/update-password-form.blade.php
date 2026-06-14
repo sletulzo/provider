@@ -1,47 +1,62 @@
-<section>
-    <div>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Mettre à jour le mot de passe') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
+<section class="profile-v2__card">
+    <div class="profile-v2__card-head">
+        <div class="profile-v2__card-icon"><i class="fa-solid fa-lock"></i></div>
+        <div>
+            <h2 class="profile-v2__card-title">Mot de passe</h2>
+            <p class="profile-v2__card-desc">Utilisez un mot de passe long et unique pour sécuriser votre compte.</p>
+        </div>
     </div>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('password.update') }}" class="profile-v2__form">
         @csrf
         @method('put')
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Mot de passe actuel')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+        <div class="profile-v2__field">
+            <label for="update_password_current_password">Mot de passe actuel</label>
+            <input
+                type="password"
+                id="update_password_current_password"
+                name="current_password"
+                autocomplete="current-password"
+                placeholder="••••••••"
+            >
+            <x-input-error :messages="$errors->updatePassword->get('current_password')" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password" :value="__('Nouveau mot de passe')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+        <div class="profile-v2__field">
+            <label for="update_password_password">Nouveau mot de passe</label>
+            <input
+                type="password"
+                id="update_password_password"
+                name="password"
+                autocomplete="new-password"
+                placeholder="••••••••"
+            >
+            <x-input-error :messages="$errors->updatePassword->get('password')" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirmer le mot de passe')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+        <div class="profile-v2__field">
+            <label for="update_password_password_confirmation">Confirmer le mot de passe</label>
+            <input
+                type="password"
+                id="update_password_password_confirmation"
+                name="password_confirmation"
+                autocomplete="new-password"
+                placeholder="••••••••"
+            >
+            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Mettre à jour') }}</x-primary-button>
+        <div class="profile-v2__actions">
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Mettre à jour le mot de passe</span>
+            </button>
 
             @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <span class="profile-v2__saved" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 2500)">
+                    <i class="fa-solid fa-check"></i> Mot de passe mis à jour
+                </span>
             @endif
         </div>
     </form>
