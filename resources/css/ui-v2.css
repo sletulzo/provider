@@ -848,6 +848,10 @@ a.dashboard-v2__stat:hover {
     flex-direction: column;
 }
 
+.modal-slide-up:has(.form-modal) #ajaxModalSlideUpClose {
+    z-index: 5;
+}
+
 .modal-slide-up:has(.cart-v2) {
     display: flex;
     flex-direction: column;

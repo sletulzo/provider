@@ -488,7 +488,10 @@ table input {
 /* ------------------------ MODAL ------------------------- */
 /* -------------------------------------------------------- */
 #ajaxModal > div {
-    overflow: auto;
+    max-height: min(92vh, 820px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* -------------------------------------------------------- */

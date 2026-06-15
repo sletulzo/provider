@@ -51,6 +51,77 @@ button[type="submit"].is-loading .btn-loader {
     display: inline-block;
 }
 
+/* Modales formulaire (ajax-modal + slide-up) */
+.form-modal {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+    max-height: min(85vh, 760px);
+    gap: 0;
+}
+
+.form-modal__title {
+    flex-shrink: 0;
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.form-modal__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 4px;
+}
+
+.form-modal__footer {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 16px;
+    margin-top: 12px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    z-index: 2;
+}
+
+.form-modal__footer .btn-delete {
+    margin-right: auto;
+}
+
+.form-modal__footer .btn-primary,
+.form-modal__footer .btn-default {
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .form-modal__footer {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .form-modal__footer .btn-delete {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .form-modal__footer .btn-default,
+    .form-modal__footer .btn-primary {
+        flex: 1 1 calc(50% - 4px);
+        justify-content: center;
+    }
+}
+
 /* Animation */
 @keyframes spin {
     from { transform: rotate(0deg); }
@@ -59,8 +130,8 @@ button[type="submit"].is-loading .btn-loader {
 
 /* Tarifs fournisseur (fiche admin) */
 .provider-prices-share {
-    margin-top: 20px;
-    padding-top: 20px;
+    margin-top: 4px;
+    padding-top: 16px;
     border-top: 1px solid var(--border);
 }
 
@@ -105,15 +176,12 @@ button[type="submit"].is-loading .btn-loader {
     color: var(--primary);
 }
 
-.provider-prices-share-send-form {
-    margin-top: 10px;
-}
-
 .provider-prices-share-send {
     width: 100%;
     justify-content: center;
     background: var(--primary);
     color: #fff;
+    margin-top: 10px;
 }
 
 .provider-prices-share-meta {
