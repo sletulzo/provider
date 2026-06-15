@@ -121,8 +121,10 @@
     }
 
     .toast-top-right {
+        top: calc(56px + env(safe-area-inset-top, 0px) + 12px);
         left: 12px;
-        width: calc(100% - 24px);
+        right: 12px;
+        width: auto;
     }
 
     #toast-container > .toast {
