@@ -11,7 +11,7 @@
         height: calc(100vh - 60px);
         padding: 15px;
         margin-left: 0px;
-        padding-bottom: 68px;
+        padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 12px);
         margin-top: calc(56px + env(safe-area-inset-top, 0px));
         width: 100%;
     }
