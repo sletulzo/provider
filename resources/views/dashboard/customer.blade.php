@@ -14,8 +14,6 @@
             </a>
         </div>
 
-        <x-search-bar placeholder="Produit, fournisseur…" data-search="dashboard" />
-
         <div class="dashboard-v2__hero">
             <div class="dashboard-v2__hero-inner">
                 <div>
@@ -35,12 +33,18 @@
 
         <div class="dashboard-v2__stats">
             <a wire:navigate href="{{ route('indents') }}" @class(['dashboard-v2__stat', 'dashboard-v2__stat--active' => $stats['cart_items'] > 0])>
-                <div class="dashboard-v2__stat-label">Panier en cours</div>
+                <div class="dashboard-v2__stat-top">
+                    <span class="dashboard-v2__stat-label">Panier en cours</span>
+                    <span class="dashboard-v2__stat-icon"><i class="fa-solid fa-basket-shopping"></i></span>
+                </div>
                 <div class="dashboard-v2__stat-value">{{ $stats['cart_items'] }}</div>
                 <div class="dashboard-v2__stat-sub">{{ $stats['cart_providers'] }} fournisseur{{ $stats['cart_providers'] > 1 ? 's' : '' }}</div>
             </a>
             <div class="dashboard-v2__stat">
-                <div class="dashboard-v2__stat-label">Montant du mois</div>
+                <div class="dashboard-v2__stat-top">
+                    <span class="dashboard-v2__stat-label">Montant du mois</span>
+                    <span class="dashboard-v2__stat-icon"><i class="fa-solid fa-euro-sign"></i></span>
+                </div>
                 <div class="dashboard-v2__stat-value"><x-price :amount="$stats['monthly_spend']" /></div>
                 <div class="dashboard-v2__stat-sub">{{ carbon()->translatedFormat('F Y') }}</div>
             </div>

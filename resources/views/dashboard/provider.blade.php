@@ -14,8 +14,6 @@
             </a>
         </div>
 
-        <x-search-bar placeholder="Commande, client…" data-search="dashboard" />
-
         <div class="dashboard-v2__hero">
             <div class="dashboard-v2__hero-inner">
                 <div>
@@ -35,12 +33,18 @@
 
         <div class="dashboard-v2__stats">
             <a wire:navigate href="{{ route('orders') }}" @class(['dashboard-v2__stat', 'dashboard-v2__stat--alert' => $stats['orders_pending'] > 0])>
-                <div class="dashboard-v2__stat-label">À traiter</div>
+                <div class="dashboard-v2__stat-top">
+                    <span class="dashboard-v2__stat-label">À traiter</span>
+                    <span class="dashboard-v2__stat-icon"><i class="fa-solid fa-clock"></i></span>
+                </div>
                 <div class="dashboard-v2__stat-value">{{ $stats['orders_pending'] }}</div>
                 <div class="dashboard-v2__stat-sub">En attente de réponse</div>
             </a>
             <div class="dashboard-v2__stat">
-                <div class="dashboard-v2__stat-label">Chiffre d'affaires</div>
+                <div class="dashboard-v2__stat-top">
+                    <span class="dashboard-v2__stat-label">Chiffre d'affaires</span>
+                    <span class="dashboard-v2__stat-icon"><i class="fa-solid fa-euro-sign"></i></span>
+                </div>
                 <div class="dashboard-v2__stat-value"><x-price :amount="$stats['monthly_revenue']" /></div>
                 <div class="dashboard-v2__stat-sub">{{ carbon()->translatedFormat('F Y') }}</div>
             </div>

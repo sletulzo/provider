@@ -33,7 +33,8 @@
     </button>
 
     <div class="app-bar__brand">
-        <span class="app-bar__logo" aria-hidden="true">V</span>
+        <img class="app-bar__logo app-bar__logo--img" src="{{ Vite::asset('resources/images/logo-no-bg.png') }}" alt="{{ config('app.name') }}">
+
         <div class="app-bar__titles">
             <span class="app-bar__page">{{ $pageTitle }}</span>
             <span class="app-bar__context">{{ $contextLabel }}</span>

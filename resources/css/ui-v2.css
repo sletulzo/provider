@@ -258,15 +258,31 @@
 }
 
 .dashboard-v2__hero {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-lg) var(--space-xl);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 12px 28px -12px color-mix(in srgb, var(--primary) 60%, transparent);
+    padding: var(--space-xl);
     margin-bottom: var(--space-md);
 }
 
+/* Halo décoratif léger */
+.dashboard-v2__hero::after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
 .dashboard-v2__hero-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -275,8 +291,8 @@
 
 .dashboard-v2__hero-label {
     font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 6px;
 }
 
 .dashboard-v2__hero-value {
@@ -284,33 +300,40 @@
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
-    color: var(--text);
+    color: #fff;
 }
 
 .dashboard-v2__hero-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     font-size: 12px;
-    margin-top: 6px;
-    color: var(--text-light);
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
 }
 
 .dashboard-v2__hero-sub--up {
-    color: var(--trend-up);
+    color: #bbf7d0;
 }
 
 .dashboard-v2__hero-sub--down {
-    color: var(--trend-down);
+    color: #fecaca;
 }
 
 .dashboard-v2__hero-icon {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: var(--radius-lg);
-    background: var(--primary-bg);
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
     flex-shrink: 0;
 }
 
@@ -346,10 +369,40 @@ a.dashboard-v2__stat:hover {
     background: var(--primary-bg);
 }
 
+.dashboard-v2__stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: 8px;
+}
+
+.dashboard-v2__stat-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-md);
+    background: var(--primary-bg);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.dashboard-v2__stat--alert .dashboard-v2__stat-icon {
+    background: color-mix(in srgb, var(--warning) 16%, transparent);
+    color: var(--warning);
+}
+
 .dashboard-v2__stat-label {
     font-size: 12px;
     color: var(--text-muted);
     margin-bottom: 4px;
+}
+
+.dashboard-v2__stat-top .dashboard-v2__stat-label {
+    margin-bottom: 0;
 }
 
 .dashboard-v2__stat-value {
@@ -2113,6 +2166,16 @@ body.backdrop::after {
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.app-bar__logo--img {
+    width: auto;
+    max-width: 130px;
+    height: 34px;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    object-fit: contain;
 }
 
 .app-bar__titles {
