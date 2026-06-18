@@ -4,6 +4,24 @@ function themeColor() {
 	return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#3645b1';
 }
 
+const MODAL_LOADER = `
+  <div class="ev-modal__loader">
+    <span class="ev-modal__spinner"></span>
+  </div>`;
+
+function openAjaxModal(modal) {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('ev-modal-open');
+}
+
+function dismissAjaxModal(modal) {
+    if (!modal || !modal.classList.contains('is-open')) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('ev-modal-open');
+}
+
 function initAjaxModal() {
     const modal = document.getElementById('ajaxModal');
     const modalContent = document.getElementById('ajaxModalContent');
@@ -22,18 +40,11 @@ function initAjaxModal() {
         e.preventDefault();
         const url = link.getAttribute('href');
 
-        modal.classList.remove('hidden');
-
-        modalContent.innerHTML = `
-          <div class="flex items-center justify-center h-32">
-            <svg class="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-            </svg>
-          </div>`;
+        openAjaxModal(modal);
+        modalContent.innerHTML = MODAL_LOADER;
 
         try {
-            const response = await fetch(url, { 
+            const response = await fetch(url, {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             });
 
@@ -43,18 +54,23 @@ function initAjaxModal() {
             modalContent.innerHTML = html;
         } catch (error) {
             modalContent.innerHTML = `
-              <div class="text-red-600 p-6">
-                <p>❌ Erreur lors du chargement du contenu.</p>
+              <div class="ev-modal__error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>Erreur lors du chargement du contenu.</p>
               </div>`;
             console.error(error);
         }
     });
 
     // Fermeture modal
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    closeBtn.addEventListener('click', () => dismissAjaxModal(modal));
 
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.add('hidden');
+        if (e.target === modal) dismissAjaxModal(modal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') dismissAjaxModal(modal);
     });
 }
 
@@ -340,7 +356,7 @@ function closeModalSlideUp() {
 function closeAjaxModal() {
 	var modal = document.getElementById('ajaxModal');
 	if (modal) {
-		modal.classList.add('hidden');
+		dismissAjaxModal(modal);
 	}
 }
 

@@ -57,16 +57,17 @@ button[type="submit"].is-loading .btn-loader {
     flex-direction: column;
     min-height: 0;
     height: 100%;
-    max-height: min(85vh, 760px);
     gap: 0;
 }
 
 .form-modal__title {
     flex-shrink: 0;
-    margin: 0 0 16px;
-    font-size: 18px;
+    margin: 0;
+    padding: 20px 56px 16px 24px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--text);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .form-modal__body {
@@ -74,10 +75,20 @@ button[type="submit"].is-loading .btn-loader {
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-bottom: 4px;
+    gap: 18px;
+    padding: 20px 24px;
+}
+
+.form-modal__body > div > label,
+.form-modal__field > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
 }
 
 .form-modal__footer {
@@ -86,9 +97,8 @@ button[type="submit"].is-loading .btn-loader {
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
-    padding-top: 16px;
-    margin-top: 12px;
-    border-top: 1px solid var(--border);
+    padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--border-light);
     background: var(--surface);
     position: relative;
     z-index: 2;
@@ -101,6 +111,29 @@ button[type="submit"].is-loading .btn-loader {
 .form-modal__footer .btn-primary,
 .form-modal__footer .btn-default {
     flex-shrink: 0;
+}
+
+/* Action secondaire (ex: lien reset mot de passe) */
+.form-modal__secondary {
+    margin-top: 4px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: center;
+}
+
+.form-modal__secondary .btn,
+.form-modal__secondary button {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Repli pour formulaires non structurés (anciennes vues) */
+.form-modal:not(:has(.form-modal__body)) {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 24px;
 }
 
 @media screen and (max-width: 480px) {

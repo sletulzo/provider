@@ -79,9 +79,7 @@
 
     @if (!Auth::user()->is_only_order)
         <div class="form-modal__footer">
-            <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="btn-delete confirm-delete" title="Supprimer">
-                <i class="fa-regular fa-trash-can"></i>
-            </a>
+            <a href="{{ route('providers.delete', ['provider' => $provider->id]) }}" class="btn-delete confirm-delete">Supprimer</a>
             <button type="button" class="btn-default close-modal-all">Annuler</button>
             <button type="submit" class="btn-primary">
                 <span class="btn-loader"></span>
