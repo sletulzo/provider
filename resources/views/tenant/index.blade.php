@@ -27,6 +27,8 @@
                             <th>Nom</th>
                             <th>Email</th>
                             <th>Adresse</th>
+                            <th class="align-center">Clients</th>
+                            <th class="align-center">Fournisseurs</th>
                             <th class="align-center">Active</th>
                             <th>Crée le</th>
                             <th class="align-right"></th>
@@ -38,6 +40,12 @@
                                 <td class="px-6 py-4">{{ $tenant->name }}</td>
                                 <td class="px-6 py-4">{{ $tenant->smtp_email }}</td>
                                 <td class="px-6 py-4">{{ $tenant->adress }}</td>
+                                <td class="px-6 py-4 align-center">
+                                    <span class="tenant-count tenant-count--clients">{{ $tenant->clients_count }}</span>
+                                </td>
+                                <td class="px-6 py-4 align-center">
+                                    <span class="tenant-count tenant-count--providers">{{ $tenant->providers_count }}</span>
+                                </td>
                                 <td class="px-6 py-4 align-center">
                                     @if (!$tenant->is_locked)
                                         <i class="fa-regular fa-circle-check"></i>

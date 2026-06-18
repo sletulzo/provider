@@ -217,11 +217,9 @@
     transition: opacity 0.5s ease;
 }
 
-/* Affiché uniquement quand l'app est lancée en mode installé (PWA) */
-@media (display-mode: standalone) {
-    .app-splash {
-        display: flex;
-    }
+/* Activé via JS uniquement au lancement de la PWA installée */
+.app-splash.is-active {
+    display: flex;
 }
 
 .app-splash.is-hidden {
@@ -231,24 +229,14 @@
 
 .app-splash__inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 28px;
+    justify-content: center;
 }
 
 .app-splash__logo {
     width: 128px;
     height: auto;
     animation: appSplashLogo 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.app-splash__loader {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 3px solid color-mix(in srgb, var(--primary) 18%, transparent);
-    border-top-color: var(--primary);
-    animation: appSplashSpin 0.7s linear infinite;
 }
 
 @keyframes appSplashLogo {
@@ -262,13 +250,8 @@
     }
 }
 
-@keyframes appSplashSpin {
-    to { transform: rotate(360deg); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .app-splash__logo,
-    .app-splash__loader {
+    .app-splash__logo {
         animation: none;
     }
 }

@@ -45,7 +45,6 @@
         <div id="appSplash" class="app-splash" aria-hidden="true">
             <div class="app-splash__inner">
                 <img class="app-splash__logo" src="{{ Vite::asset('resources/images/logo-no-bg.png') }}" alt="{{ config('app.name') }}">
-                <span class="app-splash__loader"></span>
             </div>
         </div>
 
@@ -54,18 +53,46 @@
                 var splash = document.getElementById('appSplash');
                 if (!splash) return;
 
-                var MIN_VISIBLE = 1100;
-                var start = Date.now();
-
-                function hide() {
-                    splash.classList.add('is-hidden');
-                    setTimeout(function () { splash.remove(); }, 600);
+                // Déjà affiché dans cette session (navigation SPA) : on l'enlève sans le remontrer.
+                if (window.__appSplashDone) {
+                    splash.remove();
+                    return;
                 }
 
-                window.addEventListener('load', function () {
-                    var remaining = MIN_VISIBLE - (Date.now() - start);
-                    setTimeout(hide, remaining > 0 ? remaining : 0);
-                });
+                // Uniquement au lancement de la PWA installée.
+                var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+                    || window.navigator.standalone === true;
+
+                if (!standalone) {
+                    splash.remove();
+                    return;
+                }
+
+                splash.classList.add('is-active');
+
+                var MIN_VISIBLE = 1100;
+                var start = Date.now();
+                var done = false;
+
+                function hide() {
+                    if (done) return;
+                    done = true;
+                    window.__appSplashDone = true;
+                    splash.classList.add('is-hidden');
+                    setTimeout(function () { if (splash.parentNode) splash.remove(); }, 600);
+                }
+
+                if (document.readyState === 'complete') {
+                    setTimeout(hide, MIN_VISIBLE);
+                } else {
+                    window.addEventListener('load', function () {
+                        var remaining = MIN_VISIBLE - (Date.now() - start);
+                        setTimeout(hide, remaining > 0 ? remaining : 0);
+                    });
+                }
+
+                // Sécurité : ne jamais bloquer l'accès.
+                setTimeout(hide, 4000);
             })();
         </script>
 

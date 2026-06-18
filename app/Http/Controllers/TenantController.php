@@ -19,7 +19,18 @@ class TenantController extends Controller
      */
     public function index(): View
     {
-        $tenants = Tenant::orderBy('name')->get();
+        $tenants = Tenant::query()
+            ->withCount([
+                'users as clients_count' => function ($query) {
+                    $query->whereHas('userType', fn ($type) => $type->where('slug', 'customer'));
+                },
+                'users as providers_count' => function ($query) {
+                    $query->whereHas('userType', fn ($type) => $type->where('slug', 'provider'));
+                },
+            ])
+            ->orderBy('name')
+            ->get();
+
         return view('tenant.index', compact('tenants'));
     }
 
