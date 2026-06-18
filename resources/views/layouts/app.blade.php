@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="manifest" href="{{ asset('manifest.json') }}">
-        <link rel="icon" href="{{ Vite::asset('resources/images/logo.png') }}">
+        <link rel="icon" href="{{ Vite::asset('resources/images/logo-no-bg.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('icons/logo-transparent.png') }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
