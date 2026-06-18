@@ -64,10 +64,6 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    #ajaxModal > div {
-        height: 100%;
-    }
-
     .table-wrapper-action {
         font-size: 16px;
         width: 28px;
@@ -87,7 +83,6 @@
 
     #ajaxModalContent:not(:has(.form-modal)) {
         overflow-y: auto;
-        height: 100vh;
     }
 }
 
@@ -481,31 +476,19 @@
 }
 
 #ajaxModalSlideUpContent .form-modal {
-    padding: 36px 20px calc(20px + env(safe-area-inset-bottom, 0px));
     height: 100%;
     max-height: 100%;
-    overflow: hidden;
     box-sizing: border-box;
 }
 
-#ajaxModal > div {
-    max-height: min(92vh, 820px);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+/* La slide-up affiche son propre bouton de fermeture : on dégage le titre */
+#ajaxModalSlideUpContent .form-modal .form-modal__title {
+    padding-top: 24px;
 }
 
-#ajaxModalContent {
-    min-height: 0;
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-#ajaxModalContent .form-modal {
-    max-height: none;
-    height: 100%;
+/* Repli (formulaires non structurés) dans la slide-up */
+#ajaxModalSlideUpContent .form-modal:not(:has(.form-modal__body)) {
+    padding: 36px 20px calc(20px + env(safe-area-inset-bottom, 0px));
 }
 
 
