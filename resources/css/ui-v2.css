@@ -205,6 +205,74 @@
     }
 }
 
+/* --- Splash de lancement (PWA) ------------------------------------ */
+.app-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    transition: opacity 0.5s ease;
+}
+
+/* Affiché uniquement quand l'app est lancée en mode installé (PWA) */
+@media (display-mode: standalone) {
+    .app-splash {
+        display: flex;
+    }
+}
+
+.app-splash.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-splash__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.app-splash__logo {
+    width: 128px;
+    height: auto;
+    animation: appSplashLogo 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.app-splash__loader {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 3px solid color-mix(in srgb, var(--primary) 18%, transparent);
+    border-top-color: var(--primary);
+    animation: appSplashSpin 0.7s linear infinite;
+}
+
+@keyframes appSplashLogo {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.07) translateY(-4px);
+        opacity: 0.85;
+    }
+}
+
+@keyframes appSplashSpin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-splash__logo,
+    .app-splash__loader {
+        animation: none;
+    }
+}
+
 /* --- Dashboard v2 ------------------------------------------------- */
 .dashboard-v2__header {
     display: flex;

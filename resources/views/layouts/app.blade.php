@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="manifest" href="{{ asset('manifest.json') }}">
         <link rel="icon" href="{{ Vite::asset('resources/images/logo-no-bg.png') }}">
-        <link rel="apple-touch-icon" href="{{ asset('icons/logo-transparent.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('icons/app-icon.png') }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -41,6 +41,33 @@
         </style>
     </head>
     <body class="font-sans antialiased">
+
+        <div id="appSplash" class="app-splash" aria-hidden="true">
+            <div class="app-splash__inner">
+                <img class="app-splash__logo" src="{{ Vite::asset('resources/images/logo-no-bg.png') }}" alt="{{ config('app.name') }}">
+                <span class="app-splash__loader"></span>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                var splash = document.getElementById('appSplash');
+                if (!splash) return;
+
+                var MIN_VISIBLE = 1100;
+                var start = Date.now();
+
+                function hide() {
+                    splash.classList.add('is-hidden');
+                    setTimeout(function () { splash.remove(); }, 600);
+                }
+
+                window.addEventListener('load', function () {
+                    var remaining = MIN_VISIBLE - (Date.now() - start);
+                    setTimeout(hide, remaining > 0 ? remaining : 0);
+                });
+            })();
+        </script>
 
         <div class="main-wrapper">
             @include('layouts.navigations.sidebar.' . Auth::user()->getNavigationSlug())
