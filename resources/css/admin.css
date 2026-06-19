@@ -1757,3 +1757,36 @@ body.ev-modal-open {
     opacity: 1;
   }
 }
+
+/* -------------------------------------------------------- */
+/* ------------------ TENANT COUNTERS --------------------- */
+/* -------------------------------------------------------- */
+.tenant-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 30px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.tenant-count--clients {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+
+.tenant-count--providers {
+    background: color-mix(in srgb, var(--secondary) 20%, transparent);
+    color: color-mix(in srgb, var(--secondary) 78%, #000);
+}
+
+.tenant-count-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
