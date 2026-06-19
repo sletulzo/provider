@@ -35,12 +35,16 @@ class ProviderEmail extends Mailable
      */
     public function build()
     {
+        $this->order->loadMissing(['lines.product', 'lines.unity', 'provider', 'user', 'tenant']);
+
         return $this->subject($this->data['subject'])
-            ->markdown('emails.provider')
+            ->view('emails.provider')
             ->with([
                 'subject' => $this->data['subject'],
-                'content' => nl2br($this->data['content']),
-                'url' => $this->url
+                'content' => $this->data['content'] ?? '',
+                'footer'  => $this->data['footer'] ?? '',
+                'url'     => $this->url,
+                'order'   => $this->order,
             ]);
     }
 }

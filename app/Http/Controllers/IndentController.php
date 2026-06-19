@@ -8,7 +8,6 @@ use App\Models\Provider;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderLine;
-use App\Services\IndentMail;
 use Illuminate\Http\Request;
 use App\Services\TenantMailer;
 use Illuminate\Support\Str;
@@ -211,9 +210,6 @@ class IndentController extends Controller
                 ->where('quantity', '>', 0)
                 ->get();
 
-            $serviceIndent = new IndentMail();
-            $emailContent = $serviceIndent->createIndentMail($orderWaiting, $request->content, $request->footer);
-
             $order = new Order();
             $order->uuid = Str::uuid()->toString();
             $order->provider_id = $provider->id;
@@ -243,7 +239,8 @@ class IndentController extends Controller
 
             $data = [
                 'subject' => $request->subject,
-                'content' => $emailContent
+                'content' => $request->content,
+                'footer'  => $request->footer,
             ];
 
             try 
