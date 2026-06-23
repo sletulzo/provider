@@ -19,16 +19,16 @@ return [
     'model' => \NotificationChannels\WebPush\PushSubscription::class,
 
     /**
-     * This is the name of the table that will be created by the migration and
-     * used by the PushSubscription model shipped with this package.
+     * Table used by the PushSubscription model shipped with this package.
+     * Keep this in sync with the local migration.
      */
-    'table_name' => env('WEBPUSH_DB_TABLE', 'push_subscriptions'),
+    'table_name' => 'push_subscriptions',
 
     /**
-     * This is the database connection that will be used by the migration and
-     * the PushSubscription model shipped with this package.
+     * Use Laravel's default database connection. The migration intentionally
+     * does not depend on this config value.
      */
-    'database_connection' => env('WEBPUSH_DB_CONNECTION', env('DB_CONNECTION', 'mysql')),
+    'database_connection' => null,
 
     /**
      * The Guzzle client options used by Minishlink\WebPush.

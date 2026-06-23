@@ -7,6 +7,9 @@
             ? ($order->user?->name ?? 'Client')
             : ($order->provider?->name ?? '—');
         $hasSplitTotals = $order->isResponded() && $order->getAcceptedTotal() !== $order->getTotal();
+        $shippingCost = $order->getShippingCost();
+        $productTotal = $order->getTotal() - $shippingCost;
+        $acceptedProductTotal = max(0, $order->getAcceptedTotal() - $shippingCost);
     @endphp
 
     <div class="order-view">
@@ -118,11 +121,31 @@
                         <span>Total commandé</span>
                         <span>{{ price($order->getTotal(), 2) }} €</span>
                     </div>
+                    @if ($shippingCost > 0)
+                        <div class="order-view__totals-row">
+                            <span>Produits confirmés</span>
+                            <span>{{ price($acceptedProductTotal, 2) }} €</span>
+                        </div>
+                        <div class="order-view__totals-row">
+                            <span>Frais de port</span>
+                            <span>{{ price($shippingCost, 2) }} €</span>
+                        </div>
+                    @endif
                     <div class="order-view__totals-row order-view__totals-row--main">
                         <span>Total confirmé</span>
                         <span>{{ price($order->getAcceptedTotal(), 2) }} €</span>
                     </div>
                 @else
+                    @if ($shippingCost > 0)
+                        <div class="order-view__totals-row">
+                            <span>Produits</span>
+                            <span>{{ price($productTotal, 2) }} €</span>
+                        </div>
+                        <div class="order-view__totals-row">
+                            <span>Frais de port</span>
+                            <span>{{ price($shippingCost, 2) }} €</span>
+                        </div>
+                    @endif
                     <div class="order-view__totals-row order-view__totals-row--main">
                         <span>Total</span>
                         <span>{{ price($order->getTotal(), 2) }} €</span>

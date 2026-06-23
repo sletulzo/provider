@@ -44,7 +44,9 @@ class IndentController extends Controller
 
         $cartByProduct = $cartItems->keyBy('product_id');
         $orderCount = $cartItems->sum('quantity');
-        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $cartSubtotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $shippingCost = $orderCount > 0 ? $provider->getShippingCost() : 0;
+        $cartTotal = $cartSubtotal + $shippingCost;
 
         $products = Product::query()
             ->where('provider_id', $provider->id)
@@ -57,7 +59,7 @@ class IndentController extends Controller
                 return $product;
             });
 
-        return compact('products', 'orderCount', 'cartTotal');
+        return compact('products', 'orderCount', 'cartSubtotal', 'shippingCost', 'cartTotal');
     }
 
     /**
@@ -156,7 +158,9 @@ class IndentController extends Controller
             ->where('quantity', '>', 0)
             ->get();
         $cartCount = floatval($cartItems->sum('quantity'));
-        $cartTotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $cartSubtotal = $cartItems->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $shippingCost = $cartCount > 0 ? $provider->getShippingCost() : 0;
+        $cartTotal = $cartSubtotal + $shippingCost;
 
         return response()->json([
             'value' => $quantity,
@@ -177,9 +181,11 @@ class IndentController extends Controller
             ->get();
 
         $orderCount = floatval($indents->sum('quantity'));
-        $cartTotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $cartSubtotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $shippingCost = $orderCount > 0 ? $provider->getShippingCost() : 0;
+        $cartTotal = $cartSubtotal + $shippingCost;
 
-        return view('indent.shop-cart', compact('provider', 'indents', 'orderCount', 'cartTotal'));
+        return view('indent.shop-cart', compact('provider', 'indents', 'orderCount', 'cartSubtotal', 'shippingCost', 'cartTotal'));
     }
 
     /**
@@ -194,9 +200,11 @@ class IndentController extends Controller
             ->get();
 
         $orderCount = floatval($indents->sum('quantity'));
-        $cartTotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $cartSubtotal = $indents->sum(fn (OrderWaiting $item) => $item->getPrice());
+        $shippingCost = $orderCount > 0 ? $provider->getShippingCost() : 0;
+        $cartTotal = $cartSubtotal + $shippingCost;
 
-        return view('indent.preview', compact('provider', 'indents', 'orderCount', 'cartTotal'));
+        return view('indent.preview', compact('provider', 'indents', 'orderCount', 'cartSubtotal', 'shippingCost', 'cartTotal'));
     }
 
     /**
@@ -217,6 +225,7 @@ class IndentController extends Controller
             $order->uuid = Str::uuid()->toString();
             $order->provider_id = $provider->id;
             $order->user_id = $request->user()->id;
+            $order->shipping_cost = $orderWaiting->isNotEmpty() ? $provider->getShippingCost() : 0;
             $order->save();
 
             foreach($orderWaiting as $item)

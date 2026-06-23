@@ -14,6 +14,17 @@ use Illuminate\View\View;
 
 class ProviderController extends Controller
 {
+    private function parseAmountToCents(mixed $value): int
+    {
+        if ($value === null || $value === '') {
+            return 0;
+        }
+
+        $normalized = str_replace(',', '.', (string) $value);
+
+        return max(0, (int) round(((float) $normalized) * 100));
+    }
+
     /**
      * Display provider view
      */
@@ -42,6 +53,7 @@ class ProviderController extends Controller
         $provider->phone = $request->phone;
         $provider->comment = $request->comment;
         $provider->email_content = $request->email_content;
+        $provider->shipping_cost = $this->parseAmountToCents($request->shipping_cost);
         $provider->is_stock = $request->has('is_stock') ? true : false;
         $provider->save();
 
@@ -74,6 +86,7 @@ class ProviderController extends Controller
         $provider->phone = $request->phone;
         $provider->comment = $request->comment;
         $provider->email_content = $request->email_content;
+        $provider->shipping_cost = $this->parseAmountToCents($request->shipping_cost);
         $provider->is_stock = $request->has('is_stock') ? true : false;
         $provider->update();
 
