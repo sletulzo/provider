@@ -10,6 +10,18 @@
                     @endif
                 </div>
             </div>
+            @if ($provider->comment)
+                <div class="indent-v2__provider-description">
+                    <i class="fa-regular fa-message"></i>
+                    <span>{!! nl2br(e($provider->comment)) !!}</span>
+                </div>
+            @endif
+            @if (($shippingCost ?? 0) > 0)
+                <div class="indent-v2__provider-shipping">
+                    <i class="fa-solid fa-truck"></i>
+                    <span>Frais de port : {{ price($shippingCost, 2) }} €</span>
+                </div>
+            @endif
             <div style="margin-top: 12px;">
                 <x-search-bar placeholder="Rechercher un produit…" id="indentProductSearch" />
             </div>

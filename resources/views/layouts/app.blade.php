@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="vapid-public-key" content="{{ config('webpush.vapid.public_key') }}">
+        <meta name="push-subscribe-url" content="{{ route('push.subscribe') }}">
+        <meta name="push-unsubscribe-url" content="{{ route('push.unsubscribe') }}">
         <link rel="manifest" href="{{ asset('manifest.json') }}">
         <link rel="icon" href="{{ Vite::asset('resources/images/logo-no-bg.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('icons/app-icon.png') }}">

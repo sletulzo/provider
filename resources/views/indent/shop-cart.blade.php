@@ -25,7 +25,19 @@
             @if ($provider->email)
                 <span class="cart-v2__pill cart-v2__pill--muted">{{ $provider->email }}</span>
             @endif
+            @if (($shippingCost ?? 0) > 0)
+                <span class="cart-v2__pill cart-v2__pill--muted">
+                    <i class="fa-solid fa-truck"></i> {{ price($shippingCost, 2) }} € port
+                </span>
+            @endif
         </div>
+
+        @if ($provider->comment)
+            <div class="cart-v2__provider-note">
+                <i class="fa-regular fa-message"></i>
+                <span>{!! nl2br(e($provider->comment)) !!}</span>
+            </div>
+        @endif
     </div>
 
     <div class="cart-v2__body">
@@ -52,7 +64,11 @@
 
     <div class="cart-v2__footer">
         <div class="cart-v2__total">
-            <span class="cart-v2__total-label">Total</span>
+            @if (($shippingCost ?? 0) > 0)
+                <span class="cart-v2__total-label">Sous-total {{ price($cartSubtotal ?? 0, 2) }} € · Port {{ price($shippingCost, 2) }} €</span>
+            @else
+                <span class="cart-v2__total-label">Total</span>
+            @endif
             <strong class="cart-v2__total-value">{{ price($cartTotal, 2) }} €</strong>
         </div>
         <a

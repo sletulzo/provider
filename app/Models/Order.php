@@ -17,6 +17,7 @@ class Order extends Model
         'is_sent' => 'boolean',
         'is_accepted' => 'boolean',
         'is_refused' => 'boolean',
+        'shipping_cost' => 'integer',
     ];
 
     public function tenant()
@@ -58,16 +59,23 @@ class Order extends Model
     {
         $this->loadMissing('lines.product');
 
-        return $this->lines->sum(fn (OrderLine $line) => $line->getLineTotal());
+        return $this->lines->sum(fn (OrderLine $line) => $line->getLineTotal()) + $this->getShippingCost();
     }
 
     public function getAcceptedTotal(): int
     {
         $this->loadMissing('lines.product');
 
-        return $this->lines
+        $acceptedTotal = $this->lines
             ->where('status', OrderLine::STATUS_ACCEPTED)
             ->sum(fn (OrderLine $line) => $line->getLineTotal());
+
+        return $acceptedTotal > 0 ? $acceptedTotal + $this->getShippingCost() : 0;
+    }
+
+    public function getShippingCost(): int
+    {
+        return (int) ($this->shipping_cost ?? 0);
     }
 
     public function getStatus(): array

@@ -27,12 +27,19 @@
                placeholder="+33 6 12 34 56 78">
     </div>
 
+    <div>
+        <label for="shipping_cost" class="block text-sm font-medium text-gray-700 mb-1">Frais de port</label>
+        <input type="number" name="shipping_cost" id="shipping_cost" min="0" step="0.01" inputmode="decimal"
+               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+               placeholder="0,00">
+    </div>
+
     <!-- Commentaire -->
     <div>
-        <label for="commentaire" class="block text-sm font-medium text-gray-700 mb-1">Commentaire</label>
+        <label for="commentaire" class="block text-sm font-medium text-gray-700 mb-1">Description fournisseur</label>
         <textarea name="comment" id="comment" rows="3"
                   class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Notes ou remarques..."></textarea>
+                  placeholder="Infos visibles pendant la commande..."></textarea>
     </div>
 
     <div>

@@ -17,6 +17,7 @@ class Provider extends Model
     protected $casts = [
         'prices_updated_at' => 'datetime',
         'is_stock' => 'boolean',
+        'shipping_cost' => 'integer',
     ];
 
     protected static function booted(): void
@@ -72,7 +73,10 @@ class Provider extends Model
             return $this->email_content;
         }
 
-        return "Merci !\n". Auth::user()->tenant?->name ." \n" . Auth::user()->tenant?->adress;
+        return trim(collect([
+            Auth::user()->tenant?->name,
+            Auth::user()->tenant?->adress,
+        ])->filter()->implode("\n"));
     }
 
     public function getPrice()
@@ -86,6 +90,16 @@ class Provider extends Model
         }
 
         return $price;
+    }
+
+    public function getShippingCost(): int
+    {
+        return (int) ($this->shipping_cost ?? 0);
+    }
+
+    public function getCartTotalWithShipping(int|float $cartTotal): int
+    {
+        return (int) $cartTotal + $this->getShippingCost();
     }
 
     public static function findByUuid(string $uuid): ?self

@@ -33,10 +33,22 @@
         <div class="cart-v2__summary">
             <span class="cart-v2__pill">{{ $orderCount }} article{{ $orderCount > 1 ? 's' : '' }}</span>
             <span class="cart-v2__pill cart-v2__pill--accent">{{ price($cartTotal, 2) }} €</span>
+            @if (($shippingCost ?? 0) > 0)
+                <span class="cart-v2__pill cart-v2__pill--muted">
+                    <i class="fa-solid fa-truck"></i> Port {{ price($shippingCost, 2) }} €
+                </span>
+            @endif
         </div>
     </div>
 
     <div class="cart-v2__scroll">
+        @if ($provider->comment)
+            <div class="cart-v2__provider-note cart-v2__provider-note--inset">
+                <i class="fa-regular fa-message"></i>
+                <span>{!! nl2br(e($provider->comment)) !!}</span>
+            </div>
+        @endif
+
         <div class="cart-v2__recipient">
             <div class="cart-v2__recipient-icon">
                 <i class="fa-regular fa-envelope"></i>
@@ -92,6 +104,15 @@
                             <span class="cart-v2__product-line-qty">× {{ $indent->quantity }}</span>
                         </div>
                     @endforeach
+                    @if (($shippingCost ?? 0) > 0)
+                        <div class="cart-v2__product-line cart-v2__product-line--shipping">
+                            <div class="cart-v2__product-line-info">
+                                <span class="cart-v2__product-line-name">Frais de port</span>
+                                <span class="cart-v2__product-line-unit">Ajoutés au total de commande</span>
+                            </div>
+                            <span class="cart-v2__product-line-qty">{{ price($shippingCost, 2) }} €</span>
+                        </div>
+                    @endif
                 </div>
             </div>
 

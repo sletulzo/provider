@@ -23,9 +23,23 @@
         </div>
 
         <div>
-            <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Commentaire</label>
+            <label for="shipping_cost" class="block text-sm font-medium text-gray-700 mb-1">Frais de port</label>
+            <input
+                type="number"
+                name="shipping_cost"
+                id="shipping_cost"
+                min="0"
+                step="0.01"
+                inputmode="decimal"
+                value="{{ number_format(($provider->shipping_cost ?? 0) / 100, 2, '.', '') }}"
+                placeholder="0,00"
+            >
+        </div>
+
+        <div>
+            <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">Description fournisseur</label>
             <textarea name="comment" id="comment" rows="3"
-                      placeholder="Notes ou remarques...">{!! $provider->comment !!}</textarea>
+                      placeholder="Infos visibles pendant la commande...">{!! $provider->comment !!}</textarea>
         </div>
 
         <div>
