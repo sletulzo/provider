@@ -29,8 +29,7 @@ class OrderResponseNotification extends Notification
         return (new WebPushMessage)
             ->title('Réponse à votre commande')
             ->body("Votre commande chez {$providerName} : {$status['label']}.")
-            ->icon('/icons/app-icon.png')
-            ->badge('/icons/app-icon.png')
+            ->icon('/icons/logo-transparent.png')
             ->tag('order-response-' . $this->order->id)
             ->data(['url' => route('orders.edit', $this->order)]);
     }

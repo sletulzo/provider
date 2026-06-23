@@ -30,8 +30,7 @@ class NewOrderNotification extends Notification
         return (new WebPushMessage)
             ->title('Nouvelle commande')
             ->body("{$clientName} a passé une commande chez {$providerName} ({$count} article" . ($count > 1 ? 's' : '') . ').')
-            ->icon('/icons/app-icon.png')
-            ->badge('/icons/app-icon.png')
+            ->icon('/icons/logo-transparent.png')
             ->tag('order-' . $this->order->id)
             ->data(['url' => route('orders.edit', $this->order)]);
     }

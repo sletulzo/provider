@@ -26,8 +26,7 @@ self.addEventListener('push', event => {
   const url = (payload.data && payload.data.url) || payload.url || '/';
   const options = {
     body: payload.body || '',
-    icon: payload.icon || '/icons/app-icon.png',
-    badge: payload.badge || '/icons/app-icon.png',
+    icon: payload.icon || '/icons/logo-transparent.png',
     tag: payload.tag || undefined,
     data: {
       url: url,
