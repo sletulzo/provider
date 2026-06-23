@@ -1761,32 +1761,55 @@ body.ev-modal-open {
 /* -------------------------------------------------------- */
 /* ------------------ TENANT COUNTERS --------------------- */
 /* -------------------------------------------------------- */
-.tenant-count {
+.tenant-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 13px 4px 5px;
+    border-radius: 999px;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-light);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.tenant-stat__icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    min-width: 30px;
-    padding: 2px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 11px;
+    flex-shrink: 0;
 }
 
-.tenant-count--clients {
+.tenant-stat__value {
+    font-variant-numeric: tabular-nums;
+}
+
+.tenant-stat__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.tenant-stat--clients .tenant-stat__icon {
     background: var(--primary-bg);
     color: var(--primary);
 }
 
-.tenant-count--providers {
-    background: color-mix(in srgb, var(--secondary) 20%, transparent);
-    color: color-mix(in srgb, var(--secondary) 78%, #000);
+.tenant-stat--providers .tenant-stat__icon {
+    background: var(--secondary-bg);
+    color: color-mix(in srgb, var(--secondary) 62%, #000);
 }
 
-.tenant-count-row {
+.tenant-stat-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 10px;
 }

@@ -29,6 +29,7 @@
 
         <div class="profile-v2__sections">
             @include('profile.partials.update-profile-information-form')
+            @include('profile.partials.push-notifications')
             @include('profile.partials.update-password-form')
         </div>
     </div>

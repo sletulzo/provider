@@ -41,10 +41,16 @@
                                 <td class="px-6 py-4">{{ $tenant->smtp_email }}</td>
                                 <td class="px-6 py-4">{{ $tenant->adress }}</td>
                                 <td class="px-6 py-4 align-center">
-                                    <span class="tenant-count tenant-count--clients">{{ $tenant->clients_count }}</span>
+                                    <span class="tenant-stat tenant-stat--clients">
+                                        <span class="tenant-stat__icon"><i class="fa-regular fa-user"></i></span>
+                                        <span class="tenant-stat__value">{{ $tenant->clients_count }}</span>
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 align-center">
-                                    <span class="tenant-count tenant-count--providers">{{ $tenant->providers_count }}</span>
+                                    <span class="tenant-stat tenant-stat--providers">
+                                        <span class="tenant-stat__icon"><i class="fa-solid fa-truck"></i></span>
+                                        <span class="tenant-stat__value">{{ $tenant->providers_count }}</span>
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 align-center">
                                     @if (!$tenant->is_locked)

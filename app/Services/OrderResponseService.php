@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class OrderResponseService
 {
+    public function __construct(private PushNotifier $pushNotifier) {}
+
     public function applyResponse(Order $order, array $lineStatuses, bool $refuseAll = false, ?string $note = null): void
     {
         DB::transaction(function () use ($order, $lineStatuses, $refuseAll, $note) {
@@ -48,6 +50,8 @@ class OrderResponseService
             $order->provider_note = $note;
             $order->save();
         });
+
+        $this->pushNotifier->notifyOrderResponse($order->refresh());
     }
 
     private function refuseEntireOrder(Order $order, ?string $note): void

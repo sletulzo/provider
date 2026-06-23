@@ -9,6 +9,7 @@ use App\Http\Controllers\ProviderPricesAdminController;
 use App\Http\Controllers\ProviderPriceController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PushSubscriptionController;
 use App\Http\Controllers\UnityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Provider\UserController as ProviderUserController;
@@ -49,6 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Notifications push (PWA)
+    Route::post('/push/subscribe', [PushSubscriptionController::class, 'store'])->name('push.subscribe');
+    Route::post('/push/unsubscribe', [PushSubscriptionController::class, 'destroy'])->name('push.unsubscribe');
 
     // Providers (mutations réservées aux admins client)
     Route::middleware('restrict.only_order')->group(function () {

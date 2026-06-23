@@ -8,6 +8,7 @@ use App\Models\Provider;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderLine;
+use App\Services\PushNotifier;
 use Illuminate\Http\Request;
 use App\Services\TenantMailer;
 use Illuminate\Support\Str;
@@ -203,7 +204,9 @@ class IndentController extends Controller
      */
     public function send(Provider $provider, Request $request)
     {
-        DB::transaction(function () use ($provider, $request) {
+        $createdOrder = null;
+
+        DB::transaction(function () use ($provider, $request, &$createdOrder) {
             $orderWaiting = OrderWaiting::query()
                 ->forUserCart($request->user())
                 ->where('provider_id', $provider->id)
@@ -258,7 +261,13 @@ class IndentController extends Controller
             {
                 return Redirect::route('indents')->with('error', "Erreur dans l'envoi de l'email");
             }
+
+            $createdOrder = $order;
         });
+
+        if ($createdOrder) {
+            app(PushNotifier::class)->notifyNewOrder($createdOrder);
+        }
 
         return Redirect::route('indents')->with('success', 'E-mail envoyé avec succès !');
     }
