@@ -53,9 +53,16 @@
                                 </tr>
                                 <tr>
                                     <td style="font-family:Arial,Helvetica,sans-serif; color:#ffffff; font-size:24px; font-weight:700; padding-top:6px;">
-                                        {{ $tenant?->name ?? $appName }}
+                                        {{ $customer?->name ?? $tenant?->name ?? $appName }}
                                     </td>
                                 </tr>
+                                @if($tenant?->name)
+                                <tr>
+                                    <td style="font-family:Arial,Helvetica,sans-serif; color:#dce1ff; font-size:13px; line-height:1.5; padding-top:4px;">
+                                        {{ $tenant->name }}
+                                    </td>
+                                </tr>
+                                @endif
                             </table>
                         </td>
                     </tr>
@@ -204,9 +211,6 @@
                     <tr>
                         <td class="px" style="padding:26px 36px 30px 36px;">
                             <div style="border-top:1px solid #e7e9f2; padding-top:18px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:1.6; color:#9aa0ac; text-align:center;">
-                                @if($customer?->name)
-                                    Commande passée par {{ $customer->name }}.<br>
-                                @endif
                                 Généré par <strong style="color:#3645b1;">{{ $appName }}</strong>, le logiciel de commande fournisseur.
                             </div>
                         </td>

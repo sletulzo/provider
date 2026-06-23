@@ -73,7 +73,10 @@ class Provider extends Model
             return $this->email_content;
         }
 
-        return "Merci !\n". Auth::user()->tenant?->name ." \n" . Auth::user()->tenant?->adress;
+        return trim(collect([
+            Auth::user()->tenant?->name,
+            Auth::user()->tenant?->adress,
+        ])->filter()->implode("\n"));
     }
 
     public function getPrice()
