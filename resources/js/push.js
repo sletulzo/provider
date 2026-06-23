@@ -32,6 +32,11 @@ async function getRegistration() {
 
 async function postJson(url, body) {
     const token = meta('csrf-token');
+
+    if (!url) {
+        throw new Error('Route push manquante.');
+    }
+
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -39,11 +44,13 @@ async function postJson(url, body) {
             'X-CSRF-TOKEN': token,
             Accept: 'application/json',
         },
+        credentials: 'same-origin',
         body: JSON.stringify(body),
     });
 
     if (!response.ok) {
-        throw new Error('Requête échouée : ' + response.status);
+        const text = await response.text();
+        throw new Error('Requête échouée : ' + response.status + (text ? ' - ' + text.slice(0, 180) : ''));
     }
 
     return response.json();
@@ -79,6 +86,26 @@ async function subscribe() {
     });
 
     return subscription;
+}
+
+function getPushErrorMessage(error) {
+    if (error.message === 'permission-denied') {
+        return 'Permission refusée. Autorisez les notifications pour activer cette fonctionnalité.';
+    }
+
+    if (error.name === 'NotAllowedError') {
+        return 'Le navigateur a refusé les notifications. Vérifiez les permissions du site.';
+    }
+
+    if (error.name === 'InvalidStateError') {
+        return "L'abonnement push est dans un état invalide. Désactivez puis réactivez les notifications du site.";
+    }
+
+    if (error.name === 'AbortError') {
+        return "Le navigateur n'a pas réussi à créer l'abonnement push. Vérifiez HTTPS et rechargez la page.";
+    }
+
+    return error.message || "Échec de l'activation des notifications.";
 }
 
 async function unsubscribe() {
@@ -144,12 +171,10 @@ function initPushCard() {
                 setState('Les notifications sont activées sur cet appareil.', { showDisable: true });
                 window.toastr && window.toastr.success('Notifications activées.');
             } catch (e) {
-                if (e.message === 'permission-denied') {
-                    setState('Permission refusée. Autorisez les notifications pour activer cette fonctionnalité.', { showEnable: true });
-                } else {
-                    setState('Échec de l\'activation des notifications.', { showEnable: true });
-                    window.toastr && window.toastr.error('Échec de l\'activation des notifications.');
-                }
+                console.error('Push activation failed:', e);
+                const message = getPushErrorMessage(e);
+                setState(message, { showEnable: true });
+                window.toastr && window.toastr.error(message);
             } finally {
                 enableBtn.disabled = false;
             }
