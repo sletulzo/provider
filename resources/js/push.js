@@ -22,6 +22,10 @@ function pushSupported() {
     return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 }
 
+function pushRequiresSecureContext() {
+    return !window.isSecureContext;
+}
+
 async function getRegistration() {
     return navigator.serviceWorker.register('/service-worker.js');
 }
@@ -105,6 +109,11 @@ function initPushCard() {
 
     if (!pushSupported()) {
         setState("Cet appareil ou navigateur ne prend pas en charge les notifications. Sur iPhone, installez d'abord l'application sur l'écran d'accueil.");
+        return;
+    }
+
+    if (pushRequiresSecureContext()) {
+        setState("Les notifications push nécessitent HTTPS, ou localhost en développement. Ouvrez l'application en HTTPS pour les activer.");
         return;
     }
 
