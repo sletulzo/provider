@@ -18,12 +18,9 @@
     @endif
     @if ($action && $href)
         <a
+            wire:navigate
             href="{{ $href }}"
-            @class([
-                'btn-primary empty-state-action',
-                'ajax-modal-up' => $modal,
-            ])
-            @if ($modal) data-method="GET" data-size="large" @else wire:navigate @endif
+            class="btn-primary empty-state-action"
         >{{ $action }}</a>
     @endif
 </div>

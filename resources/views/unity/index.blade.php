@@ -7,7 +7,7 @@
 
     @if (!Auth::user()->is_only_order)
         <x-slot name="headerActions">
-            <a href="{{ route('unities.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+            <a wire:navigate href="{{ route('unities.create') }}" class="table-wrapper-action"><i class="fa-solid fa-plus"></i></a>
         </x-slot>
     @endif
 
@@ -36,7 +36,7 @@
                                 <td class="px-6 py-4">{{ $unity->name }}</td>
                                 <td class="align-right actions">
                                     @if (!Auth::user()->is_only_order)
-                                        <a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a wire:navigate href="{{ route('unities.edit', ['unity' => $unity->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                                         <a href="{{ route('unities.delete', ['unity' => $unity->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                                     @endif
                                 </td>

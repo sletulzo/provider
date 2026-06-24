@@ -1,4 +1,4 @@
-<a href="{{ route('products.edit', ['product' => $product->id]) }}" data-method="GET" class="card-mobile ajax-modal-up" data-size="large">
+<a wire:navigate href="{{ route('products.edit', ['product' => $product->id]) }}" class="card-mobile">
     <div class="card-mobile-icon">
         <i class="fa-solid fa-cube"></i>
     </div>

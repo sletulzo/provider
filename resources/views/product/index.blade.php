@@ -7,7 +7,7 @@
 
     @if (!Auth::user()->is_only_order)
         <x-slot name="headerActions">
-            <a href="{{ route('products.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+            <a wire:navigate href="{{ route('products.create') }}" class="table-wrapper-action"><i class="fa-solid fa-plus"></i></a>
         </x-slot>
     @endif
 
@@ -62,7 +62,7 @@
                                         <td class="align-center">{{ $product->price ? $product->price / 100 . '€' : '' }}</td>
                                         <td class="align-right actions">
                                             @if (!Auth::user()->is_only_order)
-                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                <a wire:navigate href="{{ route('products.edit', ['product' => $product->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                                                 <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="confirm-delete" data-remove="line"><i class="fa-regular fa-trash-can"></i></a>
                                             @endif
                                         </td>

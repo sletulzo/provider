@@ -551,6 +551,59 @@ $(document).on('click', '.trigger-updown', function(e) {
 });
 
 // ---------------------------------------------------------------------------------
+// ----------------------- Partage tarifs fournisseur ------------------------------
+// ---------------------------------------------------------------------------------
+$(document).on('click', '#copyProviderPricesUrl', function () {
+	var btn = this;
+	var input = document.getElementById($(btn).data('target') || 'providerPricesUrl');
+	if (!input) return;
+
+	input.select();
+	input.setSelectionRange(0, 99999);
+
+	function feedback() {
+		btn.innerHTML = '<i class="fa-solid fa-check"></i> Copié';
+		setTimeout(function () {
+			btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier';
+		}, 2000);
+	}
+
+	if (navigator.clipboard) {
+		navigator.clipboard.writeText(input.value).then(feedback);
+	} else {
+		document.execCommand('copy');
+		feedback();
+	}
+});
+
+$(document).on('click', '#sendProviderPricesLink', function () {
+	var btn = this;
+	var url = $(btn).data('url');
+	var form = document.getElementById($(btn).data('form') || 'providerForm');
+	if (!url || !form) return;
+
+	if (!confirm('Envoyer le lien de mise à jour des tarifs par e-mail ?')) {
+		return;
+	}
+
+	var token = form.querySelector('input[name="_token"]').value;
+
+	fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-Requested-With': 'XMLHttpRequest',
+			'Accept': 'text/html',
+		},
+		body: '_token=' + encodeURIComponent(token),
+	}).then(function (response) {
+		if (response.redirected) {
+			window.location.href = response.url;
+		}
+	});
+});
+
+// ---------------------------------------------------------------------------------
 // ------------------------------- LOADER BUTTON -----------------------------------
 // ---------------------------------------------------------------------------------
 $(document).on('submit', 'form', function(e) {

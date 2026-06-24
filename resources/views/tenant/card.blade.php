@@ -1,4 +1,4 @@
-<a href="{{ route('tenants.edit', ['tenant' => $tenant->id]) }}" data-method="GET" data-size="large" class="card-mobile ajax-modal-up">
+<a wire:navigate href="{{ route('tenants.edit', ['tenant' => $tenant->id]) }}" class="card-mobile">
     <div class="card-mobile-icon">
         <i class="fa-solid fa-house-chimney-user"></i>
     </div>

@@ -1,4 +1,4 @@
-<a href="{{ route('unities.edit', ['unity' => $unity->id]) }}" data-method="GET" data-size="large" class="card-mobile ajax-modal-up">
+<a wire:navigate href="{{ route('unities.edit', ['unity' => $unity->id]) }}" class="card-mobile">
     <div class="card-mobile-icon">
         <i class="fa-solid fa-scale-unbalanced-flip"></i>
     </div>

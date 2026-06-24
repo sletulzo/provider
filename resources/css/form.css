@@ -161,6 +161,236 @@ button[type="submit"].is-loading .btn-loader {
     to   { transform: rotate(360deg); }
 }
 
+/* ================================================================== */
+/* Pages formulaire pleine page (create / edit)                       */
+/* ================================================================== */
+.form-page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding-bottom: var(--space-2xl);
+}
+
+.form-page__top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.form-page__back {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+
+.form-page__back:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+    transform: translateX(-2px);
+}
+
+.form-page__heading {
+    flex: 1;
+    min-width: 0;
+    padding-top: 1px;
+}
+
+.form-page__eyebrow {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.form-page__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.15;
+}
+
+.form-page__title i {
+    color: var(--primary);
+    font-size: 0.82em;
+}
+
+.form-page__subtitle {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.form-page__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Carte de regroupement de champs */
+.form-page__card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-xl);
+}
+
+.form-page__card-head {
+    margin-bottom: var(--space-lg);
+}
+
+.form-page__card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+.form-page__card-title i {
+    color: var(--primary);
+}
+
+.form-page__card-desc {
+    margin: 4px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-muted);
+}
+
+/* Grille de champs responsive */
+.form-page__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.form-field--full {
+    grid-column: 1 / -1;
+}
+
+.form-field__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.form-field__label .req {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.form-field__hint {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--text-muted);
+}
+
+/* Toggle dans une carte : prend toute la largeur */
+.form-page__grid .toggle-field {
+    grid-column: 1 / -1;
+}
+
+/* Barre d'action */
+.form-page__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: var(--space-md) var(--space-lg);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.form-page__footer .btn-delete {
+    margin-right: auto;
+}
+
+/* Sticky uniquement sur grand écran (pas de barre de nav basse) */
+@media screen and (min-width: 769px) {
+    .form-page__footer {
+        position: sticky;
+        bottom: var(--space-md);
+        z-index: 5;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .form-page__card {
+        padding: var(--space-lg);
+    }
+
+    .form-page__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .form-page__footer {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: var(--space-md);
+    }
+
+    .form-page__footer .btn-delete {
+        order: 3;
+        width: 100%;
+        margin-right: 0;
+        justify-content: center;
+    }
+
+    .form-page__footer .btn-default,
+    .form-page__footer .btn-primary {
+        flex: 1 1 calc(50% - 4px);
+        justify-content: center;
+    }
+}
+
+/* Action secondaire pleine largeur dans une carte */
+.form-page__inline-action {
+    display: flex;
+    margin-top: 4px;
+}
+
+.form-page__inline-action button,
+.form-page__inline-action .btn-default {
+    width: 100%;
+    justify-content: center;
+}
+
 /* Tarifs fournisseur (fiche admin) */
 .provider-prices-share {
     margin-top: 4px;

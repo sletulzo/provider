@@ -96,7 +96,7 @@ class ProviderController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Provider $provider)
+    public function destroy(Provider $provider): RedirectResponse
     {
         foreach($provider->orderWaitings as $orderWaiting)
         {
@@ -109,6 +109,8 @@ class ProviderController extends Controller
         }
 
         $provider->delete();
+
+        return Redirect::route('providers')->with('success', 'Fournisseur supprimé');
     }
 
     /**

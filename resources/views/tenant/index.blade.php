@@ -7,7 +7,7 @@
 
     @if (Auth::user()->is_admin)
         <x-slot name="headerActions">
-            <a href="{{ route('tenants.create') }}" class="ajax-modal-up table-wrapper-action" data-method="GET" data-size="large"><i class="fa-solid fa-plus"></i></a>
+            <a wire:navigate href="{{ route('tenants.create') }}" class="table-wrapper-action"><i class="fa-solid fa-plus"></i></a>
         </x-slot>
     @endif
 
@@ -61,7 +61,7 @@
                                 </td>
                                 <td class="px-6 py-4">{{ carbon($tenant->created_at)->format('d/m/Y') }}</td>
                                 <td class="align-right actions">
-                                    <a href="{{ route('tenants.edit', ['tenant' => $tenant->id]) }}" class="ajax-modal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a wire:navigate href="{{ route('tenants.edit', ['tenant' => $tenant->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                                     <a href="{{ route('tenants.delete', ['tenant' => $tenant->id]) }}" class="confirm-delete"><i class="fa-regular fa-trash-can"></i></a>
                                 </td>
                             </tr> 

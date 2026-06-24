@@ -1,51 +1,74 @@
-<form method="POST" action="{{ route('tenants.store') }}" class="form-modal">
-    @csrf
+<x-form-page
+    :back="route('tenants')"
+    eyebrow="Sociétés"
+    title="Nouvelle société"
+    subtitle="Créez une société et configurez son accès e-mail."
+    icon="fa-regular fa-building"
+>
+    <form method="POST" action="{{ route('tenants.store') }}" class="form-page__form">
+        @csrf
 
-    <h2 class="text-lg font-semibold text-gray-800">Créer une société</h2>
+        <div class="form-page__card">
+            <div class="form-page__card-head">
+                <h2 class="form-page__card-title"><i class="fa-solid fa-house-chimney-user"></i> Société</h2>
+                <p class="form-page__card-desc">Coordonnées principales de la société.</p>
+            </div>
 
-    <!-- Nom -->
-    <div>
-        <label for="name">Nom <span class="text-red-500">*</span></label>
-        <input type="text" name="name" id="name" placeholder="Nom de la société" required>
-    </div>
+            <div class="form-page__grid">
+                <div class="form-field">
+                    <label for="name" class="form-field__label">Nom <span class="req">*</span></label>
+                    <input type="text" name="name" id="name" placeholder="Nom de la société" required>
+                </div>
 
-    <!-- Adress -->
-    <div>
-        <label for="name">Adresse <span class="text-red-500">*</span></label>
-        <input type="text" name="adress" id="adress" placeholder="Adresse de la société" required>
-    </div>
-
-    <!-- Email -->
-    <div>
-        <label for="email">Email <span class="text-red-500">*</span></label>
-        <input type="text" name="email" id="email" placeholder="Email" required>
-    </div>
-
-    <!-- Mot de passe -->
-    <div>
-        <label for="smtp_password">Mot de passe <span class="text-red-500">*</span></label>
-        <input type="text" name="smtp_password" id="smtp_password" placeholder="Mot de passe" required>
-    </div>
-
-    <label class="toggle-field">
-        <div class="toggle-wrapper">
-            <input type="checkbox" id="notify-toggle" class="toggle-input" name="is_locked">
-            <span class="toggle-label">
-                <span class="toggle-ball"></span>
-            </span>
+                <div class="form-field">
+                    <label for="adress" class="form-field__label">Adresse <span class="req">*</span></label>
+                    <input type="text" name="adress" id="adress" placeholder="Adresse de la société" required>
+                </div>
+            </div>
         </div>
-        <span class="toggle-text">Société bloquée</span>
-    </label>
 
-    <!-- Boutons -->
-    <div class="flex justify-end pt-2">
-        <button type="button"
-                class="close-modal px-4 py-2 text-sm text-gray-600 hover:text-gray-800 rounded-lg transition">
-            Annuler
-        </button>
-        <button type="submit" class="btn-primary">
-            <span class="btn-loader"></span>
-            <span class="btn-text">Enregistrer</span>
-        </button>
-    </div>
-</form>
+        <div class="form-page__card">
+            <div class="form-page__card-head">
+                <h2 class="form-page__card-title"><i class="fa-regular fa-envelope"></i> Configuration e-mail</h2>
+                <p class="form-page__card-desc">Identifiants utilisés pour l'envoi des e-mails de la société.</p>
+            </div>
+
+            <div class="form-page__grid">
+                <div class="form-field">
+                    <label for="email" class="form-field__label">Email <span class="req">*</span></label>
+                    <input type="text" name="email" id="email" placeholder="Email" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="smtp_password" class="form-field__label">Mot de passe <span class="req">*</span></label>
+                    <input type="text" name="smtp_password" id="smtp_password" placeholder="Mot de passe" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-page__card">
+            <div class="form-page__card-head">
+                <h2 class="form-page__card-title"><i class="fa-solid fa-lock"></i> Accès</h2>
+                <p class="form-page__card-desc">Une société bloquée ne peut plus se connecter.</p>
+            </div>
+
+            <label class="toggle-field">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="is_locked" class="toggle-input" name="is_locked">
+                    <span class="toggle-label">
+                        <span class="toggle-ball"></span>
+                    </span>
+                </div>
+                <span class="toggle-text">Société bloquée</span>
+            </label>
+        </div>
+
+        <div class="form-page__footer">
+            <a wire:navigate href="{{ route('tenants') }}" class="btn-default">Annuler</a>
+            <button type="submit" class="btn-primary">
+                <span class="btn-loader"></span>
+                <span class="btn-text">Créer la société</span>
+            </button>
+        </div>
+    </form>
+</x-form-page>
